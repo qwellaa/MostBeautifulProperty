@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MostBeautifulProperty</string>
+    <string name="radio_btn_magazine">画报</string>
+    <string name="radio_btn_designer">设计师</string>
+    <string name="radio_btn_discover">有物</string>
+    <string name="radio_btn_mine">我</string>
 </resources>
