@@ -14,7 +14,6 @@ import com.lanou3g.mostbeautifulproperty.mine.MineFragment;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
-
     private RadioButton mRBtnMagazine;
     private RadioButton mRBtnDesigner;
     private RadioButton mRBtnDiscover;
