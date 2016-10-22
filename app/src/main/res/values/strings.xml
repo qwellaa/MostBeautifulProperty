@@ -4,4 +4,10 @@
     <string name="radio_btn_designer">设计师</string>
     <string name="radio_btn_discover">有物</string>
     <string name="radio_btn_mine">我</string>
+    <string name="myDaily">我的画报</string>
+    <string name="mineAtten">关注的设计师</string>
+    <string name="mineWish">我的心愿单</string>
+    <string name="mineMessage">消息中心</string>
+    <string name="minwFeesback">建议问题和反馈</string>
+    <string name="mineZui">最美团队的另一个产品:最美应用</string>
 </resources>

@@ -1,58 +1,234 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-                >
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+    >
 
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="230dp"
+                android:layout_height="200dp"
                 android:background="@mipmap/bg_mine">
-               <de.hdodenhof.circleimageview.CircleImageView
-                   android:layout_width="60dp"
-                   android:layout_height="60dp"
-                   android:layout_centerInParent="true"
-                   android:src="@mipmap/adasd"
-                   android:id="@+id/fragment_mine_circleimg"
-                   />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/fragment_mine_circleimg"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/adasd"
+                    />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="用户名"
-                    android:textColor="@color/nameText"
+                    android:layout_below="@+id/fragment_mine_circleimg"
                     android:layout_centerInParent="true"
                     android:layout_margin="@dimen/textToImg"
-                    android:layout_below="@+id/fragment_mine_circleimg"/>
-
+                    android:text="用户名"
+                    android:textColor="@color/nameText"/>
 
 
             </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:orientation="horizontal">
-                
+                android:orientation="horizontal"
+                android:padding="20dp">
 
+                <ImageView
+                    style="@style/mineImg"
+                    android:src="@mipmap/icon_my_daily"
+                    />
+
+                <TextView
+                    style="@style/mineTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/myDaily"
+
+
+                    />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                style="@style/mineLine"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="20dp">
+
+                <ImageView
+                    style="@style/mineImg"
+                    android:src="@mipmap/ic_mine_attention_normal"
+                    />
+
+                <TextView
+                    style="@style/mineTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/mineAtten"
+
+
+                    />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                style="@style/mineLine"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="20dp">
+
+                <ImageView
+                    style="@style/mineImg"
+                    android:src="@mipmap/ic_mine_wish_list_normal"
+                    />
+
+                <TextView
+                    style="@style/mineTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/mineWish"
+
+
+                    />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                style="@style/mineLine"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="20dp">
+
+                <ImageView
+                    style="@style/mineImg"
+                    android:src="@mipmap/ic_mine_message"
+                    />
+
+                <TextView
+                    style="@style/mineTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/mineMessage"
+
+
+                    />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                style="@style/mineLine"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="20dp">
+
+                <ImageView
+                    style="@style/mineImg"
+                    android:src="@mipmap/ic_mine_feedback"
+                    />
+
+                <TextView
+                    style="@style/mineTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/minwFeesback"
+
+
+                    />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                style="@style/mineLine"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="20dp">
+
+                <ImageView
+                    style="@style/mineImg"
+                    android:src="@mipmap/ic_mine_zuimei"
+                    />
+
+                <TextView
+                    style="@style/mineTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/mineZui"
+
+
+                    />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                style="@style/mineLine"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="135dp"
+                >
 
             </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
+
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@mipmap/me_setting"
         android:layout_alignParentRight="true"
-        android:layout_margin="@dimen/iconDis"/>
+        android:layout_margin="@dimen/iconDis"
+        android:background="@mipmap/me_setting"/>
 </RelativeLayout>

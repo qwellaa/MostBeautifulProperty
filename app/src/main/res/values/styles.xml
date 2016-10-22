@@ -17,4 +17,22 @@
         <item name="android:button">@null</item>
         <item name="android:gravity">center</item>
     </style>
+    <style name="mineImg">
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_width">15dp</item>
+        <item name="android:layout_height">15dp</item>
+    </style>
+    <style name="mineTv">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">#252524</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:drawableRight">@mipmap/ahlib_right_arrow</item>
+    </style>
+    <style name="mineLine">
+        <item name="android:background">#817c7c</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+    </style>
+
 </resources>
