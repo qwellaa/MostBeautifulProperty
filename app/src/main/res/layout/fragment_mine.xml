@@ -42,6 +42,7 @@
             </RelativeLayout>
 
             <LinearLayout
+                android:id="@+id/fragment_mine_daily_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -71,6 +72,7 @@
                 style="@style/mineLine"
                 />
             <LinearLayout
+                android:id="@+id/fragment_mine_attention_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -100,6 +102,7 @@
                 style="@style/mineLine"
                 />
             <LinearLayout
+                android:id="@+id/fragment_mine_wish_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -129,6 +132,7 @@
                 style="@style/mineLine"
                 />
             <LinearLayout
+                android:id="@+id/fragment_mine_message_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -158,6 +162,7 @@
                 style="@style/mineLine"
                 />
             <LinearLayout
+                android:id="@+id/fragment_mine_feedback_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -187,6 +192,7 @@
                 style="@style/mineLine"
                 />
             <LinearLayout
+                android:id="@+id/fragment_mine_besbeaty_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
