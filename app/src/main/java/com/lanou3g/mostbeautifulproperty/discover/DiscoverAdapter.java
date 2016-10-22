@@ -4,6 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.lanou3g.mostbeautifulproperty.discover.tabreuse.DiscoverTabReuseFragment;
+
 import java.util.ArrayList;
 
 /**
@@ -31,7 +33,7 @@ public class DiscoverAdapter extends FragmentPagerAdapter{
 
     @Override
     public Fragment getItem(int position) {
-        return DiscoverReuseFragment.newInstance(position);
+        return DiscoverTabReuseFragment.newInstance(position);
     }
 
     @Override
