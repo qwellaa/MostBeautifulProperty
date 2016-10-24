@@ -1,14 +1,24 @@
 package com.lanou3g.mostbeautifulproperty.discover;
 
+import android.content.Context;
 import android.graphics.Color;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-
+import android.view.View;
 
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
 import com.lanou3g.mostbeautifulproperty.discover.tabreuse.DiscoverTabReuseFragment;
+import com.lanou3g.mostbeautifulproperty.tabtitles.ScaleTransitionPagerTitleView;
+
+import net.lucode.hackware.magicindicator.MagicIndicator;
+import net.lucode.hackware.magicindicator.ViewPagerHelper;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.BezierPagerIndicator;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
 import java.util.ArrayList;
 
@@ -18,8 +28,9 @@ import java.util.ArrayList;
 
 public class DiscoverFragment extends BaseFragment{
 
-    private TabLayout mTabDiscover;
+    private MagicIndicator mTabDiscover;
     private ViewPager mVpDiscover;
+    private ArrayList<String> mTitles;
 
     @Override
     protected int setLayout() {
@@ -35,23 +46,60 @@ public class DiscoverFragment extends BaseFragment{
     @Override
     protected void initData() {
 
-        ArrayList<String> titles = initTitles();
+        mTitles = initTitles();
 
         ArrayList<Fragment> fragments = new ArrayList<>();
-        for (int i = 0; i < titles.size(); i++) {
+        for (int i = 0; i < mTitles.size(); i++) {
             fragments.add(new DiscoverTabReuseFragment());
         }
 
         DiscoverAdapter adapter = new DiscoverAdapter(getChildFragmentManager());
-        adapter.setTitles(titles);
+        adapter.setTitles(mTitles);
         adapter.setFragments(fragments);
-
         mVpDiscover.setAdapter(adapter);
-        mTabDiscover.setupWithViewPager(mVpDiscover);
-        // 更改tab 下滑线
-        mTabDiscover.setSelectedTabIndicatorColor(Color.WHITE);
-        // 给tab文字 加选中颜色
-        mTabDiscover.setTabTextColors(Color.GRAY, Color.WHITE);
+        initMagic();
+//        mTabDiscover.setupWithViewPager(mVpDiscover);
+//        // 更改tab 下滑线
+//        mTabDiscover.setSelectedTabIndicatorColor(Color.WHITE);
+//        // 给tab文字 加选中颜色
+//        mTabDiscover.setTabTextColors(Color.GRAY, Color.WHITE);
+    }
+
+    private void initMagic() {
+        mTabDiscover.setBackgroundColor(Color.BLACK);
+        CommonNavigator commonNavigator = new CommonNavigator(context);
+        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
+            @Override
+            public int getCount() {
+                return mTitles == null ? 0 : mTitles.size();
+            }
+
+            @Override
+            public IPagerTitleView getTitleView(Context context, final int index) {
+                SimplePagerTitleView simplePagerTitleView = new ScaleTransitionPagerTitleView(context);
+                //标题文字,选中与非选中颜色
+                simplePagerTitleView.setText(mTitles.get(index));
+//                simplePagerTitleView.setTextSize(18);
+                simplePagerTitleView.setNormalColor(Color.GRAY);
+                simplePagerTitleView.setSelectedColor(Color.WHITE);
+                simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mVpDiscover.setCurrentItem(index);
+                    }
+                });
+                return simplePagerTitleView;
+            }
+
+            @Override
+            public IPagerIndicator getIndicator(Context context) {
+                BezierPagerIndicator indicator = new BezierPagerIndicator(context);
+                indicator.setColors(Color.parseColor("#ff4a42"), Color.parseColor("#fcde64"), Color.parseColor("#73e8f4"), Color.parseColor("#76b0ff"), Color.parseColor("#c683fe"));
+                return indicator;
+            }
+        });
+        mTabDiscover.setNavigator(commonNavigator);
+        ViewPagerHelper.bind(mTabDiscover, mVpDiscover);
     }
 
     private ArrayList<String> initTitles() {

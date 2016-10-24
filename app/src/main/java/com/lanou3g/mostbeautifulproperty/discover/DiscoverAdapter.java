@@ -41,6 +41,9 @@ public class DiscoverAdapter extends FragmentPagerAdapter{
         return mFragments == null ? 0 : mFragments.size();
     }
 
+
+
+
     @Override
     public CharSequence getPageTitle(int position) {
         return mTitles.get(position);
