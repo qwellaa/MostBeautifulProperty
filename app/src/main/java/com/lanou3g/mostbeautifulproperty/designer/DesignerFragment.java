@@ -1,13 +1,24 @@
 package com.lanou3g.mostbeautifulproperty.designer;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
 import com.lanou3g.mostbeautifulproperty.discover.tabreuse.DiscoverTabReuseFragment;
+import com.lanou3g.mostbeautifulproperty.tabtitles.ScaleTransitionPagerTitleView;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
+import net.lucode.hackware.magicindicator.ViewPagerHelper;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.BezierPagerIndicator;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
 import java.util.ArrayList;
 
@@ -55,6 +66,40 @@ public class DesignerFragment extends BaseFragment{
     }
 
     private void initMagic() {
+        mTabLayout.setBackgroundColor(Color.BLACK);
+        CommonNavigator commonNavigator = new CommonNavigator(context);
+        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
+            @Override
+            public int getCount() {
+                return mTitles == null ? 0 : mTitles.size();
+            }
+
+            @Override
+            public IPagerTitleView getTitleView(Context context, final int index) {
+                SimplePagerTitleView simplePagerTitleView = new ScaleTransitionPagerTitleView(context);
+                //标题文字,选中与非选中颜色
+                simplePagerTitleView.setText(mTitles.get(index));
+//                simplePagerTitleView.setTextSize(18);
+                simplePagerTitleView.setNormalColor(Color.GRAY);
+                simplePagerTitleView.setSelectedColor(Color.WHITE);
+                simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mViewPager.setCurrentItem(index);
+                    }
+                });
+                return simplePagerTitleView;
+            }
+
+            @Override
+            public IPagerIndicator getIndicator(Context context) {
+                BezierPagerIndicator indicator = new BezierPagerIndicator(context);
+                indicator.setColors(Color.parseColor("#ff4a42"), Color.parseColor("#fcde64"), Color.parseColor("#73e8f4"), Color.parseColor("#76b0ff"), Color.parseColor("#c683fe"));
+                return indicator;
+            }
+        });
+        mTabLayout.setNavigator(commonNavigator);
+        ViewPagerHelper.bind(mTabLayout,mViewPager);
     }
 
     private ArrayList<String> initTitles() {
