@@ -7,10 +7,10 @@ import android.widget.RadioButton;
 
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseActivity;
-import com.lanou3g.mostbeautifulproperty.designer.DesignerFragment;
-import com.lanou3g.mostbeautifulproperty.discover.DiscoverFragment;
-import com.lanou3g.mostbeautifulproperty.magazine.MagazineFragment;
-import com.lanou3g.mostbeautifulproperty.mine.MineFragment;
+import com.lanou3g.mostbeautifulproperty.designer.uiview.DesignerFragment;
+import com.lanou3g.mostbeautifulproperty.discover.uiview.DiscoverFragment;
+import com.lanou3g.mostbeautifulproperty.magazine.uiview.MagazineFragment;
+import com.lanou3g.mostbeautifulproperty.mine.uiview.MineFragment;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 

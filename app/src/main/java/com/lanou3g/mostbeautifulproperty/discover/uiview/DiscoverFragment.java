@@ -1,4 +1,4 @@
-package com.lanou3g.mostbeautifulproperty.discover;
+package com.lanou3g.mostbeautifulproperty.discover.uiview;
 
 import android.graphics.Color;
 import android.support.design.widget.TabLayout;
@@ -8,7 +8,7 @@ import android.support.v4.view.ViewPager;
 
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
-import com.lanou3g.mostbeautifulproperty.discover.tabreuse.DiscoverTabReuseFragment;
+import com.lanou3g.mostbeautifulproperty.discover.uiview.adapter.DiscoverAdapter;
 
 import java.util.ArrayList;
 

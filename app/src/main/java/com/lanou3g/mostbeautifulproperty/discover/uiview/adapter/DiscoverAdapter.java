@@ -1,18 +1,19 @@
-package com.lanou3g.mostbeautifulproperty.designer;
+package com.lanou3g.mostbeautifulproperty.discover.uiview.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.lanou3g.mostbeautifulproperty.designer.tabreuse.DesignerTabReuseFragment;
+import com.lanou3g.mostbeautifulproperty.discover.uiview.DiscoverTabReuseFragment;
 
 import java.util.ArrayList;
 
 /**
- * Created by dllo on 16/10/22.
+ *
  */
 
-public class DesignerAdapter extends FragmentPagerAdapter{
+public class DiscoverAdapter extends FragmentPagerAdapter{
+
     private ArrayList<Fragment> mFragments;
     private ArrayList<String> mTitles;
 
@@ -26,13 +27,13 @@ public class DesignerAdapter extends FragmentPagerAdapter{
         mTitles = titles;
     }
 
-    public DesignerAdapter(FragmentManager fm) {
+    public DiscoverAdapter(FragmentManager fm) {
         super(fm);
     }
 
     @Override
     public Fragment getItem(int position) {
-        return DesignerTabReuseFragment.newInstance(position);
+        return DiscoverTabReuseFragment.newInstance(position);
     }
 
     @Override

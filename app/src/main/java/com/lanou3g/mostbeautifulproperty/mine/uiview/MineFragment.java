@@ -1,4 +1,4 @@
-package com.lanou3g.mostbeautifulproperty.magazine;
+package com.lanou3g.mostbeautifulproperty.mine.uiview;
 
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
@@ -7,10 +7,10 @@ import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
  *
  */
 
-public class MagazineFragment extends BaseFragment{
+public class MineFragment extends BaseFragment{
     @Override
     protected int setLayout() {
-        return R.layout.fragment_magazine;
+        return R.layout.fragment_mine;
     }
 
     @Override
