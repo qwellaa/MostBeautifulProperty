@@ -1,4 +1,4 @@
-package com.lanou3g.mostbeautifulproperty.discover;
+package com.lanou3g.mostbeautifulproperty.discover.uiview;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -8,7 +8,6 @@ import android.view.View;
 
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
-import com.lanou3g.mostbeautifulproperty.discover.tabreuse.DiscoverTabReuseFragment;
 import com.lanou3g.mostbeautifulproperty.tabtitles.ScaleTransitionPagerTitleView;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
@@ -19,6 +18,7 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerInd
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.BezierPagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
+import com.lanou3g.mostbeautifulproperty.discover.uiview.adapter.DiscoverAdapter;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.lanou3g.mostbeautifulproperty.mine;
+package com.lanou3g.mostbeautifulproperty.mine.uiview;
 
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;

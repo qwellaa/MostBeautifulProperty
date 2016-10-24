@@ -1,4 +1,4 @@
-package com.lanou3g.mostbeautifulproperty.magazine;
+package com.lanou3g.mostbeautifulproperty.magazine.uiview;
 
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
@@ -22,4 +22,5 @@ public class MagazineFragment extends BaseFragment{
     protected void initData() {
 
     }
+
 }

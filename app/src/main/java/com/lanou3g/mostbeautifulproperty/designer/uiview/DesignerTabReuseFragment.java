@@ -1,4 +1,4 @@
-package com.lanou3g.mostbeautifulproperty.designer.tabreuse;
+package com.lanou3g.mostbeautifulproperty.designer.uiview;
 
 import android.os.Bundle;
 import android.widget.TextView;
