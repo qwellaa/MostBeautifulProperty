@@ -5,4 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorInterfaceBackground">#000000</color>
     <color name="nameText">#ffffff</color>
+    <color name="colorShareBtnBgS">#40E0D0</color>
+    <color name="colorShareBtnBgN">#aa40E0D0</color>
+    <color name="colorShareBtnBorder">#b5b5b5</color>
 </resources>
