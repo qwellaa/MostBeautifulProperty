@@ -10,7 +10,7 @@ import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
 import com.lanou3g.mostbeautifulproperty.designer.uiview.adapter.DesignerAdapter;
 import com.lanou3g.mostbeautifulproperty.discover.uiview.DiscoverTabReuseFragment;
-import com.lanou3g.mostbeautifulproperty.tabtitles.ScaleTransitionPagerTitleView;
+import com.lanou3g.mostbeautifulproperty.view.ScaleTransitionPagerTitleView;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;

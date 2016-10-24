@@ -1,4 +1,4 @@
-package com.lanou3g.mostbeautifulproperty.tabtitles;
+package com.lanou3g.mostbeautifulproperty.view;
 
 import android.content.Context;
 
