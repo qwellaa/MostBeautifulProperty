@@ -3,7 +3,6 @@ package com.lanou3g.mostbeautifulproperty.discover;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.view.ViewGroup;
 
 import com.lanou3g.mostbeautifulproperty.discover.tabreuse.DiscoverTabReuseFragment;
 
@@ -43,7 +42,7 @@ public class DiscoverAdapter extends FragmentPagerAdapter{
     }
 
 
-    
+
 
     @Override
     public CharSequence getPageTitle(int position) {
