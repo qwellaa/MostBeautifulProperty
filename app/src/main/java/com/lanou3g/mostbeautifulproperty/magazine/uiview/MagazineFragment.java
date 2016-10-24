@@ -22,4 +22,5 @@ public class MagazineFragment extends BaseFragment{
     protected void initData() {
 
     }
+
 }
