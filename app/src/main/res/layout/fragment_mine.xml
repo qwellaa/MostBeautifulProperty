@@ -41,8 +41,7 @@
                 <ImageView
                     style="@style/mineImg"
                     android:src="@mipmap/icon_my_daily"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"/>
+                    />
                 <TextView
                     style="@style/mineTv"
                     android:layout_width="0dp"
