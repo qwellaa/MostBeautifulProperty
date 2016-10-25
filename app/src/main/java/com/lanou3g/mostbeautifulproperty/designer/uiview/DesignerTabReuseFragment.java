@@ -46,20 +46,22 @@ public class DesignerTabReuseFragment extends BaseFragment {
     protected void initData() {
 
         List<DesignerBean>mBeanList = new ArrayList<>();
-//        Bundle args = getArguments();
-//        int position = args.getInt("i");
+        Bundle args = getArguments();
+        final int position = args.getInt("i");
 //        mTextView.setText(position + "");
-        mDesignerBean.setTv1("一");
-        mDesignerBean.setTv2("二");
-        mBeanList.add(mDesignerBean);
+        for (int i = 0; i < 10; i++) {
+            mDesignerBean.setTv1("一");
+            mDesignerBean.setTv2("二");
+            mBeanList.add(mDesignerBean);
+        }
+
         mListView.setAdapter(mAdapter = new CurrentAdapter<DesignerBean>(context,mBeanList,
                 R.layout.designer_item_list) {
             @Override
             public void convert(BaseViewHolder helper, DesignerBean item) {
-                Bundle args =  getArguments();
-                int postiton = args.getInt("i");
-                helper.setText(R.id.tv1,item.getTv1() + postiton);
-                helper.setText(R.id.tv2,item.getTv2() + postiton);
+
+                helper.setText(R.id.tv1,item.getTv1() + position);
+                helper.setText(R.id.tv2,item.getTv2() + position);
             }
 
         });
