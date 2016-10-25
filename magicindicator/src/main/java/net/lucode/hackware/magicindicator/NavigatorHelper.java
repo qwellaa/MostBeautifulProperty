@@ -25,7 +25,7 @@ public class NavigatorHelper {
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         float currentPositionOffsetSum = position + positionOffset;
         boolean leftToRight = false;
-        if (mLastPositionOffsetSum <= currentPositionOffsetSum) {
+        if (mLastPositionOffsetSum <= currentPositionOffsetSum){
             leftToRight = true;
         }
         if (mScrollState != ScrollState.SCROLL_STATE_IDLE) {
