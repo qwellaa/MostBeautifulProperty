@@ -5,10 +5,9 @@
               android:layout_height="match_parent"
     style="@style/InterfaceBackground">
 
-    <TextView
+    <StackView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="画报"
-        android:textSize="50sp"
-        android:textColor="#fff"/>
+        android:layout_height="match_parent"
+        android:id="@+id/magazine_stackview">
+    </StackView>
 </LinearLayout>
