@@ -1,9 +1,7 @@
 package com.lanou3g.mostbeautifulproperty.designer.uiview;
 
 import android.os.Bundle;
-import android.widget.Adapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
@@ -53,7 +51,8 @@ public class DesignerTabReuseFragment extends BaseFragment {
                 R.layout.designer_item_list) {
             @Override
             public void convert(BaseViewHolder helper, DesignerBean item) {
-
+                helper.setText(R.id.tv1,item.getTv1());
+                helper.setText(R.id.tv2,item.getTv2());
             }
 
         });
