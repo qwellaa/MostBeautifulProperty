@@ -10,8 +10,6 @@ import com.google.gson.Gson;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
 
 import okhttp3.Cache;
 import okhttp3.Call;
@@ -37,7 +35,7 @@ public class OkHttpImpl implements IHttpRequest{
         mHandler = new Handler(Looper.getMainLooper());
         File file = Environment.getDownloadCacheDirectory();
         mClient = new OkHttpClient.Builder()
-                .connectTimeout(5000, TimeUnit.MILLISECONDS)
+//                .connectTimeout(5000, TimeUnit.MILLISECONDS)
                 .cache(new Cache(file, 10 * 1024 * 1024))
                 .build();
         mGson = new Gson();

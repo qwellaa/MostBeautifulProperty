@@ -1,13 +1,31 @@
 package com.lanou3g.mostbeautifulproperty.magazine.uiview;
 
+import android.app.ProgressDialog;
+import android.widget.StackView;
+import android.widget.Toast;
+
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
+import com.lanou3g.mostbeautifulproperty.baseclass.BaseViewHolder;
+import com.lanou3g.mostbeautifulproperty.baseclass.CurrentAdapter;
+import com.lanou3g.mostbeautifulproperty.bean.MagazineBean;
+import com.lanou3g.mostbeautifulproperty.magazine.presenter.MagazinePresenter;
+import com.lanou3g.mostbeautifulproperty.okhttp.URLValues;
+
+import java.util.ArrayList;
 
 /**
  *
  */
 
-public class MagazineFragment extends BaseFragment{
+public class MagazineFragment extends BaseFragment implements IMagazineView<MagazineBean>{
+
+    private StackView mStackView;
+    private MagazinePresenter mPresenter;
+    private ProgressDialog mDialog;
+    private int page = 1;
+    private int pageSize = 20;
+
     @Override
     protected int setLayout() {
         return R.layout.fragment_magazine;
@@ -15,12 +33,52 @@ public class MagazineFragment extends BaseFragment{
 
     @Override
     protected void initView() {
+        mStackView = bindView(R.id.magazine_stackview);
+        mDialog = createDialog();
+    }
 
+    private ProgressDialog createDialog() {
+        ProgressDialog dialog = new ProgressDialog(context);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        dialog.setTitle("数据加载中");
+        dialog.setMessage("请等待.....");
+        return dialog;
     }
 
     @Override
     protected void initData() {
-
+        mPresenter = new MagazinePresenter(this);
+        mPresenter.startRequest(URLValues.getMagazineUrl(page, pageSize));
     }
 
+    @Override
+    public void showDialog() {
+        mDialog.show();
+    }
+
+    @Override
+    public void dismissDialog() {
+        mDialog.dismiss();
+    }
+
+    @Override
+    public void onResponse(MagazineBean magazineBean) {
+        ArrayList<MagazineBean.DataBean.ArticlesBean> beanArrayList = (ArrayList<MagazineBean.DataBean.ArticlesBean>) magazineBean.getData().getArticles();
+        mStackView.setAdapter(new CurrentAdapter<MagazineBean.DataBean.ArticlesBean>(context, beanArrayList, R.layout.item_magazine) {
+            @Override
+            public void convert(BaseViewHolder helper, MagazineBean.DataBean.ArticlesBean item) {
+                helper.setIamgeGlide(R.id.iv_magazine_user_head, item.getAuthor().getAvatar_url());
+                helper.setIamgeGlide(R.id.iv_magazine_body, item.getImage_url());
+                helper.setText(R.id.tv_magazine_user_name, item.getAuthor().getUsername());
+                helper.setText(R.id.tv_magazine_title, item.getTitle());
+                helper.setText(R.id.tv_magazine_subtitle, item.getSub_title());
+            }
+        });
+    }
+
+    @Override
+    public void onError() {
+        Toast.makeText(context, "数据异常,请求失败", Toast.LENGTH_SHORT).show();
+    }
 }
