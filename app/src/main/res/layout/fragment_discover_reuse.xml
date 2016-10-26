@@ -4,9 +4,31 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
     <TextView
-        android:textColor="#fff"
-        android:textSize="50sp"
-        android:id="@+id/tv_discover_reuse"
+        android:id="@+id/dingwei"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="1dp"/>
+    <RelativeLayout
+        android:id="@+id/reuse_discoverfragment_relative"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="@color/moreTitle"
+        >
+        <TextView
+            android:id="@+id/fragment_discover_all_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/titleMore"
+            android:textColor="@color/nameText"
+            android:textSize="@dimen/moreTextTitle"
+            android:layout_margin="@dimen/moreTitleDistan"/>
+        <ImageView
+            android:id="@+id/fragment_discover_dowm_img"
+            android:layout_centerVertical="true"
+            android:layout_width="12dp"
+            android:layout_height="10dp"
+            android:src="@mipmap/barrage_pack_down"
+            style="@style/moreTitleImg"/>
+
+    </RelativeLayout>
+
 </LinearLayout>
