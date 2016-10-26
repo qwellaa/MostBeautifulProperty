@@ -10,5 +10,5 @@
     <color name="colorShareBtnBorder">#b5b5b5</color>
     <color name="top_bar_normal_bg">#000</color>
     <color name="discover_title_bg">#cc000000</color>
-    <color name="discover_item_bg"></color>
+    <color name="discover_item_bg">#242424</color>
 </resources>
