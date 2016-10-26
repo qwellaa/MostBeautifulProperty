@@ -5,6 +5,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -13,13 +14,17 @@ import android.widget.TextView;
 
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
+import com.lanou3g.mostbeautifulproperty.bean.PopupwindowBean;
+import com.lanou3g.mostbeautifulproperty.discover.discoverpresenter.DiscoverPresenter;
 import com.lanou3g.mostbeautifulproperty.homepage.MainActivity;
+import com.lanou3g.mostbeautifulproperty.okhttp.URLValues;
 
 /**
  *
  */
 
-public class DiscoverReuseFragment extends BaseFragment implements View.OnClickListener {
+public class DiscoverReuseFragment extends BaseFragment implements View.OnClickListener, IDiscoverView<PopupwindowBean>
+        {
     private static final int TABMEN = 6;
 
     private TextView mTv;
@@ -30,8 +35,11 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     private PopupWindow mTitclePopupWindow;
     private TableLayout tb;
     private TextView mLocationTv;
+    private GridView mPopupWindowGrideView;
+            private int mPosition;
+            private DiscoverPresenter mPresenter;
 
-    public static DiscoverReuseFragment newInstance(int position) {
+            public static DiscoverReuseFragment newInstance(int position) {
 
         Bundle args = new Bundle();
         args.putInt("position", position);
@@ -52,19 +60,28 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
         mLocationTv = bindView(R.id.dingwei);
         mMoreTopView = bindView(R.id.reuse_discoverfragment_relative);
         mTitcleTv = bindView(R.id.fragment_discover_all_tv);
-        mTitcleImg = bindView(R.id.fragment_discover_dowm_img);
-        mTitcleImg.setOnClickListener(this);
+        mMoreTopView.setOnClickListener(this);
         mView = LayoutInflater.from(getContext()).inflate(R.layout.top_popupwindow, null);
+        mPopupWindowGrideView = bindView(R.id.popuuwindow_gridview,mView);
+
 
     }
 
     @Override
     protected void initData() {
         Bundle args = getArguments();
-        int position = args.getInt("position");
-        if (TABMEN == position) {
+        mPosition = args.getInt("position");
+        if (TABMEN == mPosition) {
             mMoreTopView.setVisibility(View.INVISIBLE);
+
         }
+        if (mPosition == 3){
+
+            mPresenter = new DiscoverPresenter(this);
+            mPresenter.startRequest(URLValues.POPUPWINDOW_URL);
+
+        }
+
 
 
 
@@ -120,10 +137,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.fragment_discover_dowm_img:
-
-
-
+            case R.id.reuse_discoverfragment_relative:
                     mTitclePopupWindow = new PopupWindow(mView, RelativeLayout.LayoutParams.MATCH_PARENT, 200);
                     mTitclePopupWindow.showAsDropDown(mLocationTv);
                     mTitclePopupWindow.setFocusable(true);
@@ -134,4 +148,25 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
         }
 
     }
-}
+
+
+            @Override
+            public void showDialog() {
+
+            }
+
+            @Override
+            public void dismissDialog() {
+
+            }
+
+            @Override
+            public void onResponse(PopupwindowBean popupwindowBean) {
+
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        }
