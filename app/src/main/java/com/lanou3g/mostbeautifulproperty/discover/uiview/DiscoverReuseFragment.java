@@ -1,6 +1,7 @@
 package com.lanou3g.mostbeautifulproperty.discover.uiview;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -66,7 +67,28 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
         }
 
 
+
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+                    if (mTitclePopupWindow != null && mTitclePopupWindow.isShowing()) {
+                        mTitclePopupWindow.dismiss();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+    }
+
 
 
     private void initOnTouchLisenner() {
@@ -104,7 +126,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
 
                     mTitclePopupWindow = new PopupWindow(mView, RelativeLayout.LayoutParams.MATCH_PARENT, 200);
                     mTitclePopupWindow.showAsDropDown(mLocationTv);
-
+                    mTitclePopupWindow.setFocusable(true);
                     mTitclePopupWindow.setTouchable(true);
                     initOnTouchLisenner();
 //
