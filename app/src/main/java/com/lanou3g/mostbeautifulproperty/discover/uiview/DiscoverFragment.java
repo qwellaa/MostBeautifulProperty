@@ -61,7 +61,7 @@ public class DiscoverFragment extends BaseFragment{
 //        mTabDiscover.setSelectedTabIndicatorColor(Color.WHITE);
 //        // 给tab文字 加选中颜色
 //        mTabDiscover.setTabTextColors(Color.GRAY, Color.WHITE);
-        
+        mVpDiscover.setCurrentItem(2);
     }
 
     private void initMagic() {
