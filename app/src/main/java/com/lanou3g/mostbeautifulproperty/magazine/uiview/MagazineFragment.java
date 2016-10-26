@@ -1,6 +1,8 @@
 package com.lanou3g.mostbeautifulproperty.magazine.uiview;
 
-import android.app.ProgressDialog;
+import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.StackView;
 import android.widget.Toast;
 
@@ -11,6 +13,7 @@ import com.lanou3g.mostbeautifulproperty.baseclass.CurrentAdapter;
 import com.lanou3g.mostbeautifulproperty.bean.MagazineBean;
 import com.lanou3g.mostbeautifulproperty.magazine.presenter.MagazinePresenter;
 import com.lanou3g.mostbeautifulproperty.okhttp.URLValues;
+import com.lanou3g.mostbeautifulproperty.view.LVGhost;
 
 import java.util.ArrayList;
 
@@ -22,7 +25,7 @@ public class MagazineFragment extends BaseFragment implements IMagazineView<Maga
 
     private StackView mStackView;
     private MagazinePresenter mPresenter;
-    private ProgressDialog mDialog;
+    private AlertDialog mDialog;
     private int page = 1;
     private int pageSize = 20;
 
@@ -37,12 +40,13 @@ public class MagazineFragment extends BaseFragment implements IMagazineView<Maga
         mDialog = createDialog();
     }
 
-    private ProgressDialog createDialog() {
-        ProgressDialog dialog = new ProgressDialog(context);
+    private AlertDialog createDialog() {
+        AlertDialog dialog = new AlertDialog.Builder(context).create();
         dialog.setCanceledOnTouchOutside(true);
-        dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        dialog.setTitle("数据加载中");
-        dialog.setMessage("请等待.....");
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_loading, null);
+        LVGhost mLvGhost =  (LVGhost) view.findViewById(R.id.dialog_lvghost);
+        mLvGhost.startAnim();
+        dialog.setView(view);
         return dialog;
     }
 

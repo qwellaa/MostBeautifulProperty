@@ -52,5 +52,9 @@
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">#000</item>
     </style>
-
+    <style name="dialogLoading">
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#fff</item>
+    </style>
 </resources>

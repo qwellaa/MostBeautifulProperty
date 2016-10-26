@@ -15,4 +15,5 @@
     <string name="password">密码</string>
     <string name="register">注册</string>
     <string name="login">登录</string>
+    <string name="dialog_loading">拼命加载中...</string>
 </resources>
