@@ -14,7 +14,7 @@
         android:background="@color/discover_title_bg"
         android:textColor="@color/nameText"
         android:text="luv AJ丨菱形水晶手背链"
-        style="@style/tvDailyListTitle."
+        style="@style/tvDailyListTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />

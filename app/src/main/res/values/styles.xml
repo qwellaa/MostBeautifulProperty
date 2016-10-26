@@ -61,7 +61,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">300dp</item>
     </style>
-    <style name="tvDailyListTitle.">
+    <style name="tvDailyListTitle">
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:layout_marginTop">270dp</item>
     </style>
