@@ -9,7 +9,6 @@ import android.view.View;
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
 import com.lanou3g.mostbeautifulproperty.designer.uiview.adapter.DesignerAdapter;
-import com.lanou3g.mostbeautifulproperty.discover.uiview.DiscoverTabReuseFragment;
 import com.lanou3g.mostbeautifulproperty.view.ScaleTransitionPagerTitleView;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
@@ -50,7 +49,7 @@ public class DesignerFragment extends BaseFragment{
 
         ArrayList<Fragment> fragments = new ArrayList<>();
         for (int i = 0; i < titles.size(); i++) {
-            fragments.add(new DiscoverTabReuseFragment());
+            fragments.add(new DesignerTabReuseFragment());
         }
 
         DesignerAdapter adapter = new DesignerAdapter(getChildFragmentManager());

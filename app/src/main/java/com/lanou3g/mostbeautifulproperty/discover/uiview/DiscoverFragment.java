@@ -2,12 +2,14 @@ package com.lanou3g.mostbeautifulproperty.discover.uiview;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
+import com.lanou3g.mostbeautifulproperty.discover.uiview.adapter.DiscoverAdapter;
 import com.lanou3g.mostbeautifulproperty.view.ScaleTransitionPagerTitleView;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
@@ -18,7 +20,6 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerInd
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.BezierPagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
-import com.lanou3g.mostbeautifulproperty.discover.uiview.adapter.DiscoverAdapter;
 
 import java.util.ArrayList;
 
@@ -48,10 +49,7 @@ public class DiscoverFragment extends BaseFragment{
 
         mTitles = initTitles();
 
-        ArrayList<Fragment> fragments = new ArrayList<>();
-        for (int i = 0; i < mTitles.size(); i++) {
-            fragments.add(new DiscoverTabReuseFragment());
-        }
+        ArrayList<Fragment> fragments = getFragments();
 
         DiscoverAdapter adapter = new DiscoverAdapter(getChildFragmentManager());
         adapter.setTitles(mTitles);
@@ -63,6 +61,7 @@ public class DiscoverFragment extends BaseFragment{
 //        mTabDiscover.setSelectedTabIndicatorColor(Color.WHITE);
 //        // 给tab文字 加选中颜色
 //        mTabDiscover.setTabTextColors(Color.GRAY, Color.WHITE);
+        mVpDiscover.setCurrentItem(2);
     }
 
     private void initMagic() {
@@ -118,5 +117,16 @@ public class DiscoverFragment extends BaseFragment{
         return titles;
     }
 
+    @NonNull
+    private ArrayList<Fragment> getFragments() {
+        ArrayList<Fragment> fragments = new ArrayList<>();
+        fragments.add(new DiscoverLikeFragment());
+        fragments.add(new DiscoverDynamicFragment());
+        fragments.add(new DiscoverDailyFragment());
+        for (int i = 0; i < mTitles.size() - 3; i++) {
+            fragments.add(new DiscoverReuseFragment());
+        }
+        return fragments;
+    }
 
 }
