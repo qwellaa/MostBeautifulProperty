@@ -7,7 +7,7 @@ import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
  *
  */
 
-public class DiscoverTabLikeFragment extends BaseFragment{
+public class DiscoverLikeFragment extends BaseFragment{
     @Override
     protected int setLayout() {
         return R.layout.fragment_designer_like;

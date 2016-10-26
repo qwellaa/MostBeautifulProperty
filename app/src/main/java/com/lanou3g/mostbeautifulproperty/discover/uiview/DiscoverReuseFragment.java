@@ -1,6 +1,7 @@
 package com.lanou3g.mostbeautifulproperty.discover.uiview;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.lanou3g.mostbeautifulproperty.R;
@@ -10,15 +11,15 @@ import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
  *
  */
 
-public class DiscoverTabReuseFragment extends BaseFragment{
+public class DiscoverReuseFragment extends BaseFragment{
 
     private TextView mTv;
 
-    public static DiscoverTabReuseFragment newInstance(int position) {
+    public static DiscoverReuseFragment newInstance(int position) {
 
         Bundle args = new Bundle();
         args.putInt("position", position);
-        DiscoverTabReuseFragment fragment = new DiscoverTabReuseFragment();
+        DiscoverReuseFragment fragment = new DiscoverReuseFragment();
         fragment.setArguments(args);
         return fragment;
     }
