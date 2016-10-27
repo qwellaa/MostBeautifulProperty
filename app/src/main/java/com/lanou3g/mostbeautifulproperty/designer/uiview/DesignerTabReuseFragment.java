@@ -20,7 +20,7 @@ public class DesignerTabReuseFragment extends BaseFragment {
 //    TextView mTextView;
     private ListView mListView;
     private CurrentAdapter mAdapter;
-    private DesignerBean mDesignerBean = new DesignerBean();
+
 
     public static DesignerTabReuseFragment newInstance(int position) {
 
@@ -48,11 +48,12 @@ public class DesignerTabReuseFragment extends BaseFragment {
         List<DesignerBean>mBeanList = new ArrayList<>();
         Bundle args = getArguments();
         final int position = args.getInt("i");
-//        mTextView.setText(position + "");
+
         for (int i = 0; i < 10; i++) {
-            mDesignerBean.setTv1("一");
-            mDesignerBean.setTv2("二");
-            mBeanList.add(mDesignerBean);
+            DesignerBean designerBean = new DesignerBean();
+            designerBean.setTv1("一");
+            designerBean.setTv2("二");
+            mBeanList.add(designerBean);
         }
 
         mListView.setAdapter(mAdapter = new CurrentAdapter<DesignerBean>(context,mBeanList,
