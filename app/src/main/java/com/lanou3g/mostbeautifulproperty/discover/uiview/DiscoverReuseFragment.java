@@ -46,6 +46,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     private DiscoverPresenter mPresenter;
     private CurrentAdapter popupAdapter;
     private TextView mItemTv;
+    private ImageView mUpImg;
 
 
     public static DiscoverReuseFragment newInstance(int position) {
@@ -71,8 +72,11 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
         mTitcleTv = bindView(R.id.fragment_discover_all_tv);
         mMoreTopView.setOnClickListener(this);
         mView = LayoutInflater.from(getContext()).inflate(R.layout.top_popupwindow, null);
+        mUpImg = bindView(R.id.popupwindow_up_img,mView);
+        mUpImg.setOnClickListener(this);
         mPopupWindowGrideView = bindView(R.id.popuuwindow_gridview, mView);
         mItemTv = bindView(R.id.item_popupwindow_tv);
+
 
 
 
@@ -150,19 +154,21 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
                 mTitclePopupWindow.showAsDropDown(mLocationTv);
                 mTitclePopupWindow.setFocusable(true);
                 mTitclePopupWindow.setTouchable(true);
+
                 initOnTouchLisenner();
 //                mPopupWindowGrideView.post(new Runnable() {
 //                    @Override
 //                    public void run() {
 //                        mPopupWindowGrideView.getChildAt(0).setBackgroundResource(R.color.nameText);
 //
-//
-//
-//
-//
 //                    }
 //                });
 //
+                break;
+            case R.id.popupwindow_up_img:
+                if (mTitclePopupWindow != null || mTitclePopupWindow.isShowing()){
+                    mTitclePopupWindow.dismiss();
+                }
                 break;
         }
 
