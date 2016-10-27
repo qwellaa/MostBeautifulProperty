@@ -185,7 +185,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
             public void convert(BaseViewHolder helper, DiscoverBean.DataBean.ProductsBean item) {
                 helper.setText(R.id.tv_discover_list_name,item.getDesigner().getName());
                 helper.setText(R.id.tv_discover_list_identity,item.getDesigner().getLabel());
-//                helper.setText(R.id.iv_discover_list_title,item.getName());
+                helper.setText(R.id.tv_discover_list_title,item.getName());
                 helper.setIamgeGlide(R.id.iv_discover_list_photo,item.getDesigner().getAvatar_url());
                 helper.setIamgeGlide(R.id.iv_discover_list_title,item.getCover_images().get(0));
             }
