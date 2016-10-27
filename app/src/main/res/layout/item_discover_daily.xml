@@ -7,8 +7,7 @@
     <ImageView
         android:id="@+id/iv_daily_list_title"
         android:background="@mipmap/adasd"
-        style="@style/ivDailyListTitle"
-        />
+        style="@style/ivDailyListTitle"/>
     <TextView
         android:id="@+id/tv_daily_list_title"
         android:background="@color/discover_title_bg"

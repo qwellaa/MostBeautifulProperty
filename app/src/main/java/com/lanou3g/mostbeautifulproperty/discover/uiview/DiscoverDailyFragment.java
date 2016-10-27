@@ -33,7 +33,7 @@ public class DiscoverDailyFragment extends BaseFragment{
     protected void initData() {
         List<DailyBean>dailyBeen = new ArrayList<>();
         mListView.setAdapter(mAdapter = new CurrentAdapter<DailyBean>(context,dailyBeen,
-                R.layout.daily_item_list) {
+                R.layout.item_discover_daily) {
             @Override
             public void convert(BaseViewHolder helper, DailyBean item) {
 

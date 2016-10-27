@@ -56,7 +56,7 @@ public class DesignerTabReuseFragment extends BaseFragment {
         }
 
         mListView.setAdapter(mAdapter = new CurrentAdapter<DesignerBean>(context,mBeanList,
-                R.layout.designer_item_list) {
+                R.layout.item_design) {
             @Override
             public void convert(BaseViewHolder helper, DesignerBean item) {
 

@@ -3,6 +3,7 @@ package com.lanou3g.mostbeautifulproperty.magazine.uiview;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.StackView;
 import android.widget.Toast;
 
@@ -54,6 +55,13 @@ public class MagazineFragment extends BaseFragment implements IMagazineView<Maga
     protected void initData() {
         mPresenter = new MagazinePresenter(this);
         mPresenter.startRequest(URLValues.getMagazineUrl(page, pageSize));
+
+        mStackView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
     }
 
     @Override
