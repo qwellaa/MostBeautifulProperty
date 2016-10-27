@@ -43,6 +43,7 @@ public abstract class CurrentAdapter<T> extends BaseAdapter {
     }
 
     @Override
+
     public View getView(int position, View convertView, ViewGroup parent) {
         final BaseViewHolder viewHolder = getViewHolder(position, convertView,
                 parent);

@@ -18,10 +18,13 @@
   </RelativeLayout>
 
   <GridView
+      android:layout_marginLeft="10dp"
+      android:layout_marginRight="10dp"
+      android:layout_marginBottom="10dp"
       android:id="@+id/popuuwindow_gridview"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      >
+      android:numColumns="3">
 
   </GridView>
 
