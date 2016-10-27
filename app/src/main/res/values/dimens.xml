@@ -5,4 +5,6 @@
     <dimen name="iconDis">10dp</dimen>
     <dimen name="textToImg">10dp</dimen>
     <dimen name="height_top_bar">50dp</dimen>
+    <dimen name="moreTextTitle">12sp</dimen>
+    <dimen name="moreTitleDistan">8dp</dimen>
 </resources>

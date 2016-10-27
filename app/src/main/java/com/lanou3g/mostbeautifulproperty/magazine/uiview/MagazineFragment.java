@@ -27,8 +27,8 @@ public class MagazineFragment extends BaseFragment implements IMagazineView<Maga
     private StackView mStackView;
     private MagazinePresenter mPresenter;
     private AlertDialog mDialog;
-    private int page = 1;
-    private int pageSize = 20;
+    private int PAGA = 1;
+    private int PAGASIZE = 20;
 
     @Override
     protected int setLayout() {
@@ -54,7 +54,8 @@ public class MagazineFragment extends BaseFragment implements IMagazineView<Maga
     @Override
     protected void initData() {
         mPresenter = new MagazinePresenter(this);
-        mPresenter.startRequest(URLValues.getMagazineUrl(page, pageSize));
+
+        mPresenter.startRequest(URLValues.getMagazineUrl(PAGA, PAGASIZE));
 
         mStackView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -62,6 +63,9 @@ public class MagazineFragment extends BaseFragment implements IMagazineView<Maga
 
             }
         });
+
+
+
     }
 
     @Override
