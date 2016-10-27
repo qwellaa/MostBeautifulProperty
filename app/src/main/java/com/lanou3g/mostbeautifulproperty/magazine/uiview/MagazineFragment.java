@@ -53,6 +53,7 @@ public class MagazineFragment extends BaseFragment implements IMagazineView<Maga
 
     @Override
     protected void initData() {
+
         mPresenter = new MagazinePresenter(this);
 
         mPresenter.startRequest(URLValues.getMagazineUrl(PAGA, PAGASIZE));

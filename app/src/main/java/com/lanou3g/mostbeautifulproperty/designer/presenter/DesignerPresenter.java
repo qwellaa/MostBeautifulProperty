@@ -1,6 +1,8 @@
 package com.lanou3g.mostbeautifulproperty.designer.presenter;
 
 import com.lanou3g.mostbeautifulproperty.designer.model.DesignerModelImpl;
+import com.lanou3g.mostbeautifulproperty.designer.model.IDesignerModel;
+import com.lanou3g.mostbeautifulproperty.designer.uiview.IDesignerView;
 import com.lanou3g.mostbeautifulproperty.okhttp.OnCompletedListener;
 
 /**
