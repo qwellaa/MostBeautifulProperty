@@ -12,4 +12,6 @@ public final class URLValues {
     public static String getMagazineUrl(int page, int pageSize) {
         return MAGAZINE_HEAD_URL + page + MAGAZINE_TAIL_URL + pageSize;
     }
+    //第二页 首饰 全部
+    public static final String DISCOVER_JEWELRY_ALL_URL = "http://design.zuimeia.com/api/v1/products/category/3/?page=1&page_size=30&device_id=862638038074682&platform=android&lang=zh&appVersion=1.2.2&appVersionCode=10220&systemVersion=23&countryCode=CN&user_id=0&token=&package_name=com.zuiapps.zuiworld";
 }

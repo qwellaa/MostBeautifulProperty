@@ -1,6 +1,7 @@
 package com.lanou3g.mostbeautifulproperty.discover.uiview;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -11,22 +12,25 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseViewHolder;
 import com.lanou3g.mostbeautifulproperty.baseclass.CurrentAdapter;
 import com.lanou3g.mostbeautifulproperty.bean.DiscoverBean;
+import com.lanou3g.mostbeautifulproperty.discover.presenter.DiscoverReusePresenter;
 import com.lanou3g.mostbeautifulproperty.homepage.MainActivity;
+import com.lanou3g.mostbeautifulproperty.okhttp.URLValues;
+import com.lanou3g.mostbeautifulproperty.view.LVGhost;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
  */
 
-public class DiscoverReuseFragment extends BaseFragment implements View.OnClickListener {
+public class DiscoverReuseFragment extends BaseFragment implements View.OnClickListener,IDiscoverView<DiscoverBean> {
     private static final int TABMEN = 6;
     private RelativeLayout mMoreTopView;
     private TextView mTitcleTv;
@@ -36,8 +40,9 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     private TableLayout tb;
     private TextView mLocationTv;
     private ListView mListView;
-    private DiscoverBean mDiscoverBean = new DiscoverBean();
     private CurrentAdapter mAdapter;
+    private DiscoverReusePresenter mDiscoverReusePresenter;
+    private AlertDialog mDialog;
 
     public static DiscoverReuseFragment newInstance(int position) {
 
@@ -63,7 +68,17 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
         mTitcleImg.setOnClickListener(this);
         mView = LayoutInflater.from(getContext()).inflate(R.layout.top_popupwindow, null);
         mListView = bindView(R.id.lv_discover_refuse);
+        mDialog = createDialog();
+    }
 
+    private AlertDialog createDialog(){
+        AlertDialog dialog = new AlertDialog.Builder(context).create();
+        dialog.setCanceledOnTouchOutside(true);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_loading, null);
+        LVGhost mLvGhost =  (LVGhost) view.findViewById(R.id.dialog_lvghost);
+        mLvGhost.startAnim();
+        dialog.setView(view);
+        return dialog;
     }
 
     @Override
@@ -73,15 +88,17 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
         if (TABMEN == position) {
             mMoreTopView.setVisibility(View.INVISIBLE);
         }
+//        List<DiscoverBean> discoverBeanList = new ArrayList<>();
+//        mListView.setAdapter(mAdapter = new CurrentAdapter<DiscoverBean>(context,discoverBeanList,
+//                R.layout.discover_item_list) {
+//            @Override
+//            public void convert(BaseViewHolder helper, DiscoverBean item) {
+//
+//            }
+//        });
+        mDiscoverReusePresenter = new DiscoverReusePresenter(this);
+        mDiscoverReusePresenter.startRequest(URLValues.DISCOVER_JEWELRY_ALL_URL);
 
-        List<DiscoverBean> discoverBeanList = new ArrayList<>();
-        mListView.setAdapter(mAdapter = new CurrentAdapter<DiscoverBean>(context,discoverBeanList,
-                R.layout.discover_item_list) {
-            @Override
-            public void convert(BaseViewHolder helper, DiscoverBean item) {
-
-            }
-        });
 
     }
 
@@ -148,5 +165,35 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
                 break;
         }
 
+    }
+
+    @Override
+    public void showDialog() {
+        mDialog.show();
+    }
+
+    @Override
+    public void dismissDialog() {
+        mDialog.dismiss();
+    }
+
+    @Override
+    public void onResponse(DiscoverBean discoverBean) {
+        ArrayList<DiscoverBean.DataBean.ProductsBean> beanArrayList = (ArrayList<DiscoverBean.DataBean.ProductsBean>) discoverBean.getData().getProducts();
+        mListView.setAdapter(mAdapter = new CurrentAdapter<DiscoverBean.DataBean.ProductsBean>(context,beanArrayList, R.layout.discover_item_list) {
+            @Override
+            public void convert(BaseViewHolder helper, DiscoverBean.DataBean.ProductsBean item) {
+                helper.setText(R.id.tv_discover_list_name,item.getDesigner().getName());
+                helper.setText(R.id.tv_discover_list_identity,item.getDesigner().getLabel());
+//                helper.setText(R.id.iv_discover_list_title,item.getName());
+                helper.setIamgeGlide(R.id.iv_discover_list_photo,item.getDesigner().getAvatar_url());
+                helper.setIamgeGlide(R.id.iv_discover_list_title,item.getCover_images().get(0));
+            }
+        });
+    }
+
+    @Override
+    public void onError() {
+        Toast.makeText(context, "数据异常,请求失败", Toast.LENGTH_SHORT).show();
     }
 }
