@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
@@ -21,8 +22,6 @@ import com.lanou3g.mostbeautifulproperty.homepage.MainActivity;
 
 public class DiscoverReuseFragment extends BaseFragment implements View.OnClickListener {
     private static final int TABMEN = 6;
-
-    private TextView mTv;
     private RelativeLayout mMoreTopView;
     private TextView mTitcleTv;
     private ImageView mTitcleImg;
@@ -30,6 +29,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     private PopupWindow mTitclePopupWindow;
     private TableLayout tb;
     private TextView mLocationTv;
+    private ListView mListView;
 
     public static DiscoverReuseFragment newInstance(int position) {
 
@@ -48,13 +48,13 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     @Override
     protected void initView() {
         tb = bindView(R.id.tab_discover);
-        //  mTv = bindView(R.id.tv_discover_reuse);
         mLocationTv = bindView(R.id.dingwei);
         mMoreTopView = bindView(R.id.reuse_discoverfragment_relative);
         mTitcleTv = bindView(R.id.fragment_discover_all_tv);
         mTitcleImg = bindView(R.id.fragment_discover_dowm_img);
         mTitcleImg.setOnClickListener(this);
         mView = LayoutInflater.from(getContext()).inflate(R.layout.top_popupwindow, null);
+        mListView = bindView(R.id.lv_discover_refuse);
 
     }
 
