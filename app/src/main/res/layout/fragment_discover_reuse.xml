@@ -30,5 +30,10 @@
             style="@style/moreTitleImg"/>
 
     </RelativeLayout>
+    <ListView
+        android:id="@+id/lv_discover_refuse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </ListView>
 
 </LinearLayout>
