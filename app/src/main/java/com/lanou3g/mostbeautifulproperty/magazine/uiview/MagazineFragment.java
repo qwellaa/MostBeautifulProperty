@@ -82,13 +82,13 @@ public class MagazineFragment extends BaseFragment implements IMagazineView<Maga
     public void onResponse(MagazineBean magazineBean) {
         ArrayList<MagazineBean.DataBean.ArticlesBean> beanArrayList = (ArrayList<MagazineBean.DataBean.ArticlesBean>) magazineBean.getData().getArticles();
         mStackView.setAdapter(new CurrentAdapter<MagazineBean.DataBean.ArticlesBean>(context, beanArrayList, R.layout.item_magazine) {
-            @Override
-            public void convert(BaseViewHolder helper, MagazineBean.DataBean.ArticlesBean item) {
-                helper.setIamgeGlide(R.id.iv_magazine_user_head, item.getAuthor().getAvatar_url());
-                helper.setIamgeGlide(R.id.iv_magazine_body, item.getImage_url());
-                helper.setText(R.id.tv_magazine_user_name, item.getAuthor().getUsername());
-                helper.setText(R.id.tv_magazine_title, item.getTitle());
-                helper.setText(R.id.tv_magazine_subtitle, item.getSub_title());
+                    @Override
+                    public void convert(BaseViewHolder helper, MagazineBean.DataBean.ArticlesBean item) {
+                        helper.setIamgeGlide(R.id.iv_magazine_user_head, item.getAuthor().getAvatar_url());
+                        helper.setIamgeGlide(R.id.iv_magazine_body, item.getImage_url());
+                        helper.setText(R.id.tv_magazine_user_name, item.getAuthor().getUsername());
+                        helper.setText(R.id.tv_magazine_title, item.getTitle());
+                        helper.setText(R.id.tv_magazine_subtitle, item.getSub_title());
             }
         });
     }
