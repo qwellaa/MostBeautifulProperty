@@ -4,6 +4,18 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
          android:background="@color/moreTitle">
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      >
+
+    <ImageView
+        android:layout_margin="10dp"
+        android:layout_width="12dp"
+        android:layout_height="11dp"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/barrage_pack_up"/>
+  </RelativeLayout>
 
   <GridView
       android:id="@+id/popuuwindow_gridview"
