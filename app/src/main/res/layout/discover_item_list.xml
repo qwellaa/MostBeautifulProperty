@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:background="@color/top_bar_normal_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/iv_discover_list_title"
+        android:background="@mipmap/adasd"
+        style="@style/ivDailyListTitle"
+        />
+
+    <LinearLayout
+        android:layout_below="@id/iv_discover_list_title"
+        style="@style/llDaily"
+        android:background="@color/discover_item_bg"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout_discover">
+        <ImageView
+            android:id="@+id/iv_discover_list_photo"
+            android:src="@mipmap/like_1"
+            style="@style/photoDaily"
+            />
+        <LinearLayout
+            android:orientation="vertical"
+            style="@style/llDailyText">
+            <TextView
+                android:id="@+id/tv_discover_list_name"
+                android:text="Amanda Thomas"
+                style="@style/nameDaily"
+                />
+            <TextView
+                android:id="@+id/tv_discover_list_identity"
+                android:text="luv AJ 创始人"
+                style="@style/identityDaily"
+                />
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/iv_discover_list_like"
+            android:src="@mipmap/like_1"
+            style="@style/likeDaily"/>
+        <ImageView
+            android:id="@+id/iv_discover_list_unlike"
+            android:src="@mipmap/dislike_1"
+            style="@style/likeDaily"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_discover_list_title"
+        android:background="@color/discover_title_bg"
+        android:textColor="@color/nameText"
+        android:text="luv AJ丨菱形水晶手背链"
+        style="@style/tvDailyListTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="13dp"/>
+
+</RelativeLayout>

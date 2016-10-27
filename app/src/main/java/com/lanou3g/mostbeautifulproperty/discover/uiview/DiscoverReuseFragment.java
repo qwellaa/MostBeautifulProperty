@@ -14,7 +14,13 @@ import android.widget.TextView;
 
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
+import com.lanou3g.mostbeautifulproperty.baseclass.BaseViewHolder;
+import com.lanou3g.mostbeautifulproperty.baseclass.CurrentAdapter;
+import com.lanou3g.mostbeautifulproperty.bean.DiscoverBean;
 import com.lanou3g.mostbeautifulproperty.homepage.MainActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -30,6 +36,8 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     private TableLayout tb;
     private TextView mLocationTv;
     private ListView mListView;
+    private DiscoverBean mDiscoverBean = new DiscoverBean();
+    private CurrentAdapter mAdapter;
 
     public static DiscoverReuseFragment newInstance(int position) {
 
@@ -66,7 +74,14 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
             mMoreTopView.setVisibility(View.INVISIBLE);
         }
 
+        List<DiscoverBean> discoverBeanList = new ArrayList<>();
+        mListView.setAdapter(mAdapter = new CurrentAdapter<DiscoverBean>(context,discoverBeanList,
+                R.layout.discover_item_list) {
+            @Override
+            public void convert(BaseViewHolder helper, DiscoverBean item) {
 
+            }
+        });
 
     }
 
