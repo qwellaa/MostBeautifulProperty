@@ -1,6 +1,7 @@
 package com.lanou3g.mostbeautifulproperty.discover.uiview;
 
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
@@ -79,7 +80,8 @@ public class DiscoverDailyFragment extends BaseFragment implements IDiscoverView
         mRefreshView.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener(){
             @Override
             public void onRefresh() {
-                initInternetDate();
+//                initInternetDate();
+                mLd = mFirstTime;
                 presenter.startRequest(URLValues.getDaily_HEAD_URL(mLd), DailyBean.class);
             }
 
@@ -143,7 +145,7 @@ public class DiscoverDailyFragment extends BaseFragment implements IDiscoverView
 
     @Override
     public void onError() {
-
+        Log.d("DiscoverDailyFragment", "请求失败");
     }
 
     private void initRefreshViewScroll() {
