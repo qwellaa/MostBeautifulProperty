@@ -11,9 +11,8 @@
         android:background="@color/discover_item_bg"
         android:orientation="horizontal"
         android:id="@+id/linearLayout_discover">
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_discover_list_photo"
-            android:src="@mipmap/like_1"
             style="@style/photoDaily"
             />
         <LinearLayout
@@ -23,18 +22,18 @@
                 android:id="@+id/tv_discover_list_name"
                 android:text="Amanda Thomas"
                 style="@style/nameDaily"
-                />
+                android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/tv_discover_list_identity"
                 android:text="luv AJ 创始人"
                 style="@style/identityDaily"
                 />
         </LinearLayout>
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_discover_list_like"
             android:src="@mipmap/like_1"
             style="@style/likeDaily"/>
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_discover_list_unlike"
             android:src="@mipmap/dislike_1"
             style="@style/likeDaily"/>
@@ -45,7 +44,6 @@
     <ImageView
         android:id="@+id/iv_discover_list_title"
         android:scaleType="fitXY"
-        android:background="@mipmap/adasd"
         style="@style/ivDailyListTitle"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -57,7 +55,5 @@
         android:text="luv AJ丨菱形水晶手背链"
         style="@style/tvDailyListTitle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="13dp"/>
+        android:layout_height="wrap_content"/>
 </RelativeLayout>

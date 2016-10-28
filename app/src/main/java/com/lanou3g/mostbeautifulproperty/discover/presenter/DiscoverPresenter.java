@@ -22,9 +22,11 @@ public class DiscoverPresenter{
 
 
     public <T> void startRequest(String strUrl,Class<T>clazz){
+        mIDiscoverView.showDialog();
         mDiscoverModel.startRequest(strUrl, clazz, new OnFinishDiscoverListener<T>() {
             @Override
             public void onFinished(T t) {
+                mIDiscoverView.dismissDialog();
                 mIDiscoverView.onResponse(t);
             }
 

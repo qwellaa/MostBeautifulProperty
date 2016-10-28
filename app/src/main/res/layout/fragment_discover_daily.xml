@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.andview.refreshview.XRefreshView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:id="@+id/discover_daily_xresh_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.lanou3g.mostbeautifulproperty.view.stickyListHeaders.StickyListHeadersListView
+        android:id="@+id/discover_daily_sticky_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="3">
+    </com.lanou3g.mostbeautifulproperty.view.stickyListHeaders.StickyListHeadersListView>
+</com.andview.refreshview.XRefreshView>

@@ -10,7 +10,7 @@ import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
 public class DiscoverDynamicFragment extends BaseFragment{
     @Override
     protected int setLayout() {
-        return R.layout.fragment_designer_dynamic;
+        return R.layout.fragment_discover_dynamic;
     }
 
     @Override

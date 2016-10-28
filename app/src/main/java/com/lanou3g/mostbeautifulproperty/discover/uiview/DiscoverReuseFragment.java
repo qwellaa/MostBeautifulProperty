@@ -2,7 +2,6 @@ package com.lanou3g.mostbeautifulproperty.discover.uiview;
 
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -176,35 +175,14 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
 
         @Override
         public void dismissDialog () {
-
+            mDialog.dismiss();
         }
 
     @Override
     public void onResponse(Object result) {
-        Log.d("zzzz", "t.getClass():" + result.getClass() + "--->" + this);
         if (result instanceof PopupwindowBean){
-            Log.d("DiscoverReuseFragment", result.getClass().getSimpleName());
-            PopupwindowBean popupwindowBean = (PopupwindowBean) result;
-            if (popupwindowBean == null) {
-                Log.d("DiscoverReuseFragment", "popupwindowBean is null");
-            }else {
-                if (popupwindowBean.getData() == null) {
-                    Log.d("DiscoverReuseFragment", "popupwindowBean.getData() is null");
-                }else{
-                    if (popupwindowBean.getData().getCategories() == null) {
-                        Log.d("DiscoverReuseFragment", "popupwindowBean.getData().getCategories() is null");
-                    }else {
-                        if (popupwindowBean.getData().getCategories().get(mPosition - 3) == null) {
-                            Log.d("DiscoverReuseFragment", "popupwindowBean.getData().getCategories().get(mPosition - 3) is null");
-                        }else{
-                            if (popupwindowBean.getData().getCategories().get(mPosition - 3).getSub_categories() == null){
-                                Log.d("DiscoverReuseFragment", "popupwindowBean.getData().getCategories().get(mPosition - 3).getSub_categories() is null");
-                            }
-                        }
-                    }
-                }
-            }
 
+            PopupwindowBean popupwindowBean = (PopupwindowBean) result;
             List<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean> mTitleList = null;
             try {
                 mTitleList = popupwindowBean.getData().getCategories().get(mPosition - 3).getSub_categories();
@@ -229,19 +207,17 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
             mDialog.dismiss();
         }
         if (result instanceof DiscoverBean){
-            Log.d("zzzz", "aa");
+
             DiscoverBean discoverBean = (DiscoverBean) result;
             final ArrayList<DiscoverBean.DataBean.ProductsBean> beanArrayList = (ArrayList<DiscoverBean.DataBean.ProductsBean>) discoverBean.getData().getProducts();
             mListView.setAdapter(mAdapter = new CurrentAdapter<DiscoverBean.DataBean.ProductsBean>(context, beanArrayList, R.layout.discover_item_list) {
                 @Override
                 public void convert(BaseViewHolder helper, DiscoverBean.DataBean.ProductsBean item) {
-                    Log.d("zzzz", item.getDesigner().getName());
                     helper.setText(R.id.tv_discover_list_name, item.getDesigner().getName());
                     helper.setText(R.id.tv_discover_list_identity, item.getDesigner().getLabel());
                     helper.setText(R.id.tv_discover_list_title, item.getName());
                     helper.setIamgeGlide(R.id.iv_discover_list_photo, item.getDesigner().getAvatar_url());
                     helper.setIamgeGlide(R.id.iv_discover_list_title, item.getCover_images().get(0));
-
                 }
             });
         }
