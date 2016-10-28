@@ -53,7 +53,6 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
 
     private ListView mListView;
     private CurrentAdapter mAdapter;
-    private DiscoverPresenter mDiscoverReusePresenter;
     private AlertDialog mDialog;
 
     public static DiscoverReuseFragment newInstance(int position) {
