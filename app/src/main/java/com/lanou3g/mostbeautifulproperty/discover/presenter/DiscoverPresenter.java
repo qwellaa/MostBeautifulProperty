@@ -1,4 +1,4 @@
-package com.lanou3g.mostbeautifulproperty.discover.discoverpresenter;
+package com.lanou3g.mostbeautifulproperty.discover.presenter;
 
 import com.lanou3g.mostbeautifulproperty.discover.model.DiscoverModelmpl;
 import com.lanou3g.mostbeautifulproperty.discover.model.IDiscoverModel;
