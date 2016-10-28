@@ -1,6 +1,6 @@
 
 include ':app', ':magicindicator'
-include ':EaseUI_CN'
+include ':easeUI_CN'
 
 include ':app', ':magicindicator', 'xrefreshlibrary'
 
