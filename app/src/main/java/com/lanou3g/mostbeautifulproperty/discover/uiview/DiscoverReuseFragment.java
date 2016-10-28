@@ -227,9 +227,9 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
         mPopupWindowGrideView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(context, "position:" + position, Toast.LENGTH_SHORT).show();
                 String title = mTitleList.get(position).getName();
                 mTitcleTv.setText(title);
+                mTitclePopupWindow.dismiss();
             }
         });
 
