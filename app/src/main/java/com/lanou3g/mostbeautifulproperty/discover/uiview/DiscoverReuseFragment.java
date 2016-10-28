@@ -1,5 +1,8 @@
 package com.lanou3g.mostbeautifulproperty.discover.uiview;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -7,6 +10,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -50,6 +54,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     private DiscoverPresenter mPresenter;
     private CurrentAdapter popupAdapter;
     private TextView mItemTv;
+    private ImageView mUpImg;
 
     private ListView mListView;
     private CurrentAdapter mAdapter;
@@ -72,12 +77,17 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
 
     @Override
     protected void initView() {
+        if (!isNetworkConnected(context)) {
+            Toast.makeText(context, "网络不可用", Toast.LENGTH_SHORT).show();
+        }
         tb = bindView(R.id.tab_discover);
         mLocationTv = bindView(R.id.dingwei);
         mMoreTopView = bindView(R.id.reuse_discoverfragment_relative);
         mTitcleTv = bindView(R.id.fragment_discover_all_tv);
         mMoreTopView.setOnClickListener(this);
         mView = LayoutInflater.from(getContext()).inflate(R.layout.top_popupwindow, null);
+        mUpImg = bindView(R.id.popupwindow_up_img,mView);
+        mUpImg.setOnClickListener(this);
         mPopupWindowGrideView = bindView(R.id.popuuwindow_gridview, mView);
         mItemTv = bindView(R.id.item_popupwindow_tv);
 
@@ -85,6 +95,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
         mListView = bindView(R.id.lv_discover_refuse);
         mDialog = createDialog();
     }
+
 
     private AlertDialog createDialog() {
         AlertDialog dialog = new AlertDialog.Builder(context).create();
@@ -94,7 +105,22 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
         mLvGhost.startAnim();
         dialog.setView(view);
         return dialog;
+
+
     }
+    public boolean isNetworkConnected(Context context) {
+        if (context != null) {
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
+            if (mNetworkInfo != null) {
+                return mNetworkInfo.isAvailable();
+            }
+        }
+        return false;
+
+    }
+
 
     @Override
     protected void initData() {
@@ -164,15 +190,48 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
                 mTitclePopupWindow.setFocusable(true);
                 mTitclePopupWindow.setTouchable(true);
                 initOnTouchLisenner();
+
+
+                // 点击事件
+                initOnClickGridList();
+                break;
+//                mPopupWindowGrideView.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        mPopupWindowGrideView.getChildAt(0).setBackgroundResource(R.color.nameText);
+//
+
+//                    }
+//                });
+//
+
+            case R.id.popupwindow_up_img:
+                if (mTitclePopupWindow != null || mTitclePopupWindow.isShowing()){
+                    mTitclePopupWindow.dismiss();
+                }
+
                 break;
         }
 
     }
 
+
         @Override
         public void showDialog () {
             mDialog.show();
         }
+
+    private void initOnClickGridList() {
+        mPopupWindowGrideView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(context, "position:" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+
 
         @Override
         public void dismissDialog () {
@@ -180,6 +239,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
         }
 
     @Override
+
     public void onResponse(Object result) {
         Log.d("zzzz", "t.getClass():" + result.getClass() + "--->" + this);
         if (result instanceof PopupwindowBean){
@@ -204,6 +264,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
                     }
                 }
             }
+
 
             List<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean> mTitleList = null;
             try {
