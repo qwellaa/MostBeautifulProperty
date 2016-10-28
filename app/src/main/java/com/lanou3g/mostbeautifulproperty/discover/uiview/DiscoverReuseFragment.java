@@ -2,6 +2,7 @@ package com.lanou3g.mostbeautifulproperty.discover.uiview;
 
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -19,21 +20,21 @@ import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseViewHolder;
 import com.lanou3g.mostbeautifulproperty.baseclass.CurrentAdapter;
+import com.lanou3g.mostbeautifulproperty.bean.DiscoverBean;
 import com.lanou3g.mostbeautifulproperty.bean.PopupwindowBean;
 import com.lanou3g.mostbeautifulproperty.discover.discoverpresenter.DiscoverPresenter;
-import com.lanou3g.mostbeautifulproperty.discover.presenter.DiscoverReusePresenter;
 import com.lanou3g.mostbeautifulproperty.homepage.MainActivity;
 import com.lanou3g.mostbeautifulproperty.okhttp.URLValues;
 import com.lanou3g.mostbeautifulproperty.view.LVGhost;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import static com.lanou3g.mostbeautifulproperty.R.id.item_popupwindow_tv;
 /**
  *
  */
 
-public class DiscoverReuseFragment extends BaseFragment implements View.OnClickListener, IDiscoverView<PopupwindowBean> {
+public class DiscoverReuseFragment extends BaseFragment implements View.OnClickListener, IDiscoverView{
 
 
     private static final int TABMEN = 6;
@@ -52,7 +53,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
 
     private ListView mListView;
     private CurrentAdapter mAdapter;
-    private DiscoverReusePresenter mDiscoverReusePresenter;
+    private DiscoverPresenter mDiscoverReusePresenter;
     private AlertDialog mDialog;
 
     public static DiscoverReuseFragment newInstance(int position) {
@@ -99,19 +100,16 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     protected void initData() {
         Bundle args = getArguments();
         mPosition = args.getInt("position");
+        mPresenter = new DiscoverPresenter(this);
         if (TABMEN == mPosition) {
             mMoreTopView.setVisibility(View.INVISIBLE);
-
         } else {
-
-
-            mPresenter = new DiscoverPresenter(this);
-            mPresenter.startRequest(URLValues.POPUPWINDOW_URL);
-
+            mPresenter.startRequest(URLValues.POPUPWINDOW_URL,PopupwindowBean.class);
         }
+        mPresenter.startRequest(URLValues.DISCOVER_JEWELRY_ALL_URL,DiscoverBean.class);
 //
-//        mDiscoverReusePresenter = new DiscoverReusePresenter(this);
-//        mDiscoverReusePresenter.startRequest(URLValues.DISCOVER_JEWELRY_ALL_URL);
+//        mDiscoverReusePresenter = new DiscoverBeanerReusePresenter(this);
+//        mDiscoverReusePresenter.startRequestt(URLValues.DISCOVER_JEWELRY_ALL_URL);
     }
 //        List<DiscoverBean> discoverBeanList = new ArrayList<>();
 //        mListView.setAdapter(mAdapter = new CurrentAdapter<DiscoverBean>(context,discoverBeanList,
@@ -207,10 +205,41 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
 
         }
 
-        @Override
-        public void onResponse (PopupwindowBean popupwindowBean){
+    @Override
+    public void onResponse(Object result) {
+        Log.d("zzzz", "t.getClass():" + result.getClass() + "--->" + this);
+        if (result instanceof PopupwindowBean){
+            Log.d("DiscoverReuseFragment", result.getClass().getSimpleName());
+            PopupwindowBean popupwindowBean = (PopupwindowBean) result;
+            if (popupwindowBean == null) {
+                Log.d("DiscoverReuseFragment", "popupwindowBean is null");
+            }else {
+                if (popupwindowBean.getData() == null) {
+                    Log.d("DiscoverReuseFragment", "popupwindowBean.getData() is null");
+                }else{
+                    if (popupwindowBean.getData().getCategories() == null) {
+                        Log.d("DiscoverReuseFragment", "popupwindowBean.getData().getCategories() is null");
+                    }else {
+                        if (popupwindowBean.getData().getCategories().get(mPosition - 3) == null) {
+                            Log.d("DiscoverReuseFragment", "popupwindowBean.getData().getCategories().get(mPosition - 3) is null");
+                        }else{
+                            if (popupwindowBean.getData().getCategories().get(mPosition - 3).getSub_categories() == null){
+                                Log.d("DiscoverReuseFragment", "popupwindowBean.getData().getCategories().get(mPosition - 3).getSub_categories() is null");
+                            }
+                        }
+                    }
+                }
+            }
 
-            ArrayList<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean> mTitleList = (ArrayList<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean>) popupwindowBean.getData().getCategories().get(mPosition - 3).getSub_categories();
+            List<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean> mTitleList = null;
+            try {
+                mTitleList = popupwindowBean.getData().getCategories().get(mPosition - 3).getSub_categories();
+
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+                mTitleList = new ArrayList<>();
+            }
+//            Log.d("zzz", mTitleList.get(0).getName());
             PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean bean = new PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean();
             bean.setName("全部");
             mTitleList.add(0, bean);
@@ -221,7 +250,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
 
                 @Override
                 public void convert(BaseViewHolder helper, PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean item) {
-                    helper.setText(item_popupwindow_tv, item.getName());
+                    helper.setText(R.id.item_popupwindow_tv, item.getName());
 
 
                 }
@@ -230,22 +259,37 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
 
             mDialog.dismiss();
         }
+        if (result instanceof DiscoverBean){
+            Log.d("zzzz", "aa");
+            DiscoverBean discoverBean = (DiscoverBean) result;
+            final ArrayList<DiscoverBean.DataBean.ProductsBean> beanArrayList = (ArrayList<DiscoverBean.DataBean.ProductsBean>) discoverBean.getData().getProducts();
+            mListView.setAdapter(mAdapter = new CurrentAdapter<DiscoverBean.DataBean.ProductsBean>(context, beanArrayList, R.layout.discover_item_list) {
+                @Override
+                public void convert(BaseViewHolder helper, DiscoverBean.DataBean.ProductsBean item) {
+                    Log.d("zzzz", item.getDesigner().getName());
+                    helper.setText(R.id.tv_discover_list_name, item.getDesigner().getName());
+                    helper.setText(R.id.tv_discover_list_identity, item.getDesigner().getLabel());
+                    helper.setText(R.id.tv_discover_list_title, item.getName());
+                    helper.setIamgeGlide(R.id.iv_discover_list_photo, item.getDesigner().getAvatar_url());
+                    helper.setIamgeGlide(R.id.iv_discover_list_title, item.getCover_images().get(0));
 
+                }
+            });
+        }
+    }
 
-
+//    @Override
+//        public void onResponse (PopupwindowBean popupwindowBean){
+//
+//
+//        }
+//
+//
+//
+//
 //        @Override
 //        public void onResponse (DiscoverBean discoverBean){
-//            ArrayList<DiscoverBean.DataBean.ProductsBean> beanArrayList = (ArrayList<DiscoverBean.DataBean.ProductsBean>) discoverBean.getData().getProducts();
-//            mListView.setAdapter(mAdapter = new CurrentAdapter<DiscoverBean.DataBean.ProductsBean>(context, beanArrayList, R.layout.discover_item_list) {
-//                @Override
-//                public void convert(BaseViewHolder helper, DiscoverBean.DataBean.ProductsBean item) {
-//                    helper.setText(R.id.tv_discover_list_name, item.getDesigner().getName());
-//                    helper.setText(R.id.tv_discover_list_identity, item.getDesigner().getLabel());
-//                    helper.setText(R.id.tv_discover_list_title, item.getName());
-//                    helper.setIamgeGlide(R.id.iv_discover_list_photo, item.getDesigner().getAvatar_url());
-//                    helper.setIamgeGlide(R.id.iv_discover_list_title, item.getCover_images().get(0));
-//                }
-//            });
+
 //        }
 
         @Override

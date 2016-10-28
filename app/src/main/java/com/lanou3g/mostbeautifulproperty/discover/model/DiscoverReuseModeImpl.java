@@ -8,14 +8,15 @@ import com.lanou3g.mostbeautifulproperty.okhttp.OnCompletedListener;
  * Created by dllo on 16/10/27.
  */
 
-public class DiscoverReuseModeImpl implements IDiscoverModel<DiscoverBean> {
+public class DiscoverReuseModeImpl implements IDiscoverModel {
+
     @Override
-    public void startRequest(String urlStr, final OnFinishDiscoverListener<DiscoverBean> listener) {
+    public <T> void startRequest(String urlStr, Class<T> tClass, final OnFinishDiscoverListener<T> listener) {
         HttpManager.getInstance().getRequest(urlStr, DiscoverBean.class, new OnCompletedListener<DiscoverBean>() {
             @Override
             public void onCompleted(DiscoverBean result) {
-                if (result.getResult() == 1){
-                    listener.onFinished(result);
+                if (1 == result.getResult()){
+                    listener.onFinished((T) result);
                 }else {
                     listener.onError();
                     return;
@@ -30,12 +31,12 @@ public class DiscoverReuseModeImpl implements IDiscoverModel<DiscoverBean> {
     }
 
     @Override
-    public void insertInfoDB(DiscoverBean discoverBean) {
+    public <T> void insertInfoDB(T t) {
 
     }
 
     @Override
-    public void queryGankAll(OnFinishDiscoverListener<DiscoverBean> listener) {
+    public <T> void queryGankAll(OnFinishDiscoverListener<T> listener) {
 
     }
 }
