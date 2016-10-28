@@ -1,1 +1,5 @@
+
 include ':app', ':magicindicator', 'xrefreshlibrary'
+
+include ':app', ':magicindicator', 'library'
+
