@@ -10,6 +10,7 @@
       >
 
     <ImageView
+        android:id="@+id/popupwindow_up_img"
         android:layout_margin="10dp"
         android:layout_width="12dp"
         android:layout_height="11dp"
