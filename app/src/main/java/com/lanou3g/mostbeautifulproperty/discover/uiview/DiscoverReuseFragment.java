@@ -5,7 +5,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -58,8 +57,10 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
 
     private ListView mListView;
     private CurrentAdapter mAdapter;
-    private DiscoverPresenter mDiscoverReusePresenter;
     private AlertDialog mDialog;
+    private PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean mBean;
+    private PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean mBeanAll;
+    private List<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean> mTitleList;
 
     public static DiscoverReuseFragment newInstance(int position) {
 
@@ -178,9 +179,6 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
 
     }
 
-//
-
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -195,16 +193,6 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
                 // 点击事件
                 initOnClickGridList();
                 break;
-//                mPopupWindowGrideView.post(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        mPopupWindowGrideView.getChildAt(0).setBackgroundResource(R.color.nameText);
-//
-
-//                    }
-//                });
-//
-
             case R.id.popupwindow_up_img:
                 if (mTitclePopupWindow != null || mTitclePopupWindow.isShowing()){
                     mTitclePopupWindow.dismiss();
@@ -225,7 +213,9 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
         mPopupWindowGrideView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(context, "position:" + position, Toast.LENGTH_SHORT).show();
+                String title = mTitleList.get(position).getName();
+                mTitcleTv.setText(title);
+                mTitclePopupWindow.dismiss();
             }
         });
 
@@ -235,38 +225,18 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
 
         @Override
         public void dismissDialog () {
-
+            mDialog.dismiss();
         }
 
     @Override
 
     public void onResponse(Object result) {
-        Log.d("zzzz", "t.getClass():" + result.getClass() + "--->" + this);
         if (result instanceof PopupwindowBean){
-            Log.d("DiscoverReuseFragment", result.getClass().getSimpleName());
+
+            mTitleList = null;
             PopupwindowBean popupwindowBean = (PopupwindowBean) result;
-            if (popupwindowBean == null) {
-                Log.d("DiscoverReuseFragment", "popupwindowBean is null");
-            }else {
-                if (popupwindowBean.getData() == null) {
-                    Log.d("DiscoverReuseFragment", "popupwindowBean.getData() is null");
-                }else{
-                    if (popupwindowBean.getData().getCategories() == null) {
-                        Log.d("DiscoverReuseFragment", "popupwindowBean.getData().getCategories() is null");
-                    }else {
-                        if (popupwindowBean.getData().getCategories().get(mPosition - 3) == null) {
-                            Log.d("DiscoverReuseFragment", "popupwindowBean.getData().getCategories().get(mPosition - 3) is null");
-                        }else{
-                            if (popupwindowBean.getData().getCategories().get(mPosition - 3).getSub_categories() == null){
-                                Log.d("DiscoverReuseFragment", "popupwindowBean.getData().getCategories().get(mPosition - 3).getSub_categories() is null");
-                            }
-                        }
-                    }
-                }
-            }
-
-
             List<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean> mTitleList = null;
+
             try {
                 mTitleList = popupwindowBean.getData().getCategories().get(mPosition - 3).getSub_categories();
 
@@ -274,35 +244,36 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
                 e.printStackTrace();
                 mTitleList = new ArrayList<>();
             }
-            PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean bean = new PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean();
-            bean.setName("全部");
-            mTitleList.add(0, bean);
-
-
+            mBean = new PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean();
+            mBeanAll = new PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean();
+            mBeanAll.setName("全部");
+            mTitleList.add(0,mBeanAll);
             mPopupWindowGrideView.setAdapter(popupAdapter = new CurrentAdapter<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean>(context
                     , mTitleList, R.layout.item_popopwindow) {
 
                 @Override
                 public void convert(BaseViewHolder helper, PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean item) {
                     helper.setText(R.id.item_popupwindow_tv, item.getName());
+                    mBean.setName(item.getName());
                 }
+
             });
+            mTitleList.add(mBean);
+            mTitleList.remove(mTitleList.size()-1);
             mDialog.dismiss();
         }
         if (result instanceof DiscoverBean){
-            Log.d("zzzz", "aa");
+
             DiscoverBean discoverBean = (DiscoverBean) result;
             final ArrayList<DiscoverBean.DataBean.ProductsBean> beanArrayList = (ArrayList<DiscoverBean.DataBean.ProductsBean>) discoverBean.getData().getProducts();
             mListView.setAdapter(mAdapter = new CurrentAdapter<DiscoverBean.DataBean.ProductsBean>(context, beanArrayList, R.layout.discover_item_list) {
                 @Override
                 public void convert(BaseViewHolder helper, DiscoverBean.DataBean.ProductsBean item) {
-                    Log.d("zzzz", item.getDesigner().getName());
                     helper.setText(R.id.tv_discover_list_name, item.getDesigner().getName());
                     helper.setText(R.id.tv_discover_list_identity, item.getDesigner().getLabel());
                     helper.setText(R.id.tv_discover_list_title, item.getName());
                     helper.setIamgeGlide(R.id.iv_discover_list_photo, item.getDesigner().getAvatar_url());
                     helper.setIamgeGlide(R.id.iv_discover_list_title, item.getCover_images().get(0));
-
                 }
             });
         }
