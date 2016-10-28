@@ -3,15 +3,10 @@
                 android:background="@color/top_bar_normal_bg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-    <ImageView
-        android:id="@+id/iv_discover_list_title"
-        android:scaleType="fitXY"
-        android:background="@mipmap/adasd"
-        style="@style/ivDailyListTitle"
-        />
+
 
     <LinearLayout
-        android:layout_below="@id/iv_discover_list_title"
+        android:layout_below="@+id/iv_discover_list_title"
         style="@style/llDaily"
         android:background="@color/discover_item_bg"
         android:orientation="horizontal"
@@ -45,6 +40,16 @@
             style="@style/likeDaily"/>
     </LinearLayout>
 
+
+
+    <ImageView
+        android:id="@+id/iv_discover_list_title"
+        android:scaleType="fitXY"
+        android:background="@mipmap/adasd"
+        style="@style/ivDailyListTitle"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
     <TextView
         android:id="@+id/tv_discover_list_title"
         android:background="@color/discover_title_bg"
@@ -55,5 +60,4 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="13dp"/>
-
 </RelativeLayout>
