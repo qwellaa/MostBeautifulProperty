@@ -235,7 +235,6 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
 
             mTitleList = null;
             PopupwindowBean popupwindowBean = (PopupwindowBean) result;
-            List<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean> mTitleList = null;
 
             try {
                 mTitleList = popupwindowBean.getData().getCategories().get(mPosition - 3).getSub_categories();
