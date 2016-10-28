@@ -1,16 +1,21 @@
 package com.lanou3g.mostbeautifulproperty.discover.uiview;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
@@ -65,6 +70,9 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
 
     @Override
     protected void initView() {
+        if (!isNetworkConnected(context)) {
+            Toast.makeText(context, "网络不可用", Toast.LENGTH_SHORT).show();
+        }
         tb = bindView(R.id.tab_discover);
         //  mTv = bindView(R.id.tv_discover_reuse);
         mLocationTv = bindView(R.id.dingwei);
@@ -81,6 +89,18 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
 
 
     }
+    public boolean isNetworkConnected(Context context) {
+        if (context != null) {
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
+            if (mNetworkInfo != null) {
+                return mNetworkInfo.isAvailable();
+            }
+        }
+        return false;
+    }
+
 
     @Override
     protected void initData() {
@@ -154,23 +174,36 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
                 mTitclePopupWindow.showAsDropDown(mLocationTv);
                 mTitclePopupWindow.setFocusable(true);
                 mTitclePopupWindow.setTouchable(true);
-
                 initOnTouchLisenner();
+                // 点击事件
+                initOnClickGridList();
+                break;
 //                mPopupWindowGrideView.post(new Runnable() {
 //                    @Override
 //                    public void run() {
 //                        mPopupWindowGrideView.getChildAt(0).setBackgroundResource(R.color.nameText);
 //
+
 //                    }
 //                });
 //
-                break;
+
             case R.id.popupwindow_up_img:
                 if (mTitclePopupWindow != null || mTitclePopupWindow.isShowing()){
                     mTitclePopupWindow.dismiss();
                 }
                 break;
         }
+
+    }
+
+    private void initOnClickGridList() {
+        mPopupWindowGrideView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(context, "position:" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -188,7 +221,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     @Override
     public void onResponse(PopupwindowBean popupwindowBean) {
 
-     ArrayList<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean> mTitleList = (ArrayList<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean>) popupwindowBean.getData().getCategories().get(mPosition -3).getSub_categories();
+        ArrayList<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean> mTitleList = (ArrayList<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean>) popupwindowBean.getData().getCategories().get(mPosition -3).getSub_categories();
         PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean bean = new PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean();
         bean.setName("全部");
         mTitleList.add(0,bean);

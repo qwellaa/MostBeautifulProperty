@@ -30,16 +30,24 @@ public class MagazineFragment extends BaseFragment implements IMagazineView<Maga
     private int PAGA = 1;
     private int PAGASIZE = 20;
 
+
+
     @Override
     protected int setLayout() {
         return R.layout.fragment_magazine;
     }
 
+
     @Override
     protected void initView() {
         mStackView = bindView(R.id.magazine_stackview);
         mDialog = createDialog();
+
+
+
     }
+
+
 
     private AlertDialog createDialog() {
         AlertDialog dialog = new AlertDialog.Builder(context).create();

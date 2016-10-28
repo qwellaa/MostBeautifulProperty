@@ -1,10 +1,14 @@
 package com.lanou3g.mostbeautifulproperty.homepage;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseActivity;
@@ -37,13 +41,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void initData() {
+
         mRBtnMagazine.setOnClickListener(this);
         mRBtnDiscover.setOnClickListener(this);
         mRBtnDesigner.setOnClickListener(this);
         mRBtnMine.setOnClickListener(this);
 
         initStartRun();
+
+
     }
+
+
 
     private void initStartRun() {
         mRBtnMagazine.setChecked(true);
