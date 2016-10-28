@@ -38,9 +38,6 @@
             android:src="@mipmap/dislike_1"
             style="@style/likeDaily"/>
     </LinearLayout>
-
-
-
     <ImageView
         android:id="@+id/iv_discover_list_title"
         android:scaleType="fitXY"
@@ -50,8 +47,6 @@
         android:layout_alignParentStart="true"/>
     <TextView
         android:id="@+id/tv_discover_list_title"
-        android:background="@color/discover_title_bg"
-        android:textColor="@color/nameText"
         android:text="luv AJ丨菱形水晶手背链"
         style="@style/tvDailyListTitle"
         android:layout_width="wrap_content"
