@@ -59,6 +59,9 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     private ListView mListView;
     private CurrentAdapter mAdapter;
     private AlertDialog mDialog;
+    private PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean mBean;
+    private PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean mBeanAll;
+    private List<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean> mTitleList;
 
     public static DiscoverReuseFragment newInstance(int position) {
 
@@ -225,6 +228,8 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(context, "position:" + position, Toast.LENGTH_SHORT).show();
+                String title = mTitleList.get(position).getName();
+                mTitcleTv.setText(title);
             }
         });
 
@@ -265,7 +270,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
             }
 
 
-            List<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean> mTitleList = null;
+            mTitleList = null;
             try {
                 mTitleList = popupwindowBean.getData().getCategories().get(mPosition - 3).getSub_categories();
 
@@ -273,19 +278,22 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
                 e.printStackTrace();
                 mTitleList = new ArrayList<>();
             }
-            PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean bean = new PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean();
-            bean.setName("全部");
-            mTitleList.add(0, bean);
-
-
+            mBean = new PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean();
+            mBeanAll = new PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean();
+            mBeanAll.setName("全部");
+            mTitleList.add(0,mBeanAll);
             mPopupWindowGrideView.setAdapter(popupAdapter = new CurrentAdapter<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean>(context
                     , mTitleList, R.layout.item_popopwindow) {
 
                 @Override
                 public void convert(BaseViewHolder helper, PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean item) {
                     helper.setText(R.id.item_popupwindow_tv, item.getName());
+                    mBean.setName(item.getName());
                 }
+
             });
+            mTitleList.add(mBean);
+            mTitleList.remove(mTitleList.size()-1);
             mDialog.dismiss();
         }
         if (result instanceof DiscoverBean){
