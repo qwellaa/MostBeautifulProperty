@@ -35,6 +35,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".mine.uiview.chat.LoginActivity"/>
+        <activity android:name=".mine.uiview.chat.MessageMainActivity">
+
+        </activity>
         <meta-data
             android:name="EASEMOB_APPKEY"
             android:value="lzan13#hxsdkdemo"/>
