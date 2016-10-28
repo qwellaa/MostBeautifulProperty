@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:text="发起聊天"/>
     <Button
+        android:id="@+id/btn_exit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="退出登录"/>

@@ -24,14 +24,14 @@
 
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/login_username"
         style="@style/userNameAnd"
         android:hint="@string/user_name"
         android:singleLine="true"
         />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/login_password"
         style="@style/userNameAnd"
 
         android:hint="@string/password"
@@ -57,9 +57,10 @@
             android:text="@string/register"
             android:textColor="@android:color/white"
             android:textSize="18sp"
-            android:id="@+id/button"/>
+            android:id="@+id/button_riegister"/>
 
         <Button
+            android:id="@+id/btn_login"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginLeft="10dip"

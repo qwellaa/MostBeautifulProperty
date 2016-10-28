@@ -35,6 +35,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".mine.uiview.chat.LoginActivity"/>
+        <activity android:name=".mine.uiview.chat.MessageMainActivity">
+
+        </activity>
         <meta-data
             android:name="EASEMOB_APPKEY"
             android:value="lzan13#hxsdkdemo"/>
@@ -43,7 +46,7 @@
             android:name="com.hyphenate.chat.EMChatService"
             android:exported="true"/>
         <!-- 声明sdk所需的receiver -->
-        <receiver android:name="com.hyphenate.chat. ">
+        <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_REMOVED"/>
                 <data android:scheme="package"/>

@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
 import com.lanou3g.mostbeautifulproperty.mine.uiview.chat.LoginActivity;
+import com.lanou3g.mostbeautifulproperty.mine.uiview.chat.MessageMainActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -44,6 +45,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         switch (v.getId()){
 
             case R.id.fragment_mine_message_ll:
+                Intent mesIntent = new Intent(getContext(), MessageMainActivity.class);
+                startActivity(mesIntent);
 
                 break;
             case R.id.fragment_mine_circleimg:
