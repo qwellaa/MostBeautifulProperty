@@ -162,6 +162,7 @@
     </com.lanou3g.mostbeautifulproperty.view.BounceScrollView>
 
     <ImageView
+
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignParentRight="true"
