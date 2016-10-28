@@ -179,9 +179,6 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
 
     }
 
-//
-
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -196,16 +193,6 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
                 // 点击事件
                 initOnClickGridList();
                 break;
-//                mPopupWindowGrideView.post(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        mPopupWindowGrideView.getChildAt(0).setBackgroundResource(R.color.nameText);
-//
-
-//                    }
-//                });
-//
-
             case R.id.popupwindow_up_img:
                 if (mTitclePopupWindow != null || mTitclePopupWindow.isShowing()){
                     mTitclePopupWindow.dismiss();
@@ -246,13 +233,10 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     public void onResponse(Object result) {
         if (result instanceof PopupwindowBean){
 
-<<<<<<< HEAD
-
             mTitleList = null;
-=======
             PopupwindowBean popupwindowBean = (PopupwindowBean) result;
             List<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean> mTitleList = null;
->>>>>>> feature/有物页面daily数据
+
             try {
                 mTitleList = popupwindowBean.getData().getCategories().get(mPosition - 3).getSub_categories();
 

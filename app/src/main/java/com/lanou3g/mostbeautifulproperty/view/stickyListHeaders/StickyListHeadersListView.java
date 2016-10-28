@@ -21,10 +21,6 @@ import android.widget.ListView;
 import android.widget.SectionIndexer;
 
 import com.lanou3g.mostbeautifulproperty.R;
-<<<<<<< HEAD
-
-=======
->>>>>>> feature/有物页面daily数据
 import com.lanou3g.mostbeautifulproperty.view.stickyListHeaders.WrapperViewList.LifeCycleListener;
 
 
