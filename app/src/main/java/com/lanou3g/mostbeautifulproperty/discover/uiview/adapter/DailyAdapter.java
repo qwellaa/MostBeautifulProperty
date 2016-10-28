@@ -109,7 +109,8 @@ public class DailyAdapter extends BaseAdapter implements StickyListHeadersAdapte
         } else {
             viewHeadHolder = (ViewHeadHolder) convertView.getTag();
         }
-        viewHeadHolder.mTvHeader.setText(mFormat.format(new Date(getItem(position).getPublish_at())));
+        String strDate = mFormat.format(new Date(getItem(position).getPublish_at()));
+        viewHeadHolder.mTvHeader.setText(strDate);
 
         return convertView;
     }
