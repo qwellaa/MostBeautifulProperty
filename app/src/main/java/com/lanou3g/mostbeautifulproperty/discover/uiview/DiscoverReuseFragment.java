@@ -5,6 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -235,7 +236,6 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
 
             mTitleList = null;
             PopupwindowBean popupwindowBean = (PopupwindowBean) result;
-            List<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean> mTitleList = null;
 
             try {
                 mTitleList = popupwindowBean.getData().getCategories().get(mPosition - 3).getSub_categories();
@@ -255,12 +255,15 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
                 public void convert(BaseViewHolder helper, PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean item) {
                     helper.setText(R.id.item_popupwindow_tv, item.getName());
                     mBean.setName(item.getName());
+                    Log.d("as", item.getName());
                 }
 
             });
             mTitleList.add(mBean);
             mTitleList.remove(mTitleList.size()-1);
             mDialog.dismiss();
+            Log.d("as", "mBean:" + mBean.getName());
+            Log.d("DiscoverReuseFragment", "mTitleList.size():" + mTitleList.size());
         }
         if (result instanceof DiscoverBean){
 
