@@ -201,9 +201,16 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
         } else {
             mPresenter.startRequest(URLValues.POPUPWINDOW_URL,PopupwindowBean.class);
         }
-        String URL = URLValues.getDISCOVER_URL(3,1,30);
-        mPresenter.startRequest(URL,DiscoverBean.class);
+//        String URL = URLValues.getDISCOVER_URL(3,1,30);
+//        mPresenter.startRequest(URL,DiscoverBean.class);
+        String[] URLStrs = URLArr.get(mPosition - 3);
+        String url = URLStrs[0];
+        mPresenter.startRequest(url,DiscoverBean.class);
+
+
     }
+
+
 
     @Override
     public void onResume() {
@@ -284,6 +291,9 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String title = mTitleList.get(position).getName();
                 mTitcleTv.setText(title);
+                String[] URLStrings = URLArr.get(mPosition - 3);
+                String urls = URLStrings[position];
+                mPresenter.startRequest(urls,DiscoverBean.class);
                 mTitclePopupWindow.dismiss();
             }
         });
