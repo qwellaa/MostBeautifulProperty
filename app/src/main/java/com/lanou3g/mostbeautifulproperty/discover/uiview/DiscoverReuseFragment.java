@@ -188,8 +188,6 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
                 mTitclePopupWindow.setFocusable(true);
                 mTitclePopupWindow.setTouchable(true);
                 initOnTouchLisenner();
-
-
                 // 点击事件
                 initOnClickGridList();
                 break;

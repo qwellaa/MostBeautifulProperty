@@ -7,6 +7,9 @@ package com.lanou3g.mostbeautifulproperty.dbtool;
  */
 
 public class DBTool<T> {
+    // 需要进一步完善.......
+
+
 //    private static DBTool sDBTool;
 //    private LiteOrm mLiteOrm;
 //    private ExecutorService threedPool;
