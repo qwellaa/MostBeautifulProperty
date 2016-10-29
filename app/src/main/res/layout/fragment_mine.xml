@@ -4,8 +4,6 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
     >
-
-
     <com.lanou3g.mostbeautifulproperty.view.BounceScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -166,5 +164,6 @@
         android:layout_height="30dp"
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/iconDis"
+        android:id="@+id/iv_mine_setting"
         android:background="@mipmap/me_setting"/>
 </RelativeLayout>

@@ -20,6 +20,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".mine.uiview.chat.LoginActivity"/>
+
+        <activity android:name=".mine.uiview.setting.SettingActivity">
+
+        </activity>
     </application>
 
 </manifest>

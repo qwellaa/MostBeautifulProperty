@@ -17,4 +17,14 @@
     <string name="login">登录</string>
     <string name="dialog_loading">拼命加载中...</string>
     <string name="titleMore">全部</string>
+    <string name="settingTitle">设置</string>
+    <string name="settingPersonalData">个人资料</string>
+    <string name="settingAlerts">消息通知</string>
+    <string name="settingClearCache">清除缓存</string>
+    <string name="settingUserFeedback">用户反馈</string>
+    <string name="settingGivePraise">给最美有物好评</string>
+    <string name="settingRecommendFriend">推荐给朋友</string>
+    <string name="settingAboutUs">关于我们</string>
+    <string name="settingStartVideo">播放启动视频</string>
+    <string name="settingExitLogin">退出登录</string>
 </resources>
