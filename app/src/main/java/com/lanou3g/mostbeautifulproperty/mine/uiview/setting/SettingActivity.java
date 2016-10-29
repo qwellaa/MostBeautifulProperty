@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.lanou3g.mostbeautifulproperty.R;
@@ -20,7 +20,7 @@ import com.lanou3g.mostbeautifulproperty.mine.uiview.setting.clearcache.DataClea
 public class SettingActivity extends BaseActivity implements View.OnClickListener {
 
     private LinearLayout mLlPersonal;
-    private SeekBar mSbAlerts;
+    private Switch mStAlerts;
     private LinearLayout mLlClearCache;
     private LinearLayout mLlUserFeedback;
     private LinearLayout mLlGivePraise;
@@ -39,7 +39,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     @Override
     protected void initView() {
         mLlPersonal = bindView(R.id.ll_setting_personal);
-        mSbAlerts = bindView(R.id.seek_bar_setting_alerts);
+        mStAlerts = bindView(R.id.switch_setting_alerts);
         mLlClearCache = bindView(R.id.ll_setting_clear_cache);
         mLlUserFeedback = bindView(R.id.ll_setting_user_feedback);
         mLlGivePraise = bindView(R.id.ll_setting_give_praise);
@@ -67,7 +67,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 
     private void initSetOnClick() {
         mLlPersonal.setOnClickListener(this);
-        mSbAlerts.setOnClickListener(this);
+        mStAlerts.setOnClickListener(this);
         mLlClearCache.setOnClickListener(this);
         mLlUserFeedback.setOnClickListener(this);
         mLlGivePraise.setOnClickListener(this);
@@ -98,7 +98,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.ll_setting_exit_login:
                 break;
-            case R.id.seek_bar_setting_alerts:
+            case R.id.switch_setting_alerts:
                 break;
             case R.id.btn_include_setting_return:
                 finish();
