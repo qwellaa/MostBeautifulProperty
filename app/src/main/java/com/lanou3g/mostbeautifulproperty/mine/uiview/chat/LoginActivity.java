@@ -2,6 +2,8 @@ package com.lanou3g.mostbeautifulproperty.mine.uiview.chat;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.support.design.widget.TextInputEditText;
 import android.text.TextUtils;
 import android.util.Log;
@@ -43,6 +45,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         mLoginBtn = bindView(R.id.btn_login);
         mRegisterBtn.setOnClickListener(this);
         mLoginBtn.setOnClickListener(this);
+        if (Build.VERSION.SDK_INT >= 21) {
+            View decorView = getWindow().getDecorView();
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            decorView.setSystemUiVisibility(option);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
 
 
     }
