@@ -66,7 +66,7 @@ public class DailyAdapter extends BaseAdapter implements StickyListHeadersAdapte
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder = null;
         if (convertView == null) {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.discover_item_list, null);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_discover_list, null);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         } else {

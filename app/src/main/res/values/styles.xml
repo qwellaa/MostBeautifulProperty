@@ -75,6 +75,7 @@
         <item name="android:layout_marginBottom">5dp</item>
     </style>
     <style name="likeDaily">
+        <item name="android:button">@null</item>
         <item name="android:layout_margin">10dp</item>
         <item name="android:layout_height">50dp</item>
         <item name="android:layout_width">50dp</item>
@@ -114,8 +115,21 @@
     <style name="dailyHeaders">
         <item name="android:textColor">@color/colorShareBtnBgS</item>
         <item name="android:layout_margin">8dp</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">16sp</item>
     </style>
-
-
+    <style name="settingTitle">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/nameText</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:background">@color/discover_item_bg</item>
+    </style>
+    <style name="personalData">
+        <item name="android:textColor">#000</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+    <style name="personalDatall">
+        <item name="android:padding">10dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/setting_view_border_bg</item>
+    </style>
 </resources>

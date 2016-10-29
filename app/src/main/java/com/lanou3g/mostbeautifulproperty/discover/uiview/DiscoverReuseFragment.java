@@ -265,7 +265,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
 
             DiscoverBean discoverBean = (DiscoverBean) result;
             final ArrayList<DiscoverBean.DataBean.ProductsBean> beanArrayList = (ArrayList<DiscoverBean.DataBean.ProductsBean>) discoverBean.getData().getProducts();
-            mListView.setAdapter(mAdapter = new CurrentAdapter<DiscoverBean.DataBean.ProductsBean>(context, beanArrayList, R.layout.discover_item_list) {
+            mListView.setAdapter(mAdapter = new CurrentAdapter<DiscoverBean.DataBean.ProductsBean>(context, beanArrayList, R.layout.item_discover_list) {
                 @Override
                 public void convert(BaseViewHolder helper, DiscoverBean.DataBean.ProductsBean item) {
                     helper.setText(R.id.tv_discover_list_name, item.getDesigner().getName());

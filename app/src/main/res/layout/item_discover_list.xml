@@ -29,14 +29,19 @@
                 style="@style/identityDaily"
                 />
         </LinearLayout>
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/iv_discover_list_like"
-            android:src="@mipmap/like_1"
-            style="@style/likeDaily"/>
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/iv_discover_list_unlike"
-            android:src="@mipmap/dislike_1"
-            style="@style/likeDaily"/>
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/iv_daily_list_dislike"
+                android:background="@drawable/radio_btn_dislike"
+                style="@style/likeDaily"/>
+            <RadioButton
+                android:id="@+id/iv_daily_list_like"
+                android:background="@drawable/radio_btn_like"
+                style="@style/likeDaily"/>
+        </RadioGroup>
     </LinearLayout>
     <ImageView
         android:id="@+id/iv_discover_list_title"
