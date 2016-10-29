@@ -4,7 +4,7 @@
               android:id="@+id/ll"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/colorPrimary"
+              android:background="@color/colorInterfaceBackground"
     android:gravity="center">
     <com.lanou3g.mostbeautifulproperty.view.LVGhost
         android:id="@+id/dialog_lvghost"
