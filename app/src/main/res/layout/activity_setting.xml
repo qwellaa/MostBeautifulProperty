@@ -53,11 +53,13 @@
                     android:text="@string/settingAlerts"
                     style="@style/personalData"/>
                 <SeekBar
+                    android:id="@+id/seek_bar_setting_alerts"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"/>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/ll_setting_clear_cache"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:orientation="horizontal"
@@ -68,6 +70,11 @@
                     android:layout_height="wrap_content"
                     android:text="@string/settingClearCache"
                     style="@style/personalData"/>
+                <TextView
+                    android:id="@+id/tv_setting_cache"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0M"/>
                 <ImageView
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
@@ -76,6 +83,7 @@
                     android:background="@mipmap/ahlib_right_arrow"/>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/ll_setting_user_feedback"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:orientation="horizontal"
@@ -94,6 +102,7 @@
                     android:background="@mipmap/ahlib_right_arrow"/>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/ll_setting_give_praise"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:orientation="horizontal"
@@ -112,6 +121,7 @@
                     android:background="@mipmap/ahlib_right_arrow"/>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/ll_setting_recommend_friend"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:orientation="horizontal"
@@ -130,6 +140,7 @@
                     android:background="@mipmap/ahlib_right_arrow"/>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/ll_setting_about_us"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:orientation="horizontal"
@@ -148,6 +159,7 @@
                     android:background="@mipmap/ahlib_right_arrow"/>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/ll_setting_start_video"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:orientation="horizontal"
@@ -166,6 +178,7 @@
                     android:background="@mipmap/ahlib_right_arrow"/>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/ll_setting_exit_login"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:orientation="horizontal"
