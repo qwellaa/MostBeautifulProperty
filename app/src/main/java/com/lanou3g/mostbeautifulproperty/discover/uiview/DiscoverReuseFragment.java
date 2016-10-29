@@ -63,64 +63,13 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     private PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean mBean;
     private PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean mBeanAll;
     private List<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean> mTitleList;
-
-    private String[] URLJewelryList = new String[]{
-            URLValues.getDISCOVER_URL(3, page, size),
-            URLValues.getDISCOVER_URL(24,page,size),
-            URLValues.getDISCOVER_URL(23,page,size),
-            URLValues.getDISCOVER_URL(22,page,size),
-            URLValues.getDISCOVER_URL(21,page,size),
-            URLValues.getDISCOVER_URL(20,page,size)
-    };
-    private String[] URLBagList = new String[]{
-            URLValues.getDISCOVER_URL(1, page, size),
-            URLValues.getDISCOVER_URL(51,page,size),
-            URLValues.getDISCOVER_URL(32,page,size),
-            URLValues.getDISCOVER_URL(10,page,size),
-            URLValues.getDISCOVER_URL(9,page,size),
-            URLValues.getDISCOVER_URL(8,page,size),
-            URLValues.getDISCOVER_URL(7,page,size),
-            URLValues.getDISCOVER_URL(6,page,size),
-            URLValues.getDISCOVER_URL(5,page,size)
-    };
-    private String[] URLShoeList = new String[]{
-            URLValues.getDISCOVER_URL(2, page, size),
-            URLValues.getDISCOVER_URL(14,page,size),
-            URLValues.getDISCOVER_URL(49,page,size),
-            URLValues.getDISCOVER_URL(48,page,size),
-            URLValues.getDISCOVER_URL(38,page,size),
-            URLValues.getDISCOVER_URL(16,page,size),
-            URLValues.getDISCOVER_URL(15,page,size),
-            URLValues.getDISCOVER_URL(11,page,size)
-    };
-    private String[] URLManList= new String[]{
-            URLValues.getDISCOVER_URL(65,page,size)
-    };
-    //配饰
-    private String[] URLAccessoriesList = new String[]{
-            URLValues.getDISCOVER_URL(4, page, size),
-            URLValues.getDISCOVER_URL(53,page,size),
-            URLValues.getDISCOVER_URL(52,page,size),
-            URLValues.getDISCOVER_URL(45,page,size),
-            URLValues.getDISCOVER_URL(37,page,size),
-            URLValues.getDISCOVER_URL(36,page,size),
-            URLValues.getDISCOVER_URL(29,page,size),
-            URLValues.getDISCOVER_URL(27,page,size),
-            URLValues.getDISCOVER_URL(26,page,size),
-            URLValues.getDISCOVER_URL(25,page,size)
-    };
-    private String[] URLOtherList = new String[]{
-            URLValues.getDISCOVER_URL(54, page, size),
-            URLValues.getDISCOVER_URL(68,page,size),
-            URLValues.getDISCOVER_URL(64,page,size),
-            URLValues.getDISCOVER_URL(61,page,size),
-            URLValues.getDISCOVER_URL(58,page,size),
-            URLValues.getDISCOVER_URL(56,page,size),
-            URLValues.getDISCOVER_URL(42,page,size)
-    };
-    private ArrayList<String[]>URLArr = new ArrayList<>();
-
-
+    private ArrayList<String[]> mURLArr;
+    private String[] mURLOtherList;
+    private String[] mURLAccessoriesList;
+    private String[] mURLManList;
+    private String[] mURLShoeList;
+    private String[] mURLBagList;
+    private String[] mURLJewelryList;
 
 
     public static DiscoverReuseFragment newInstance(int position) {
@@ -186,12 +135,67 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
 
     @Override
     protected void initData() {
-        URLArr.add(URLJewelryList);
-        URLArr.add(URLBagList);
-        URLArr.add(URLShoeList);
-        URLArr.add(URLManList);
-        URLArr.add(URLAccessoriesList);
-        URLArr.add(URLOtherList);
+        mURLJewelryList = new String[]{
+                URLValues.getDISCOVER_URL(3, page, size),
+                URLValues.getDISCOVER_URL(24,page,size),
+                URLValues.getDISCOVER_URL(23,page,size),
+                URLValues.getDISCOVER_URL(22,page,size),
+                URLValues.getDISCOVER_URL(21,page,size),
+                URLValues.getDISCOVER_URL(20,page,size)
+        };
+        mURLBagList = new String[]{
+                URLValues.getDISCOVER_URL(1, page, size),
+                URLValues.getDISCOVER_URL(51,page,size),
+                URLValues.getDISCOVER_URL(32,page,size),
+                URLValues.getDISCOVER_URL(10,page,size),
+                URLValues.getDISCOVER_URL(9,page,size),
+                URLValues.getDISCOVER_URL(8,page,size),
+                URLValues.getDISCOVER_URL(7,page,size),
+                URLValues.getDISCOVER_URL(6,page,size),
+                URLValues.getDISCOVER_URL(5,page,size)
+        };
+        mURLShoeList = new String[]{
+                URLValues.getDISCOVER_URL(2, page, size),
+                URLValues.getDISCOVER_URL(14,page,size),
+                URLValues.getDISCOVER_URL(49,page,size),
+                URLValues.getDISCOVER_URL(48,page,size),
+                URLValues.getDISCOVER_URL(38,page,size),
+                URLValues.getDISCOVER_URL(16,page,size),
+                URLValues.getDISCOVER_URL(15,page,size),
+                URLValues.getDISCOVER_URL(11,page,size)
+        };
+        mURLManList = new String[]{
+                URLValues.getDISCOVER_URL(65,page,size)
+        };
+        //配饰
+        mURLAccessoriesList = new String[]{
+                URLValues.getDISCOVER_URL(4, page, size),
+                URLValues.getDISCOVER_URL(53,page,size),
+                URLValues.getDISCOVER_URL(52,page,size),
+                URLValues.getDISCOVER_URL(45,page,size),
+                URLValues.getDISCOVER_URL(37,page,size),
+                URLValues.getDISCOVER_URL(36,page,size),
+                URLValues.getDISCOVER_URL(29,page,size),
+                URLValues.getDISCOVER_URL(27,page,size),
+                URLValues.getDISCOVER_URL(26,page,size),
+                URLValues.getDISCOVER_URL(25,page,size)
+        };
+        mURLOtherList = new String[]{
+                URLValues.getDISCOVER_URL(54, page, size),
+                URLValues.getDISCOVER_URL(68,page,size),
+                URLValues.getDISCOVER_URL(64,page,size),
+                URLValues.getDISCOVER_URL(61,page,size),
+                URLValues.getDISCOVER_URL(58,page,size),
+                URLValues.getDISCOVER_URL(56,page,size),
+                URLValues.getDISCOVER_URL(42,page,size)
+        };
+        mURLArr = new ArrayList<>();
+        mURLArr.add(mURLJewelryList);
+        mURLArr.add(mURLBagList);
+        mURLArr.add(mURLShoeList);
+        mURLArr.add(mURLManList);
+        mURLArr.add(mURLAccessoriesList);
+        mURLArr.add(mURLOtherList);
 
         Bundle args = getArguments();
         mPosition = args.getInt("position");
@@ -203,7 +207,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
         }
 //        String URL = URLValues.getDISCOVER_URL(3,1,30);
 //        mPresenter.startRequest(URL,DiscoverBean.class);
-        String[] URLStrs = URLArr.get(mPosition - 3);
+        String[] URLStrs = mURLArr.get(mPosition - 3);
         String url = URLStrs[0];
         mPresenter.startRequest(url,DiscoverBean.class);
 
@@ -289,7 +293,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String title = mTitleList.get(position).getName();
                 mTitcleTv.setText(title);
-                String[] URLStrings = URLArr.get(mPosition - 3);
+                String[] URLStrings = mURLArr.get(mPosition - 3);
                 String urls = URLStrings[position];
                 mPresenter.startRequest(urls,DiscoverBean.class);
                 mTitclePopupWindow.dismiss();
