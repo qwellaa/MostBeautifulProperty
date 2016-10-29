@@ -21,7 +21,15 @@ public final class URLValues {
         return Daily_HEAD_URL + time;
     }
 
-    //第二页 首饰 全部
-    public static final String DISCOVER_JEWELRY_ALL_URL = "http://design.zuimeia.com/api/v1/products/category/3/?page=1&page_size=30&device_id=862638038074682&platform=android&lang=zh&appVersion=1.2.2&appVersionCode=10220&systemVersion=23&countryCode=CN&user_id=0&token=&package_name=com.zuiapps.zuiworld";
+    //第二页 全部
+    public static final String DISCOVER_HEAD_URL = "http://design.zuimeia.com/api/v1/products/category/";
+    public static final String DISCOVER_MID_URL = "/?page=";
+    public static final String DISCOVER_TAIL_URL = "&page_size=";
+
+    public static String getDISCOVER_URL(int category,int page,int size) {
+        return DISCOVER_HEAD_URL + category + DISCOVER_MID_URL + page + DISCOVER_TAIL_URL + size;
+    }
+
+
 
 }
