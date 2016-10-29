@@ -12,4 +12,6 @@
     <color name="discover_title_bg">#cc000000</color>
     <color name="discover_item_bg">#242424</color>
     <color name="moreTitle">#2c2c2c</color>
+    <color name="cardViewBack">#00000000</color>
+    <color name="loginText">#ffffff</color>
 </resources>

@@ -2,11 +2,11 @@ package com.lanou3g.mostbeautifulproperty.mine.uiview.chat;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.design.widget.TextInputEditText;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.hyphenate.EMCallBack;
@@ -22,8 +22,8 @@ import com.lanou3g.mostbeautifulproperty.baseclass.BaseActivity;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
     private ProgressDialog mDialog;
-    private EditText mUserNameEdit;
-    private EditText mPasswordEdit;
+    private TextInputEditText mUserNameEdit;
+    private TextInputEditText mPasswordEdit;
     private Button mRegisterBtn;
     private Button mLoginBtn;
 
