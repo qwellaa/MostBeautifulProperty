@@ -118,7 +118,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
             URLValues.getDISCOVER_URL(56,page,size),
             URLValues.getDISCOVER_URL(42,page,size)
     };
-    private ArrayList<String[]>URLArr = new ArrayList<>();
+    private ArrayList<String[]> URLArr = new ArrayList<>();
 
 
 
