@@ -1,5 +1,6 @@
 package com.lanou3g.mostbeautifulproperty.baseclass;
 
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,18 +10,16 @@ import android.widget.BaseAdapter;
 import java.util.List;
 
 
-
-
 /**
- * Created by dllo on 16/10/22.
+ * Created by dllo on 16/10/31.
  */
 
-public abstract class CurrentAdapter<T> extends BaseAdapter {
+public abstract class GirdAdapter<T> extends BaseAdapter{
     protected LayoutInflater mInflater;
     protected Context mContext;
     protected List<T> mDatas;
     protected final int mItemLayoutId;
-    public CurrentAdapter(Context context, List<T> mDatas, int itemLayoutId) {
+    public GirdAdapter(Context context, List<T> mDatas, int itemLayoutId) {
         this.mContext = context;
         this.mInflater = LayoutInflater.from(mContext);
         this.mDatas = mDatas;
@@ -45,21 +44,27 @@ public abstract class CurrentAdapter<T> extends BaseAdapter {
     @Override
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        final BaseViewHolder viewHolder = getViewHolder(position, convertView,
-                parent);
+        final GirdHolder viewHolder = getViewHolder(position,convertView,parent);
         convert(viewHolder, getItem(position));
+
+//            viewHolder.getConvertView().setBackgroundColor(Color.WHITE);
+
+//            viewHolder.getConvertView().setBackgroundColor(Color.parseColor("#2c2c2c"));
 
         return viewHolder.getConvertView();
 
     }
-    public abstract void convert(BaseViewHolder helper, T item);
 
-    private BaseViewHolder getViewHolder(int position, View convertView,
+    public abstract void convert(GirdHolder helper, T item);
+
+    private GirdHolder getViewHolder(int position, View convertView,
                                          ViewGroup parent) {
-        return BaseViewHolder.get(mContext, convertView, parent, mItemLayoutId,
+        return GirdHolder.get(mContext, convertView, parent, mItemLayoutId,
                 position);
 
 
     }
+
+
 
 }

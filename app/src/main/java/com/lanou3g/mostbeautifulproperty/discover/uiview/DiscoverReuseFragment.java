@@ -1,6 +1,7 @@
 package com.lanou3g.mostbeautifulproperty.discover.uiview;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -23,6 +24,8 @@ import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseViewHolder;
 import com.lanou3g.mostbeautifulproperty.baseclass.CurrentAdapter;
+import com.lanou3g.mostbeautifulproperty.baseclass.GirdAdapter;
+import com.lanou3g.mostbeautifulproperty.baseclass.GirdHolder;
 import com.lanou3g.mostbeautifulproperty.bean.DiscoverBean;
 import com.lanou3g.mostbeautifulproperty.bean.PopupwindowBean;
 import com.lanou3g.mostbeautifulproperty.discover.presenter.DiscoverPresenter;
@@ -51,7 +54,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     private GridView mPopupWindowGrideView;
     private int mPosition;
     private DiscoverPresenter mPresenter;
-    private CurrentAdapter popupAdapter;
+    private GirdAdapter popupAdapter;
     private TextView mItemTv;
     private ImageView mUpImg;
 
@@ -201,8 +204,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
         } else {
             mPresenter.startRequest(URLValues.POPUPWINDOW_URL,PopupwindowBean.class);
         }
-//        String URL = URLValues.getDISCOVER_URL(3,1,30);
-//        mPresenter.startRequest(URL,DiscoverBean.class);
+
         String[] URLStrs = URLArr.get(mPosition - 3);
         String url = URLStrs[0];
         mPresenter.startRequest(url,DiscoverBean.class);
@@ -287,14 +289,30 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
         mPopupWindowGrideView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView tv = (TextView) view.findViewById(R.id.item_popupwindow_tv);
+                for (int i = 0; i < mTitleList.size(); i++) {
+                    View v = parent.getChildAt(i);
+                    TextView tv1 = (TextView) v.findViewById(R.id.item_popupwindow_tv);
+                    if (position == i){
+                        view.setBackgroundColor(Color.WHITE);
+                        tv.setTextColor(Color.BLACK);
+                    }else {
+                        v.setBackgroundColor(Color.parseColor("#2c2c2c"));
+                        tv1.setTextColor(Color.WHITE);
+                    }
+                }
+
                 String title = mTitleList.get(position).getName();
                 mTitcleTv.setText(title);
                 String[] URLStrings = URLArr.get(mPosition - 3);
                 String urls = URLStrings[position];
                 mPresenter.startRequest(urls,DiscoverBean.class);
                 mTitclePopupWindow.dismiss();
+                popupAdapter.notifyDataSetChanged();
+
             }
         });
+
 
     }
 
@@ -324,11 +342,10 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
             mBeanAll = new PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean();
             mBeanAll.setName("全部");
             mTitleList.add(0,mBeanAll);
-            mPopupWindowGrideView.setAdapter(popupAdapter = new CurrentAdapter<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean>(context
+            mPopupWindowGrideView.setAdapter(popupAdapter = new GirdAdapter<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean>(context
                     , mTitleList, R.layout.item_popopwindow) {
-
                 @Override
-                public void convert(BaseViewHolder helper, PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean item) {
+                public void convert(GirdHolder helper, PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean item) {
                     helper.setText(R.id.item_popupwindow_tv, item.getName());
                     mBean.setName(item.getName());
                 }
