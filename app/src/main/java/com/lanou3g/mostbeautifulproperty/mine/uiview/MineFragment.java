@@ -2,14 +2,16 @@ package com.lanou3g.mostbeautifulproperty.mine.uiview;
 
 import android.Manifest;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
-import com.lanou3g.mostbeautifulproperty.mine.uiview.chat.LoginActivity;
 import com.lanou3g.mostbeautifulproperty.mine.uiview.chat.MessageMainActivity;
 import com.lanou3g.mostbeautifulproperty.mine.uiview.scan.ScanActivity;
 import com.lanou3g.mostbeautifulproperty.mine.uiview.setting.SettingActivity;
@@ -17,8 +19,12 @@ import com.lanou3g.mostbeautifulproperty.okhttp.URLValues;
 
 import java.util.List;
 
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
+import cn.sharesdk.sina.weibo.SinaWeibo;
+import cn.sharesdk.tencent.qq.QQ;
 import de.hdodenhof.circleimageview.CircleImageView;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -34,6 +40,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
     private ImageView mSetting;
     private static final int REQUEST_CODE_QRCODE_PERMISSIONS = 1;
     private Button mBtnShare;
+    private AlertDialog mDialog;
 
     @Override
     protected int setLayout() {
@@ -64,6 +71,43 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
     protected void initData() {
         mMessageLl.setOnClickListener(this);
         mSetting.setOnClickListener(this);
+
+        mDialog = createDialog();
+    }
+
+    private AlertDialog createDialog() {
+        AlertDialog dialog = new AlertDialog.Builder(context).create();
+        dialog.setCanceledOnTouchOutside(true);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_login, null);
+        TextView tvWeiXin = (TextView) view.findViewById(R.id.btn_login_weixin);
+        TextView tvQQ = (TextView) view.findViewById(R.id.btn_login_qq);
+        TextView tvSina = (TextView) view.findViewById(R.id.btn_login_sina);
+
+        final PlatformActionListener paListener = null;
+
+        tvSina.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Platform weibo = ShareSDK.getPlatform(SinaWeibo.NAME);
+                weibo.setPlatformActionListener(paListener);
+                //authorize与showUser单独调用一个即可
+                weibo.authorize();//单独授权,OnComplete返回的hashmap是空的
+                weibo.showUser(null);//授权并获取用户信息
+            }
+        });
+
+        tvQQ.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Platform qq = ShareSDK.getPlatform(QQ.NAME);
+                qq.setPlatformActionListener(paListener);
+                //authorize与showUser单独调用一个即可
+                qq.authorize();//单独授权,OnComplete返回的hashmap是空的
+                qq.showUser(null);//授权并获取用户信息
+            }
+        });
+        dialog.setView(view);
+        return dialog;
     }
 
     private void showShare() {
@@ -101,8 +145,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
                 startActivity(mesIntent);
                 break;
             case R.id.fragment_mine_circleimg:
-                Intent loginIntent = new Intent(context,LoginActivity.class);
-                startActivity(loginIntent);
+                mDialog.show();
                 break;
             case R.id.iv_mine_setting:
                 Intent settingIntent = new Intent(context, SettingActivity.class);
