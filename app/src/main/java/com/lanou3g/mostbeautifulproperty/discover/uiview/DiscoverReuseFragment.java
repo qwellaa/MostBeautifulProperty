@@ -1,6 +1,7 @@
 package com.lanou3g.mostbeautifulproperty.discover.uiview;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -23,11 +24,11 @@ import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseViewHolder;
 import com.lanou3g.mostbeautifulproperty.baseclass.CurrentAdapter;
+import com.lanou3g.mostbeautifulproperty.baseclass.GirdAdapter;
 import com.lanou3g.mostbeautifulproperty.baseclass.GirdHolder;
 import com.lanou3g.mostbeautifulproperty.bean.DiscoverBean;
 import com.lanou3g.mostbeautifulproperty.bean.PopupwindowBean;
 import com.lanou3g.mostbeautifulproperty.discover.presenter.DiscoverPresenter;
-import com.lanou3g.mostbeautifulproperty.baseclass.GirdAdapter;
 import com.lanou3g.mostbeautifulproperty.homepage.MainActivity;
 import com.lanou3g.mostbeautifulproperty.okhttp.URLValues;
 import com.lanou3g.mostbeautifulproperty.view.LVGhost;
@@ -289,6 +290,16 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
         mPopupWindowGrideView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                for (int i = 0; i < mTitleList.size(); i++) {
+                    View v = parent.getChildAt(i);
+                    if (position == i){
+                        view.setBackgroundColor(Color.WHITE);
+
+                    }else {
+                        v.setBackgroundColor(Color.parseColor("#2c2c2c"));
+                    }
+                }
+
 
                 String title = mTitleList.get(position).getName();
                 mTitcleTv.setText(title);
@@ -296,8 +307,11 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
                 String urls = URLStrings[position];
                 mPresenter.startRequest(urls,DiscoverBean.class);
                 mTitclePopupWindow.dismiss();
+                popupAdapter.notifyDataSetChanged();
+
             }
         });
+
 
     }
 

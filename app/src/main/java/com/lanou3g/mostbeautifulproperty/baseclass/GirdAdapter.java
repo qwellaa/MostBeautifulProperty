@@ -44,14 +44,17 @@ public abstract class GirdAdapter<T> extends BaseAdapter{
     @Override
 
     public View getView(int position, View convertView, ViewGroup parent) {
-//        final GirdHolder viewHolder = getViewHolder(position, convertView,
-//                parent);
         final GirdHolder viewHolder = getViewHolder(position,convertView,parent);
         convert(viewHolder, getItem(position));
+
+//            viewHolder.getConvertView().setBackgroundColor(Color.WHITE);
+
+//            viewHolder.getConvertView().setBackgroundColor(Color.parseColor("#2c2c2c"));
 
         return viewHolder.getConvertView();
 
     }
+
     public abstract void convert(GirdHolder helper, T item);
 
     private GirdHolder getViewHolder(int position, View convertView,
