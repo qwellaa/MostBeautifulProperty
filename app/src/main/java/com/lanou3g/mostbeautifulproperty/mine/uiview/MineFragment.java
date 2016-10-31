@@ -2,7 +2,6 @@ package com.lanou3g.mostbeautifulproperty.mine.uiview;
 
 import android.Manifest;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -91,7 +90,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults,this);
 
     }

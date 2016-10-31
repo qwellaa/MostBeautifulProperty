@@ -7,4 +7,5 @@
     <dimen name="height_top_bar">50dp</dimen>
     <dimen name="moreTextTitle">12sp</dimen>
     <dimen name="moreTitleDistan">8dp</dimen>
+    <dimen name="left_img">10dp</dimen>
 </resources>

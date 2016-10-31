@@ -39,6 +39,7 @@
         <activity android:name=".mine.uiview.chat.MessageMainActivity">
 
         </activity>
+        <activity android:name=".mine.uiview.scan.ScanActivity"/>
         <meta-data
             android:name="EASEMOB_APPKEY"
             android:value="lzan13#hxsdkdemo"/>
