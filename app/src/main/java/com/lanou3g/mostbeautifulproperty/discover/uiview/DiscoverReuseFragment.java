@@ -204,8 +204,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
         } else {
             mPresenter.startRequest(URLValues.POPUPWINDOW_URL,PopupwindowBean.class);
         }
-//        String URL = URLValues.getDISCOVER_URL(3,1,30);
-//        mPresenter.startRequest(URL,DiscoverBean.class);
+
         String[] URLStrs = URLArr.get(mPosition - 3);
         String url = URLStrs[0];
         mPresenter.startRequest(url,DiscoverBean.class);
@@ -290,16 +289,18 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
         mPopupWindowGrideView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView tv = (TextView) view.findViewById(R.id.item_popupwindow_tv);
                 for (int i = 0; i < mTitleList.size(); i++) {
                     View v = parent.getChildAt(i);
+                    TextView tv1 = (TextView) v.findViewById(R.id.item_popupwindow_tv);
                     if (position == i){
                         view.setBackgroundColor(Color.WHITE);
-
+                        tv.setTextColor(Color.BLACK);
                     }else {
                         v.setBackgroundColor(Color.parseColor("#2c2c2c"));
+                        tv1.setTextColor(Color.WHITE);
                     }
                 }
-
 
                 String title = mTitleList.get(position).getName();
                 mTitcleTv.setText(title);
