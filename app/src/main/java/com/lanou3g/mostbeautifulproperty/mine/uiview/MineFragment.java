@@ -78,7 +78,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
         // text是分享文本，所有平台都需要这个字段
         oks.setText("我们一起 \n" + "在「最美有物」");
         // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
-        oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
+//        oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
         // url仅在微信（包括好友和朋友圈）中使用
         oks.setUrl(URLValues.APP_DOWNLOAD_URL);
         // comment是我对这条分享的评论，仅在人人网和QQ空间使用

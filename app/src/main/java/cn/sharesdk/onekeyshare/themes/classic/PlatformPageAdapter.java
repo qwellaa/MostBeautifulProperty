@@ -8,24 +8,25 @@
 
 package cn.sharesdk.onekeyshare.themes.classic;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.ImageView.ScaleType;
-import cn.sharesdk.framework.Platform;
-import cn.sharesdk.onekeyshare.CustomerLogo;
 
 import com.mob.tools.gui.ViewPagerAdapter;
 import com.mob.tools.utils.R;
+
+import java.util.ArrayList;
+
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.onekeyshare.CustomerLogo;
 
 /** 九宫格的适配器抽象类 */
 public abstract class PlatformPageAdapter extends ViewPagerAdapter implements OnClickListener {
@@ -100,6 +101,10 @@ public abstract class PlatformPageAdapter extends ViewPagerAdapter implements On
 		LinearLayout llPanel = new LinearLayout(context);
 		llPanel.setOrientation(LinearLayout.VERTICAL);
 		llPanel.setBackgroundColor(0xfff2f2f2);
+//		int resIddd = R.getBitmapRes(context, "share_vp_back");
+//		if (resIddd > 0) {
+//			llPanel.setBackgroundResource(resIddd);
+//		}
 
 		int lineCount = panelHeight / cellHeight;
 		LinearLayout[] llCells = new LinearLayout[lineCount * lineSize];
@@ -139,7 +144,7 @@ public abstract class PlatformPageAdapter extends ViewPagerAdapter implements On
 			llCell.addView(ivLogo, lp);
 
 			TextView tvName = new TextView(context);
-			tvName.setTextColor(0xff646464);
+			tvName.setTextColor(0xff000000);
 			tvName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 			tvName.setGravity(Gravity.CENTER);
 			lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
@@ -153,6 +158,7 @@ public abstract class PlatformPageAdapter extends ViewPagerAdapter implements On
 	private void refreshPanel(LinearLayout[] llCells, Object[] logos) {
 		int cellBack = R.getBitmapRes(page.getContext(), "ssdk_oks_classic_platform_cell_back");
 		int disableBack = R.getBitmapRes(page.getContext(), "ssdk_oks_classic_platfrom_cell_back_nor");
+//		int disableBack = R.getBitmapRes(page.getContext(), "share_vp_back");
 		for (int i = 0; i < logos.length; i++) {
 			ImageView ivLogo = R.forceCast(llCells[i].getChildAt(0));
 			TextView tvName = R.forceCast(llCells[i].getChildAt(1));
@@ -164,7 +170,7 @@ public abstract class PlatformPageAdapter extends ViewPagerAdapter implements On
 			} else {
 				ivLogo.setVisibility(View.VISIBLE);
 				tvName.setVisibility(View.VISIBLE);
-				llCells[i].setBackgroundResource(cellBack);
+				llCells[i].setBackgroundResource(disableBack);
 				llCells[i].setOnClickListener(this);
 				llCells[i].setTag(logos[i]);
 
