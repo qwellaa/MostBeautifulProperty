@@ -132,4 +132,25 @@
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/setting_view_border_bg</item>
     </style>
+    <style name="MatchMatch">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+    <style name="scanBtn">
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:background">@drawable/scan_btn_bg</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+    <style name="titleSetPicsize">
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_margin">@dimen/iconDis</item>
+        <item name="android:background">@mipmap/me_setting</item>
+    </style>
+
 </resources>
+

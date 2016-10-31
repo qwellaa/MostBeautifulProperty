@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:toolbar="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="50dp"
+       android:background="@color/black_deep"
+       >
+
+       <ImageView
+           android:id="@+id/app_bar_renturn_img"
+           android:layout_marginLeft="@dimen/left_img"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:src="@drawable/btn_return_left"
+           android:layout_centerVertical="true"/>
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="二维码/条码"
+           android:textColor="@color/btn_register_normal"
+           android:textSize="20sp"
+           android:layout_centerVertical="true"
+           android:layout_marginLeft="15dp"
+           android:layout_toRightOf="@+id/app_bar_renturn_img"/>
+
+   </RelativeLayout>
+
+</LinearLayout>

@@ -15,4 +15,5 @@
     <color name="moreTitle">#2c2c2c</color>
     <color name="cardViewBack">#00000000</color>
     <color name="loginText">#ffffff</color>
+    <color name="colorPress_scan_btn_Bg">#CCf57257</color>
 </resources>
