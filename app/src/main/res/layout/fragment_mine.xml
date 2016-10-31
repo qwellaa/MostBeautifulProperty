@@ -153,6 +153,7 @@
                 android:layout_height="1dp"
                 style="@style/mineLine"/>
             <Button
+                android:id="@+id/btn_mine_share"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/mineShareBtn"
