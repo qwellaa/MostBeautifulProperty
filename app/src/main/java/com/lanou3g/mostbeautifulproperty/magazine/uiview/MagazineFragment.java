@@ -77,6 +77,7 @@ public class MagazineFragment extends BaseFragment implements IMagazineView<Maga
     @Override
     public void dismissDialog() {
         mDialog.dismiss();
+
     }
 
     @Override
