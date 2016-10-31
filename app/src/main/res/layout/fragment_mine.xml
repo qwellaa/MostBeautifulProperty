@@ -167,7 +167,7 @@
         android:layout_height="30dp"
         android:layout_margin="@dimen/iconDis"
         android:id="@+id/iv_mine_sm"
-        android:background="@drawable/ic_crop_free_black_24dp"/>
+        android:background="@drawable/fragment_mine_qr"/>
     <ImageView
 
         android:layout_width="30dp"

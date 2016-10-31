@@ -45,33 +45,22 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <Button
-                android:layout_margin="5dp"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:text="哈哈"
-                android:background="@drawable/scan_btn_bg"/>
+                android:id="@+id/scan_two"
+               style="@style/scanBtn"
+                android:text="@string/sanbtn_two"/>
             <Button
-                android:layout_margin="5dp"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:text="哈哈"
-                android:background="@drawable/scan_btn_bg"/>
+                android:id="@+id/scan_item"
+                style="@style/scanBtn"
+                android:text="@string/scan_item"/>
             <Button
-                android:layout_margin="5dp"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:text="哈哈"
-                android:background="@drawable/scan_btn_bg"/>
+                android:id="@+id/scan_open_lamp"
+                style="@style/scanBtn"
+                android:text="@string/scan_open_lamp"/>
             <Button
-                android:layout_margin="5dp"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:text="哈哈"
-                android:background="@drawable/scan_btn_bg"/>
+                android:id="@+id/scan_stop_lamp"
+                style="@style/scanBtn"
+                android:text="@string/scan_stop_lamp"/>
+
 
 
 
