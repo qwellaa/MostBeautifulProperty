@@ -56,6 +56,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
     private LinearLayout mLlDaily;
     private LinearLayout mLlAttention;
     private LinearLayout mLlWish;
+    private MyDisOrderBroadCastReceiver mReceiver;
 
     @Override
     protected int setLayout() {
@@ -96,10 +97,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
         mLlAttention.setOnClickListener(this);
 
 
-        MyDisOrderBroadCastReceiver receiver = new MyDisOrderBroadCastReceiver();
+        mReceiver = new MyDisOrderBroadCastReceiver();
         IntentFilter filter = new IntentFilter();
         filter.addAction("userMessage");
-        context.registerReceiver(receiver, filter);
+        context.registerReceiver(mReceiver, filter);
         mDialog = createDialog();
 
         // 设置微博登录头像
@@ -229,6 +230,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
 
         // 启动分享GUI
         oks.show(context);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        context.unregisterReceiver(mReceiver);
     }
 
     @Override
