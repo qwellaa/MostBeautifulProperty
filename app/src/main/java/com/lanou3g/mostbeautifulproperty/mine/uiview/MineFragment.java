@@ -53,6 +53,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
     private Platform mWeibo;
     private Platform mQq;
     private CircleImageView mCirMyImg;
+    private LinearLayout mLlDaily;
+    private LinearLayout mLlAttention;
+    private LinearLayout mLlWish;
 
     @Override
     protected int setLayout() {
@@ -78,6 +81,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
         mBtnShare = bindView(R.id.btn_mine_share);
         mBtnShare.setOnClickListener(this);
 
+        mLlDaily = bindView(R.id.fragment_mine_daily_ll);
+        mLlAttention = bindView(R.id.fragment_mine_attention_ll);
+        mLlWish = bindView(R.id.fragment_mine_wish_ll);
 
     }
 
@@ -85,6 +91,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
     protected void initData() {
         mMessageLl.setOnClickListener(this);
         mSetting.setOnClickListener(this);
+        mLlDaily.setOnClickListener(this);
+        mLlWish.setOnClickListener(this);
+        mLlAttention.setOnClickListener(this);
 
 
         MyDisOrderBroadCastReceiver receiver = new MyDisOrderBroadCastReceiver();
@@ -249,6 +258,33 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
                 break;
             case R.id.btn_mine_share:
                 showShare();
+                break;
+            case R.id.fragment_mine_daily_ll:
+                if (mQq.isAuthValid()) {
+                    Toast.makeText(context, "qq关注", Toast.LENGTH_SHORT).show();
+                } else if (mWeibo.isAuthValid()){
+                    Toast.makeText(context, "微博关注", Toast.LENGTH_SHORT).show();
+                } else {
+                    mDialog.show();
+                }
+                break;
+            case R.id.fragment_mine_attention_ll:
+                if (mQq.isAuthValid()) {
+                    Toast.makeText(context, "qq关注", Toast.LENGTH_SHORT).show();
+                } else if (mWeibo.isAuthValid()){
+                    Toast.makeText(context, "微博关注", Toast.LENGTH_SHORT).show();
+                } else {
+                    mDialog.show();
+                }
+                break;
+            case R.id.fragment_mine_wish_ll:
+                if (mQq.isAuthValid()) {
+                    Toast.makeText(context, "qq关注", Toast.LENGTH_SHORT).show();
+                } else if (mWeibo.isAuthValid()){
+                    Toast.makeText(context, "微博关注", Toast.LENGTH_SHORT).show();
+                } else {
+                    mDialog.show();
+                }
                 break;
         }
 
