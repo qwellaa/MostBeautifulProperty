@@ -389,11 +389,12 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
             helper.setText(R.id.item_popupwindow_tv, item.getName());
             mBean.setName(item.getName());
             TextView textView = helper.getView(R.id.item_popupwindow_tv);
+            RelativeLayout rl = helper.getView(R.id.item_popupwindow_rl);
             if(helper.getPosition() == selectPos){
-                textView.setBackgroundColor(Color.WHITE);
+                rl.setBackgroundColor(Color.WHITE);
                 textView.setTextColor(Color.BLACK);
             }else {
-                textView.setBackgroundColor(Color.parseColor("#2c2c2c"));
+                rl.setBackgroundColor(Color.parseColor("#2c2c2c"));
                 textView.setTextColor(Color.WHITE);
             }
 
