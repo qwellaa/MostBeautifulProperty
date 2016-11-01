@@ -30,6 +30,7 @@ public final class URLValues {
         return DISCOVER_HEAD_URL + category + DISCOVER_MID_URL + page + DISCOVER_TAIL_URL + size;
     }
 
-
+    // 最美有物下载地址
+    public static final String APP_DOWNLOAD_URL = "http://design.zuimeia.com/app.html";
 
 }

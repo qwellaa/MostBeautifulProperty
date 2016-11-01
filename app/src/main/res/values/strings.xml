@@ -31,4 +31,5 @@
     <string name="scan_item">条码</string>
     <string name="scan_open_lamp">开灯</string>
     <string name="scan_stop_lamp">关灯</string>
+    <string name="weixin">微信</string>
 </resources>
