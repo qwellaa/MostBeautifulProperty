@@ -75,6 +75,7 @@ public class ScanActivity  extends AppCompatActivity implements QRCodeView.Deleg
         super.onDestroy();
     }
     private void vibrate(){
+        // 控制手机震动
         Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         vibrator.vibrate(200);
     }
