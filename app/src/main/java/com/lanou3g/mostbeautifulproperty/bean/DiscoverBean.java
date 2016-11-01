@@ -8,6 +8,7 @@ import java.util.List;
 
 public class DiscoverBean {
 
+
     private DataBean data;
 
 
@@ -84,6 +85,15 @@ public class DiscoverBean {
             private int id;
             private List<String> cover_images;
             private List<String> images;
+            private int state;
+
+            public int getState() {
+                return state;
+            }
+
+            public void setState(int state) {
+                this.state = state;
+            }
 
             public int getUnlike_user_num() {
                 return unlike_user_num;
