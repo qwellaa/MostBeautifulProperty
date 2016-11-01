@@ -381,14 +381,14 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
                         @Override
                         public void onClick(View v) {
                             item.setState(1);
-                            Toast.makeText(mContext,item.getLike_user_num()+"人不喜欢", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext, item.getUnlike_user_num() + "人不喜欢", Toast.LENGTH_SHORT).show();
                         }
                     });
                     helper.getView(R.id.iv_daily_list_like).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             item.setState(2);
-                            Toast.makeText(mContext,item.getLike_user_num()+"人喜欢", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext, item.getLike_user_num() + "人喜欢", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
