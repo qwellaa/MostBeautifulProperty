@@ -6,15 +6,5 @@
               android:layout_height="match_parent"
               style="@style/InterfaceBackground">
 
-    <net.lucode.hackware.magicindicator.MagicIndicator
-        android:id="@+id/tab_designer"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:tabMode="scrollable"
-        app:tabGravity="center"/>
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vp_designer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </android.support.v4.view.ViewPager>
+
 </LinearLayout>
