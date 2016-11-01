@@ -11,6 +11,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseActivity;
 import com.lanou3g.mostbeautifulproperty.mine.uiview.setting.clearcache.DataCleanManager;
@@ -19,6 +20,7 @@ import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.sina.weibo.SinaWeibo;
 import cn.sharesdk.tencent.qq.QQ;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  *
@@ -39,6 +41,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     private TextView mTvCache;
     private Platform mQq;
     private Platform mWeibo;
+    private CircleImageView mIvHeadIcon;
 
     @Override
     protected int setLayout() {
@@ -58,6 +61,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         mLlExitLogin = bindView(R.id.ll_setting_exit_login);
         mIvReturn = bindView(R.id.btn_include_setting_return);
 
+        mIvHeadIcon = bindView(R.id.iv_setting_head_image);
         mTvCache = bindView(R.id.tv_setting_cache);
     }
 
@@ -87,6 +91,9 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             mLlExitLogin.setVisibility(View.GONE);
         }
 
+        Intent intent = getIntent();
+        String headIcon = intent.getStringExtra("headIcon");
+        Glide.with(this).load(headIcon).into(mIvHeadIcon);
     }
 
     private void initSetOnClick() {
@@ -127,6 +134,8 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                     intent.putExtra("userName", "");
                     intent.putExtra("userIcon", "");
                     sendBroadcast(intent);
+                    mLlPersonal.setVisibility(View.GONE);
+                    mLlExitLogin.setVisibility(View.GONE);
                     Toast.makeText(this, "退出登录成功", Toast.LENGTH_SHORT).show();
                 } else if (mWeibo.isAuthValid()){
                     mWeibo.removeAccount(true);
@@ -134,9 +143,9 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                     intent.putExtra("userName", "");
                     intent.putExtra("userIcon", "");
                     sendBroadcast(intent);
+                    mLlPersonal.setVisibility(View.GONE);
+                    mLlExitLogin.setVisibility(View.GONE);
                     Toast.makeText(this, "退出登录成功", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(this, "请先登录", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.switch_setting_alerts:

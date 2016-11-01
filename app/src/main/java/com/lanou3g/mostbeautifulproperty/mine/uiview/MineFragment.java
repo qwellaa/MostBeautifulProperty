@@ -235,6 +235,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
                 break;
             case R.id.iv_mine_setting:
                 Intent settingIntent = new Intent(context, SettingActivity.class);
+
+                if (mQq.isAuthValid()) {
+                    settingIntent.putExtra("headIcon", mQq.getDb().getUserIcon());
+                } else if (mWeibo.isAuthValid()){
+                    settingIntent.putExtra("headIcon", mWeibo.getDb().getUserIcon());
+                }
                 startActivity(settingIntent);
                 break;
             case R.id.iv_mine_sm:
