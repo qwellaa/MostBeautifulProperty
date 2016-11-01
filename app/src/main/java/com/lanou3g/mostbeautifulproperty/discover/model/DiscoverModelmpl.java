@@ -15,10 +15,7 @@ public class DiscoverModelmpl implements IDiscoverModel{
         HttpManager.getInstance().getRequest(urlStr, tClass, new OnCompletedListener<T>() {
             @Override
             public void onCompleted(T result) {
-
-                    listener.onFinished( result);
-
-
+                listener.onFinished( result);
             }
 
             @Override
@@ -37,36 +34,4 @@ public class DiscoverModelmpl implements IDiscoverModel{
     public <T> void queryGankAll(OnFinishDiscoverListener<T> listener) {
 
     }
-
-//    @Override
-//    public void startRequest(String urlStr, final OnFinishDiscoverListener<PopupwindowBean> listener) {
-//        HttpManager.getInstance().getRequest(urlStr, PopupwindowBean.class, new OnCompletedListener<PopupwindowBean>() {
-//            @Override
-//            public void onCompleted(PopupwindowBean result) {
-//                if ( REQUEST_CODE == result.getResult()){
-//                    listener.onFinished(result);
-//                } else {
-//                    listener.onError();
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onFailed() {
-//                listener.onError();
-//
-//            }
-//        });
-//
-//    }
-//
-//    @Override
-//    public void insertInfoDB(PopupwindowBean popupwindowBean) {
-//
-//    }
-//
-//    @Override
-//    public void queryGankAll(OnFinishDiscoverListener<PopupwindowBean> listener) {
-//
-//    }
 }

@@ -1,10 +1,12 @@
 package com.lanou3g.mostbeautifulproperty.magazine.presenter;
 
-import com.lanou3g.mostbeautifulproperty.bean.MagazineBean;
+import com.lanou3g.mostbeautifulproperty.bean.MagazineLiteBean;
 import com.lanou3g.mostbeautifulproperty.magazine.model.IMagazineModel;
 import com.lanou3g.mostbeautifulproperty.magazine.model.MagazineModeImpl;
 import com.lanou3g.mostbeautifulproperty.magazine.model.OnFinishedMagazineListener;
 import com.lanou3g.mostbeautifulproperty.magazine.uiview.IMagazineView;
+
+import java.util.List;
 
 /**
  *
@@ -12,36 +14,39 @@ import com.lanou3g.mostbeautifulproperty.magazine.uiview.IMagazineView;
 
 public class MagazinePresenter {
     // P层需要有Model和View层的引用
-    private IMagazineModel<MagazineBean> mModel;
-    private IMagazineView<MagazineBean> mView;
+    private IMagazineModel<MagazineLiteBean> mModel;
+    private IMagazineView<MagazineLiteBean> mView;
 
-    public MagazinePresenter(IMagazineView<MagazineBean> view) {
+    public MagazinePresenter(IMagazineView<MagazineLiteBean> view) {
         mView = view;
         mModel = new MagazineModeImpl();
     }
 
     public void startRequest(String strUrl){
         mView.showDialog();
-        mModel.startRequest(strUrl, new OnFinishedMagazineListener<MagazineBean>() {
+        mModel.startRequest(strUrl, new OnFinishedMagazineListener<MagazineLiteBean>() {
+
             @Override
-            public void onFinished(MagazineBean magazineBean) {
+            public void onFinished(List<MagazineLiteBean> list) {
                 mView.dismissDialog();
-                mView.onResponse(magazineBean);
-//                mModel.insertInfoDB(magazineBean);
+                mView.onResponse(list);
+                mModel.deleteInfoDB(MagazineLiteBean.class);
+                mModel.insertInfoDB(list);
             }
 
             @Override
             public void onError() {
-//                queryDB();
+                queryDB();
             }
         });
     }
 
     private void queryDB() {
-        mModel.queryGankAll(new OnFinishedMagazineListener<MagazineBean>() {
+        mModel.queryGankAll(new OnFinishedMagazineListener<MagazineLiteBean>() {
+
             @Override
-            public void onFinished(MagazineBean magazineBean) {
-                mView.onResponse(magazineBean);
+            public void onFinished(List<MagazineLiteBean> list) {
+                mView.onResponse(list);
                 mView.dismissDialog();
             }
 

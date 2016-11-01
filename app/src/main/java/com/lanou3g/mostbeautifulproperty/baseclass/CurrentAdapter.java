@@ -48,6 +48,7 @@ public abstract class CurrentAdapter<T> extends BaseAdapter {
         final BaseViewHolder viewHolder = getViewHolder(position, convertView,
                 parent);
         convert(viewHolder, getItem(position));
+
         return viewHolder.getConvertView();
 
     }
@@ -57,5 +58,8 @@ public abstract class CurrentAdapter<T> extends BaseAdapter {
                                          ViewGroup parent) {
         return BaseViewHolder.get(mContext, convertView, parent, mItemLayoutId,
                 position);
+
+
     }
+
 }

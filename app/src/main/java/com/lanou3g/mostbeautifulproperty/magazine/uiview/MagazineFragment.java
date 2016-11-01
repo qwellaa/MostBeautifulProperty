@@ -11,26 +11,24 @@ import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseViewHolder;
 import com.lanou3g.mostbeautifulproperty.baseclass.CurrentAdapter;
-import com.lanou3g.mostbeautifulproperty.bean.MagazineBean;
+import com.lanou3g.mostbeautifulproperty.bean.MagazineLiteBean;
 import com.lanou3g.mostbeautifulproperty.magazine.presenter.MagazinePresenter;
 import com.lanou3g.mostbeautifulproperty.okhttp.URLValues;
 import com.lanou3g.mostbeautifulproperty.view.LVGhost;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  */
 
-public class MagazineFragment extends BaseFragment implements IMagazineView<MagazineBean>{
+public class MagazineFragment extends BaseFragment implements IMagazineView<MagazineLiteBean>{
 
     private StackView mStackView;
     private MagazinePresenter mPresenter;
     private AlertDialog mDialog;
     private int PAGA = 1;
     private int PAGASIZE = 20;
-
-
 
     @Override
     protected int setLayout() {
@@ -42,9 +40,6 @@ public class MagazineFragment extends BaseFragment implements IMagazineView<Maga
     protected void initView() {
         mStackView = bindView(R.id.magazine_stackview);
         mDialog = createDialog();
-
-
-
     }
 
 
@@ -72,9 +67,6 @@ public class MagazineFragment extends BaseFragment implements IMagazineView<Maga
 
             }
         });
-
-
-
     }
 
     @Override
@@ -85,19 +77,20 @@ public class MagazineFragment extends BaseFragment implements IMagazineView<Maga
     @Override
     public void dismissDialog() {
         mDialog.dismiss();
+
     }
 
     @Override
-    public void onResponse(MagazineBean magazineBean) {
-        ArrayList<MagazineBean.DataBean.ArticlesBean> beanArrayList = (ArrayList<MagazineBean.DataBean.ArticlesBean>) magazineBean.getData().getArticles();
-        mStackView.setAdapter(new CurrentAdapter<MagazineBean.DataBean.ArticlesBean>(context, beanArrayList, R.layout.item_magazine) {
-                    @Override
-                    public void convert(BaseViewHolder helper, MagazineBean.DataBean.ArticlesBean item) {
-                        helper.setIamgeGlide(R.id.iv_magazine_user_head, item.getAuthor().getAvatar_url());
-                        helper.setIamgeGlide(R.id.iv_magazine_body, item.getImage_url());
-                        helper.setText(R.id.tv_magazine_user_name, item.getAuthor().getUsername());
-                        helper.setText(R.id.tv_magazine_title, item.getTitle());
-                        helper.setText(R.id.tv_magazine_subtitle, item.getSub_title());
+    public void onResponse(List<MagazineLiteBean> list) {
+
+        mStackView.setAdapter(new CurrentAdapter<MagazineLiteBean>(context, list, R.layout.item_magazine) {
+            @Override
+            public void convert(BaseViewHolder helper, MagazineLiteBean item) {
+                helper.setIamgeGlide(R.id.iv_magazine_user_head, item.getUserHead());
+                helper.setIamgeGlide(R.id.iv_magazine_body, item.getImageUrl());
+                helper.setText(R.id.tv_magazine_user_name, item.getUserName());
+                helper.setText(R.id.tv_magazine_title, item.getTitle());
+                helper.setText(R.id.tv_magazine_subtitle, item.getSubTitle());
             }
         });
     }

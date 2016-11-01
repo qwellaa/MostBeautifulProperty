@@ -16,20 +16,23 @@
                 android:layout_height="200dp"
                 android:background="@mipmap/bg_mine">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/fragment_mine_circleimg"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_centerInParent="true"
-                    android:src="@mipmap/adasd"/>
                 <TextView
+                    android:id="@+id/tv_fragment_mine_user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/fragment_mine_circleimg"
                     android:layout_centerInParent="true"
                     android:layout_margin="@dimen/textToImg"
-                    android:text="用户名"
+                    android:text="登录"
                     android:textColor="@color/nameText"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/fragment_mine_circleimg"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@mipmap/man_selected"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"/>
             </RelativeLayout>
             <LinearLayout
                 android:id="@+id/fragment_mine_daily_ll"
@@ -153,6 +156,7 @@
                 android:layout_height="1dp"
                 style="@style/mineLine"/>
             <Button
+                android:id="@+id/btn_mine_share"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/mineShareBtn"
