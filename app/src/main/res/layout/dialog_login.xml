@@ -74,13 +74,13 @@
             android:gravity="center"
             android:orientation="vertical">
             <ImageView
-                android:id="@+id/btn_login_copylink"
+                android:id="@+id/iv_login_exit"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:background="@mipmap/share_copylink"/>
             <TextView
                 style="@style/dialogLoginText"
-                android:text="copylink"/>
+                android:text="退出登录"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -1,14 +1,21 @@
 package com.lanou3g.mostbeautifulproperty.mine.uiview;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
 import com.lanou3g.mostbeautifulproperty.mine.uiview.chat.MessageMainActivity;
@@ -16,10 +23,12 @@ import com.lanou3g.mostbeautifulproperty.mine.uiview.scan.ScanActivity;
 import com.lanou3g.mostbeautifulproperty.mine.uiview.setting.SettingActivity;
 import com.lanou3g.mostbeautifulproperty.okhttp.URLValues;
 
+import java.util.HashMap;
 import java.util.List;
 
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
+import cn.sharesdk.framework.PlatformDb;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import cn.sharesdk.sina.weibo.SinaWeibo;
@@ -40,6 +49,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
     private static final int REQUEST_CODE_QRCODE_PERMISSIONS = 1;
     private Button mBtnShare;
     private AlertDialog mDialog;
+    private TextView mTvUserName;
+    private Platform mWeibo;
+    private Platform mQq;
+    private CircleImageView mCirMyImg;
 
     @Override
     protected int setLayout() {
@@ -53,8 +66,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
         mMessageLl = bindView(R.id.fragment_mine_message_ll);
         mMessageLl.setOnClickListener(this);
         // 登录头像
-        CircleImageView cirMyImg = bindView(R.id.fragment_mine_circleimg);
-        cirMyImg.setOnClickListener(this);
+        mCirMyImg = bindView(R.id.fragment_mine_circleimg);
+        mCirMyImg.setOnClickListener(this);
+        // 用户名
+        mTvUserName = bindView(R.id.tv_fragment_mine_user_name);
         mSetting = bindView(R.id.iv_mine_setting);
         // 扫一扫
         ImageView smImg = bindView(R.id.iv_mine_sm);
@@ -71,7 +86,26 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
         mMessageLl.setOnClickListener(this);
         mSetting.setOnClickListener(this);
 
+
+        MyDisOrderBroadCastReceiver receiver = new MyDisOrderBroadCastReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("userMessage");
+        context.registerReceiver(receiver, filter);
         mDialog = createDialog();
+
+        // 设置微博登录头像
+        mWeibo = ShareSDK.getPlatform(SinaWeibo.NAME);
+        if (!(mWeibo.getDb().getUserId().equals(""))) {
+            mTvUserName.setText(mWeibo.getDb().getUserName());
+            Glide.with(this).load(mWeibo.getDb().getUserIcon()).into(mCirMyImg);
+        }
+        // 设置qq登录头像
+        mQq = ShareSDK.getPlatform(QQ.NAME);
+        if (!(mQq.getDb().getUserId().equals(""))) {
+            mTvUserName.setText(mQq.getDb().getUserName());
+            Glide.with(this).load(mQq.getDb().getUserIcon()).into(mCirMyImg);
+        }
+
     }
 
     private AlertDialog createDialog() {
@@ -81,17 +115,37 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
         ImageView ivWeiXin = (ImageView) view.findViewById(R.id.btn_login_weixin);
         ImageView ivQQ = (ImageView) view.findViewById(R.id.btn_login_qq);
         ImageView ivSina = (ImageView) view.findViewById(R.id.btn_login_sina);
+        ImageView ivExitLogin = (ImageView) view.findViewById(R.id.iv_login_exit);
 
-        final PlatformActionListener paListener = null;
+        final PlatformActionListener paListener = new PlatformActionListener() {
+            @Override
+            public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+                PlatformDb platDB = platform.getDb();//获取数平台数据DB
+                Intent intent = new Intent("userMessage");
+                intent.putExtra("userName", platDB.getUserName());
+                intent.putExtra("userIcon", platDB.getUserIcon());
+                context.sendBroadcast(intent);
+                Toast.makeText(context, "登录成功", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(Platform platform, int i, Throwable throwable) {
+                Toast.makeText(context, "登录失败", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancel(Platform platform, int i) {
+                Toast.makeText(context, "取消登录", Toast.LENGTH_SHORT).show();
+            }
+        };
 
         ivSina.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Platform weibo = ShareSDK.getPlatform(SinaWeibo.NAME);
-                weibo.setPlatformActionListener(paListener);
+                mWeibo.setPlatformActionListener(paListener);
                 //authorize与showUser单独调用一个即可
 //                weibo.authorize();//单独授权,OnComplete返回的hashmap是空的
-                weibo.showUser(null);//授权并获取用户信息
+                mWeibo.showUser(null);//授权并获取用户信息
 
                 dialog.dismiss();
             }
@@ -100,11 +154,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
         ivQQ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Platform qq = ShareSDK.getPlatform(QQ.NAME);
-                qq.setPlatformActionListener(paListener);
+                mQq.setPlatformActionListener(paListener);
                 //authorize与showUser单独调用一个即可
 //                qq.authorize();//单独授权,OnComplete返回的hashmap是空的
-                qq.showUser(null);//授权并获取用户信息
+                mQq.showUser(null);//授权并获取用户信息
                 dialog.dismiss();
             }
         });
@@ -112,6 +165,30 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
         ivWeiXin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        ivExitLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mQq.isAuthValid()) {
+                    mQq.removeAccount(true);
+                    Intent intent = new Intent("userMessage");
+                    intent.putExtra("userName", "");
+                    intent.putExtra("userIcon", "");
+                    context.sendBroadcast(intent);
+                    Toast.makeText(context, "退出登录成功", Toast.LENGTH_SHORT).show();
+                } else if (mWeibo.isAuthValid()){
+                    mWeibo.removeAccount(true);
+                    Intent intent = new Intent("userMessage");
+                    intent.putExtra("userName", "");
+                    intent.putExtra("userIcon", "");
+                    context.sendBroadcast(intent);
+                    Toast.makeText(context, "退出登录成功", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, "请先登录", Toast.LENGTH_SHORT).show();
+                }
                 dialog.dismiss();
             }
         });
@@ -196,6 +273,26 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
         String[] perms = {Manifest.permission.CAMERA};
         if (!EasyPermissions.hasPermissions(context, perms)) {
             EasyPermissions.requestPermissions(this, "扫描二维码需要打开相机和散光灯的权限", REQUEST_CODE_QRCODE_PERMISSIONS, perms);
+        }
+    }
+
+    private class MyDisOrderBroadCastReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String userName = intent.getStringExtra("userName");
+            String userIcon = intent.getStringExtra("userIcon");
+
+            if (userName.equals("")) {
+                mTvUserName.setText("请登录");
+            } else {
+                mTvUserName.setText(userName);
+            }
+            if (userIcon.equals("")) {
+                Log.d("MyDisOrderBroadCastRece", "走没走");
+                mCirMyImg.setImageResource(R.mipmap.man_selected);
+            } else {
+                Glide.with(context).load(userIcon).into(mCirMyImg);
+            }
         }
     }
 }

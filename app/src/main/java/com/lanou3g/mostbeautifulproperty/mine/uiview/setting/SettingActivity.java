@@ -1,5 +1,6 @@
 package com.lanou3g.mostbeautifulproperty.mine.uiview.setting;
 
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,10 +9,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseActivity;
 import com.lanou3g.mostbeautifulproperty.mine.uiview.setting.clearcache.DataCleanManager;
+
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.sina.weibo.SinaWeibo;
+import cn.sharesdk.tencent.qq.QQ;
 
 /**
  *
@@ -97,6 +104,25 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             case R.id.ll_setting_start_video:
                 break;
             case R.id.ll_setting_exit_login:
+                Platform mQq = ShareSDK.getPlatform(QQ.NAME);
+                Platform mWeibo = ShareSDK.getPlatform(SinaWeibo.NAME);
+                if (mQq.isAuthValid()) {
+                    mQq.removeAccount(true);
+                    Intent intent = new Intent("userMessage");
+                    intent.putExtra("userName", "");
+                    intent.putExtra("userIcon", "");
+                    sendBroadcast(intent);
+                    Toast.makeText(this, "退出登录成功", Toast.LENGTH_SHORT).show();
+                } else if (mWeibo.isAuthValid()){
+                    mWeibo.removeAccount(true);
+                    Intent intent = new Intent("userMessage");
+                    intent.putExtra("userName", "");
+                    intent.putExtra("userIcon", "");
+                    sendBroadcast(intent);
+                    Toast.makeText(this, "退出登录成功", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "请先登录", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.switch_setting_alerts:
                 break;
