@@ -54,7 +54,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     private GridView mPopupWindowGrideView;
     private int mPosition;
     private DiscoverPresenter mPresenter;
-    private GirdAdapter popupAdapter;
+    private MyAdapter popupAdapter;
     private TextView mItemTv;
     private ImageView mUpImg;
 
@@ -296,11 +296,13 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
                     if (position == i){
                         view.setBackgroundColor(Color.WHITE);
                         tv.setTextColor(Color.BLACK);
-                    }else {
+                    }else{
                         v.setBackgroundColor(Color.parseColor("#2c2c2c"));
                         tv1.setTextColor(Color.WHITE);
                     }
+
                 }
+                popupAdapter.setSelectPos(position);
 
                 String title = mTitleList.get(position).getName();
                 mTitcleTv.setText(title);
@@ -308,8 +310,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
                 String urls = URLStrings[position];
                 mPresenter.startRequest(urls,DiscoverBean.class);
                 mTitclePopupWindow.dismiss();
-                popupAdapter.notifyDataSetChanged();
-
+                Toast.makeText(context, "position:" + position, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -342,15 +343,8 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
             mBeanAll = new PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean();
             mBeanAll.setName("全部");
             mTitleList.add(0,mBeanAll);
-            mPopupWindowGrideView.setAdapter(popupAdapter = new GirdAdapter<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean>(context
-                    , mTitleList, R.layout.item_popopwindow) {
-                @Override
-                public void convert(GirdHolder helper, PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean item) {
-                    helper.setText(R.id.item_popupwindow_tv, item.getName());
-                    mBean.setName(item.getName());
-                }
-
-            });
+            mPopupWindowGrideView.setAdapter(popupAdapter = new MyAdapter(context
+                    , mTitleList, R.layout.item_popopwindow));
             mTitleList.add(mBean);
             mTitleList.remove(mTitleList.size()-1);
             mDialog.dismiss();
@@ -377,5 +371,34 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
             Toast.makeText(context, "数据异常,请求失败", Toast.LENGTH_SHORT).show();
         }
 
+
+    class MyAdapter extends GirdAdapter<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean>{
+        private int selectPos = 0;
+
+        public MyAdapter(Context context, List<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean> mDatas, int itemLayoutId) {
+            super(context, mDatas, itemLayoutId);
+        }
+
+        public void setSelectPos(int selectPos) {
+            this.selectPos = selectPos;
+            notifyDataSetChanged();
+        }
+
+        @Override
+        public void convert(GirdHolder helper, PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean item) {
+            helper.setText(R.id.item_popupwindow_tv, item.getName());
+            mBean.setName(item.getName());
+            TextView textView = helper.getView(R.id.item_popupwindow_tv);
+            RelativeLayout rl = helper.getView(R.id.item_popupwindow_rl);
+            if(helper.getPosition() == selectPos){
+                rl.setBackgroundColor(Color.WHITE);
+                textView.setTextColor(Color.BLACK);
+            }else {
+                rl.setBackgroundColor(Color.parseColor("#2c2c2c"));
+                textView.setTextColor(Color.WHITE);
+            }
+
+        }
+    }
 }
 
