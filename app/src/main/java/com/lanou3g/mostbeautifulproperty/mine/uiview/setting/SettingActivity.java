@@ -37,6 +37,8 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     private LinearLayout mLlExitLogin;
     private ImageView mIvReturn;
     private TextView mTvCache;
+    private Platform mQq;
+    private Platform mWeibo;
 
     @Override
     protected int setLayout() {
@@ -70,6 +72,21 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        mQq = ShareSDK.getPlatform(QQ.NAME);
+        mWeibo = ShareSDK.getPlatform(SinaWeibo.NAME);
+
+        if (mQq.isAuthValid()) {
+            mLlPersonal.setVisibility(View.VISIBLE);
+            mLlExitLogin.setVisibility(View.VISIBLE);
+        } else if (mWeibo.isAuthValid()){
+            mLlPersonal.setVisibility(View.VISIBLE);
+            mLlExitLogin.setVisibility(View.VISIBLE);
+        } else {
+            mLlPersonal.setVisibility(View.GONE);
+            mLlExitLogin.setVisibility(View.GONE);
+        }
+
     }
 
     private void initSetOnClick() {
@@ -104,8 +121,6 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             case R.id.ll_setting_start_video:
                 break;
             case R.id.ll_setting_exit_login:
-                Platform mQq = ShareSDK.getPlatform(QQ.NAME);
-                Platform mWeibo = ShareSDK.getPlatform(SinaWeibo.NAME);
                 if (mQq.isAuthValid()) {
                     mQq.removeAccount(true);
                     Intent intent = new Intent("userMessage");
