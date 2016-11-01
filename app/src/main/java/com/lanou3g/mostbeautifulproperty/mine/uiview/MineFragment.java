@@ -1,8 +1,12 @@
 package com.lanou3g.mostbeautifulproperty.mine.uiview;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AlertDialog;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -16,10 +20,12 @@ import com.lanou3g.mostbeautifulproperty.mine.uiview.scan.ScanActivity;
 import com.lanou3g.mostbeautifulproperty.mine.uiview.setting.SettingActivity;
 import com.lanou3g.mostbeautifulproperty.okhttp.URLValues;
 
+import java.util.HashMap;
 import java.util.List;
 
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
+import cn.sharesdk.framework.PlatformDb;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import cn.sharesdk.sina.weibo.SinaWeibo;
@@ -71,6 +77,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
         mMessageLl.setOnClickListener(this);
         mSetting.setOnClickListener(this);
 
+
+        MyDisOrderBroadCastReceiver receiver = new MyDisOrderBroadCastReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("userMessage");
+        context.registerReceiver(receiver, filter);
         mDialog = createDialog();
     }
 
@@ -82,7 +93,26 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
         ImageView ivQQ = (ImageView) view.findViewById(R.id.btn_login_qq);
         ImageView ivSina = (ImageView) view.findViewById(R.id.btn_login_sina);
 
-        final PlatformActionListener paListener = null;
+        final PlatformActionListener paListener = new PlatformActionListener() {
+            @Override
+            public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+                PlatformDb platDB = platform.getDb();//获取数平台数据DB
+                Intent intent = new Intent("userMessage");
+                intent.putExtra("userName", platDB.getUserName());
+                intent.putExtra("userIcon", platDB.getUserIcon());
+                context.sendBroadcast(intent);
+            }
+
+            @Override
+            public void onError(Platform platform, int i, Throwable throwable) {
+
+            }
+
+            @Override
+            public void onCancel(Platform platform, int i) {
+
+            }
+        };
 
         ivSina.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -196,6 +226,25 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
         String[] perms = {Manifest.permission.CAMERA};
         if (!EasyPermissions.hasPermissions(context, perms)) {
             EasyPermissions.requestPermissions(this, "扫描二维码需要打开相机和散光灯的权限", REQUEST_CODE_QRCODE_PERMISSIONS, perms);
+        }
+    }
+
+    private class MyDisOrderBroadCastReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String userName = intent.getStringExtra("userName");
+            String userIcon = intent.getStringExtra("userIcon");
+
+            if (userName.equals("")) {
+                
+            } else {
+
+            }
+            if (userIcon.equals("")) {
+
+            } else {
+
+            }
         }
     }
 }
