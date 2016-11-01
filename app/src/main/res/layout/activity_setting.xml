@@ -15,6 +15,7 @@
             android:orientation="vertical"
             android:padding="10dp">
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/ll_setting_personal"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -29,10 +30,10 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_marginLeft="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:src="@mipmap/ic_launcher"
-                    android:id="@+id/circleImageView"/>
+                    android:id="@+id/iv_setting_head_image"/>
 
                 <ImageView
                     android:layout_marginLeft="10dp"
@@ -178,6 +179,7 @@
                     android:background="@mipmap/ahlib_right_arrow"/>
             </LinearLayout>
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/ll_setting_exit_login"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"

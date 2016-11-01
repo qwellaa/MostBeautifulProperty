@@ -7,9 +7,10 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:textColor="@color/black_deep"
+        android:background="@color/discover_title_bg"
+        android:textColor="@color/loginText"
         android:text="快捷登录"
-        android:textSize="30sp"/>
+        android:textSize="20sp"/>
     <LinearLayout
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
@@ -23,8 +24,8 @@
             android:orientation="vertical">
             <ImageView
                 android:id="@+id/btn_login_sina"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:background="@mipmap/share_sina_normal"/>
             <TextView
                 style="@style/dialogLoginText"
@@ -39,8 +40,8 @@
             android:orientation="vertical">
             <ImageView
                 android:id="@+id/btn_login_qq"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:background="@mipmap/share_qq_normal"/>
             <TextView
                 style="@style/dialogLoginText"
@@ -60,14 +61,15 @@
             android:orientation="vertical">
             <ImageView
                 android:id="@+id/btn_login_weixin"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:background="@mipmap/share_weixin_normal"/>
             <TextView
                 style="@style/dialogLoginText"
                 android:text="@string/weixin"/>
         </LinearLayout>
         <LinearLayout
+            android:layout_marginBottom="20dp"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -75,8 +77,8 @@
             android:orientation="vertical">
             <ImageView
                 android:id="@+id/iv_login_exit"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:background="@mipmap/share_copylink"/>
             <TextView
                 style="@style/dialogLoginText"
