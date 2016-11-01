@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
@@ -76,34 +75,44 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
     }
 
     private AlertDialog createDialog() {
-        AlertDialog dialog = new AlertDialog.Builder(context).create();
+        final AlertDialog dialog = new AlertDialog.Builder(context).create();
         dialog.setCanceledOnTouchOutside(true);
         View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_login, null);
-        TextView tvWeiXin = (TextView) view.findViewById(R.id.btn_login_weixin);
-        TextView tvQQ = (TextView) view.findViewById(R.id.btn_login_qq);
-        TextView tvSina = (TextView) view.findViewById(R.id.btn_login_sina);
+        ImageView ivWeiXin = (ImageView) view.findViewById(R.id.btn_login_weixin);
+        ImageView ivQQ = (ImageView) view.findViewById(R.id.btn_login_qq);
+        ImageView ivSina = (ImageView) view.findViewById(R.id.btn_login_sina);
 
         final PlatformActionListener paListener = null;
 
-        tvSina.setOnClickListener(new View.OnClickListener() {
+        ivSina.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Platform weibo = ShareSDK.getPlatform(SinaWeibo.NAME);
                 weibo.setPlatformActionListener(paListener);
                 //authorize与showUser单独调用一个即可
-                weibo.authorize();//单独授权,OnComplete返回的hashmap是空的
+//                weibo.authorize();//单独授权,OnComplete返回的hashmap是空的
                 weibo.showUser(null);//授权并获取用户信息
+
+                dialog.dismiss();
             }
         });
 
-        tvQQ.setOnClickListener(new View.OnClickListener() {
+        ivQQ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Platform qq = ShareSDK.getPlatform(QQ.NAME);
                 qq.setPlatformActionListener(paListener);
                 //authorize与showUser单独调用一个即可
-                qq.authorize();//单独授权,OnComplete返回的hashmap是空的
+//                qq.authorize();//单独授权,OnComplete返回的hashmap是空的
                 qq.showUser(null);//授权并获取用户信息
+                dialog.dismiss();
+            }
+        });
+
+        ivWeiXin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
             }
         });
         dialog.setView(view);
