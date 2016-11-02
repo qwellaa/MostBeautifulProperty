@@ -48,7 +48,6 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     private static final int TABMEN = 6;
     private RelativeLayout mMoreTopView;
     private TextView mTitcleTv;
-    private ImageView mTitcleImg;
     private View mView;
     private PopupWindow mTitclePopupWindow;
     private TableLayout tb;
@@ -59,7 +58,6 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     private MyAdapter popupAdapter;
     private TextView mItemTv;
     private ImageView mUpImg;
-
     private int page = 1;
     private int size = 20;
     private ListView mListView;
@@ -68,6 +66,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     private PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean mBean;
     private PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean mBeanAll;
     private List<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean> mTitleList;
+    
 
     private String[] URLJewelryList = new String[]{
             URLValues.getDISCOVER_URL(3, page, size),
