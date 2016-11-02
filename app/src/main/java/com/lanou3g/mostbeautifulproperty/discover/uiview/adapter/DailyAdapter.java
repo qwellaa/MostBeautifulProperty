@@ -10,6 +10,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.lanou3g.mostbeautifulproperty.R;
@@ -87,11 +88,22 @@ public class DailyAdapter extends BaseAdapter implements StickyListHeadersAdapte
             case 1:
                 viewHolder.mRadioGroup.check(R.id.iv_daily_list_dislike);
                 break;
+            case 2:
+                viewHolder.mRadioGroup.check(R.id.iv_daily_list_like);
+                break;
         }
         viewHolder.mDislike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 info.setNum(1);
+                Toast.makeText(mContext,info.getUnlike_user_num()+"人不喜欢", Toast.LENGTH_SHORT).show();
+            }
+        });
+        viewHolder.mLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                info.setNum(2);
+                Toast.makeText(mContext,info.getLike_user_num()+"人喜欢", Toast.LENGTH_SHORT).show();
             }
         });
 
