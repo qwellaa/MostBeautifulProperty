@@ -58,6 +58,15 @@ public class DailyBean {
             private int id;
             private List<String> cover_images;
             private List<String> images;
+            private int num;
+
+            public int getNum() {
+                return num;
+            }
+
+            public void setNum(int num) {
+                this.num = num;
+            }
 
             public int getUnlike_user_num() {
                 return unlike_user_num;

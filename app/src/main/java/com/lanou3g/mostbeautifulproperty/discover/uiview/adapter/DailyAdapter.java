@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
@@ -72,13 +74,27 @@ public class DailyAdapter extends BaseAdapter implements StickyListHeadersAdapte
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        DailyBean.DataBean.ProductsBean info = (DailyBean.DataBean.ProductsBean) getItem(position);
+        final DailyBean.DataBean.ProductsBean info = getItem(position);
         viewHolder.mTvUserName.setText(info.getDesigner().getName());
         viewHolder.mTvDesigner.setText(info.getDesigner().getLabel());
         viewHolder.mTvTitle.setText(info.getName());
-
         Glide.with(mContext).load(info.getDesigner().getAvatar_url()).into(viewHolder.mIvUserHead);
         Glide.with(mContext).load(info.getCover_images().get(0)).into(viewHolder.mIvBody);
+        switch (info.getNum()){
+            case 0:
+                viewHolder.mRadioGroup.clearCheck();
+                break;
+            case 1:
+                viewHolder.mRadioGroup.check(R.id.iv_daily_list_dislike);
+                break;
+        }
+        viewHolder.mDislike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                info.setNum(1);
+            }
+        });
+
         return convertView;
     }
 
@@ -89,8 +105,14 @@ public class DailyAdapter extends BaseAdapter implements StickyListHeadersAdapte
         private final CircleImageView mIvUserHead;
         private final TextView mTvTitle;
         private final ImageView mIvBody;
+        private final RadioGroup mRadioGroup;
+        private final RadioButton mDislike;
+        private final RadioButton mLike;
 
         public ViewHolder(View view) {
+            mLike = (RadioButton) view.findViewById(R.id.iv_daily_list_like);
+            mDislike = (RadioButton) view.findViewById(R.id.iv_daily_list_dislike);
+            mRadioGroup = (RadioGroup) view.findViewById(R.id.radio_group);
             mTvDesigner = (TextView) view.findViewById(R.id.tv_discover_list_identity);
             mTvUserName = (TextView) view.findViewById(R.id.tv_discover_list_name);
             mIvUserHead = (CircleImageView) view.findViewById(R.id.iv_discover_list_photo);
