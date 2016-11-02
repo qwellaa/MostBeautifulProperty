@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseActivity;
 import com.lanou3g.mostbeautifulproperty.mine.uiview.MineFragment;
+import com.lanou3g.mostbeautifulproperty.mine.uiview.setting.aboutus.AboutUsActivity;
 import com.lanou3g.mostbeautifulproperty.mine.uiview.setting.clearcache.DataCleanManager;
 import com.lanou3g.mostbeautifulproperty.mine.uiview.setting.userfeedback.UserFeedbcakActivity;
 import com.lanou3g.mostbeautifulproperty.okhttp.URLValues;
@@ -136,6 +137,8 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 showShare();
                 break;
             case R.id.ll_setting_about_us:
+                Intent intentAbout = new Intent(SettingActivity.this, AboutUsActivity.class);
+                startActivity(intentAbout);
                 break;
             case R.id.ll_setting_start_video:
                 break;
