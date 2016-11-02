@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -22,6 +23,8 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.andview.refreshview.XRefreshView;
+import com.andview.refreshview.XRefreshView.SimpleXRefreshListener;
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseViewHolder;
@@ -66,7 +69,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     private PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean mBean;
     private PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean mBeanAll;
     private List<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean> mTitleList;
-    
+    private XRefreshView mRefreshView;
 
     private String[] URLJewelryList = new String[]{
             URLValues.getDISCOVER_URL(3, page, size),
@@ -209,8 +212,37 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
         String[] URLStrs = URLArr.get(mPosition - 3);
         String url = URLStrs[0];
         mPresenter.startRequest(url, DiscoverBean.class);
+        //设置是否可以下拉刷新
+        mRefreshView.setPullRefreshEnable(true);
+        //设置是否可以上拉加载
+        mRefreshView.setPullLoadEnable(true);
+        refresh();
 
+    }
 
+    private void refresh() {
+        mRefreshView.setXRefreshViewListener(new SimpleXRefreshListener(){
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mRefreshView.stopRefresh();
+
+                    }
+                },200);
+            }
+
+            @Override
+            public void onLoadMore(boolean isSilence) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                      mRefreshView.stopLoadMore();
+                    }
+                },2000);
+            }
+        });
     }
 
 
