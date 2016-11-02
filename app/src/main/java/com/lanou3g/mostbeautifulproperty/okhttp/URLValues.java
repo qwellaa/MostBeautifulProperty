@@ -35,5 +35,13 @@ public final class URLValues {
     //百思不得姐视频
     //?market=360zhushou&ver=6.5.7&visiting=19543442&os=5.1&appname=baisibudejie&client=android&udid=860954030358581&mac=74%3Aac%3A5f%3A6d%3A3c%3A93
     public static final String VIDEO_URL = "http://s.budejie.com/topic/list/jingxuan/41/budejie-android-6.5.7/0-20.json";
+    public static final String VIDEO_TOP_URL = "http://s.budejie.com/topic/list/jingxuan/41/budejie-android-6.5.7/";
+    public static final String VIDEO_BUTTOM_URL = "-20.json";
+    public static String getVIDEO_URL ( int page){
+
+        return VIDEO_TOP_URL + page + VIDEO_BUTTOM_URL;
+
+
+    }
 
 }

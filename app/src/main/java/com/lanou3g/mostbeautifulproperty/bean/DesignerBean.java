@@ -80,6 +80,7 @@ public class DesignerBean {
         private String share_url;
         private int down;
         private int forward;
+
         /**
          * header : ["http://wimg.spriteapp.cn/profile/large/2016/08/19/57b71b5307519_mini.jpg","http://dimg.spriteapp.cn/profile/large/2016/08/19/57b71b5307519_mini.jpg"]
          * is_v : true
@@ -105,10 +106,15 @@ public class DesignerBean {
         private VideoBean video;
         private String type;
         private String id;
+
+
+
         /**
          * id : 1
          * name : 搞笑
          */
+
+
 
         private List<TagsBean> tags;
 

@@ -8,12 +8,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     xrefreshview:isHeightMatchParent="true"
-    xrefreshview:isWidthMatchParent="true">
+    xrefreshview:isWidthMatchParent="true"
+    android:layout_margin="10dp">
 
     <ListView
         android:id="@+id/design_fragemrnt_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none"/>
+
+        />
 
 </com.andview.refreshview.XRefreshView>
