@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -58,6 +57,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
     private LinearLayout mLlWish;
     private MyDisOrderBroadCastReceiver mReceiver;
 
+    public static final String FILTER_NAME = "userMessage";
+    public static final String USER_NAME = "userName";
+    public static final String USER_ICON = "userIcon";
+
     @Override
     protected int setLayout() {
         return R.layout.fragment_mine;
@@ -99,9 +102,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
 
         mReceiver = new MyDisOrderBroadCastReceiver();
         IntentFilter filter = new IntentFilter();
-        filter.addAction("userMessage");
+        filter.addAction(FILTER_NAME);
         context.registerReceiver(mReceiver, filter);
         mDialog = createDialog();
+
 
         // 设置微博登录头像
         mWeibo = ShareSDK.getPlatform(SinaWeibo.NAME);
@@ -131,9 +135,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
             @Override
             public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
                 PlatformDb platDB = platform.getDb();//获取数平台数据DB
-                Intent intent = new Intent("userMessage");
-                intent.putExtra("userName", platDB.getUserName());
-                intent.putExtra("userIcon", platDB.getUserIcon());
+                Intent intent = new Intent(FILTER_NAME);
+                intent.putExtra(USER_NAME, platDB.getUserName());
+                intent.putExtra(USER_ICON, platDB.getUserIcon());
                 context.sendBroadcast(intent);
                 Toast.makeText(context, "登录成功", Toast.LENGTH_SHORT).show();
             }
@@ -184,16 +188,16 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
             public void onClick(View v) {
                 if (mQq.isAuthValid()) {
                     mQq.removeAccount(true);
-                    Intent intent = new Intent("userMessage");
-                    intent.putExtra("userName", "");
-                    intent.putExtra("userIcon", "");
+                    Intent intent = new Intent(FILTER_NAME);
+                    intent.putExtra(USER_NAME, "");
+                    intent.putExtra(USER_ICON, "");
                     context.sendBroadcast(intent);
                     Toast.makeText(context, "退出登录成功", Toast.LENGTH_SHORT).show();
                 } else if (mWeibo.isAuthValid()){
                     mWeibo.removeAccount(true);
-                    Intent intent = new Intent("userMessage");
-                    intent.putExtra("userName", "");
-                    intent.putExtra("userIcon", "");
+                    Intent intent = new Intent(FILTER_NAME);
+                    intent.putExtra(USER_NAME, "");
+                    intent.putExtra(USER_ICON, "");
                     context.sendBroadcast(intent);
                     Toast.makeText(context, "退出登录成功", Toast.LENGTH_SHORT).show();
                 } else {
@@ -253,9 +257,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
                 Intent settingIntent = new Intent(context, SettingActivity.class);
 
                 if (mQq.isAuthValid()) {
-                    settingIntent.putExtra("headIcon", mQq.getDb().getUserIcon());
+                    settingIntent.putExtra(SettingActivity.HEADICON, mQq.getDb().getUserIcon());
                 } else if (mWeibo.isAuthValid()){
-                    settingIntent.putExtra("headIcon", mWeibo.getDb().getUserIcon());
+                    settingIntent.putExtra(SettingActivity.HEADICON, mWeibo.getDb().getUserIcon());
                 }
                 startActivity(settingIntent);
                 break;
@@ -328,8 +332,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
     private class MyDisOrderBroadCastReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            String userName = intent.getStringExtra("userName");
-            String userIcon = intent.getStringExtra("userIcon");
+            String userName = intent.getStringExtra(USER_NAME);
+            String userIcon = intent.getStringExtra(USER_ICON);
 
             if (userName.equals("")) {
                 mTvUserName.setText("请登录");
@@ -337,7 +341,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
                 mTvUserName.setText(userName);
             }
             if (userIcon.equals("")) {
-                Log.d("MyDisOrderBroadCastRece", "走没走");
                 mCirMyImg.setImageResource(R.mipmap.man_selected);
             } else {
                 Glide.with(context).load(userIcon).into(mCirMyImg);

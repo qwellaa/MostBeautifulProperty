@@ -9,12 +9,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseActivity;
+import com.lanou3g.mostbeautifulproperty.mine.uiview.MineFragment;
+import com.lanou3g.mostbeautifulproperty.mine.uiview.setting.aboutus.AboutUsActivity;
 import com.lanou3g.mostbeautifulproperty.mine.uiview.setting.clearcache.DataCleanManager;
+import com.lanou3g.mostbeautifulproperty.mine.uiview.setting.startvideo.StartVideoActivity;
+import com.lanou3g.mostbeautifulproperty.mine.uiview.setting.userfeedback.UserFeedbcakActivity;
 import com.lanou3g.mostbeautifulproperty.okhttp.URLValues;
 
 import cn.sharesdk.framework.Platform;
@@ -45,6 +48,8 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     private Platform mWeibo;
     private CircleImageView mIvHeadIcon;
 
+    public static final String HEADICON = "headIcon";
+
     @Override
     protected int setLayout() {
         return R.layout.activity_setting;
@@ -66,6 +71,9 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 
         mIvHeadIcon = bindView(R.id.iv_setting_head_image);
         mTvCache = bindView(R.id.tv_setting_cache);
+
+        TextView tvIncludeTitle = bindView(R.id.tv_include_setting_title);
+        tvIncludeTitle.setText("设置");
     }
 
     @Override
@@ -95,7 +103,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         }
 
         Intent intent = getIntent();
-        String headIcon = intent.getStringExtra("headIcon");
+        String headIcon = intent.getStringExtra(HEADICON);
         Glide.with(this).load(headIcon).into(mIvHeadIcon);
     }
 
@@ -121,6 +129,8 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 cacheDialog();
                 break;
             case R.id.ll_setting_user_feedback:
+                Intent intent = new Intent(SettingActivity.this, UserFeedbcakActivity.class);
+                startActivity(intent);
                 break;
             case R.id.ll_setting_give_praise:
                 break;
@@ -128,29 +138,15 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 showShare();
                 break;
             case R.id.ll_setting_about_us:
+                Intent intentAbout = new Intent(SettingActivity.this, AboutUsActivity.class);
+                startActivity(intentAbout);
                 break;
             case R.id.ll_setting_start_video:
+                Intent intentVideo = new Intent(SettingActivity.this, StartVideoActivity.class);
+                startActivity(intentVideo);
                 break;
             case R.id.ll_setting_exit_login:
-                if (mQq.isAuthValid()) {
-                    mQq.removeAccount(true);
-                    Intent intent = new Intent("userMessage");
-                    intent.putExtra("userName", "");
-                    intent.putExtra("userIcon", "");
-                    sendBroadcast(intent);
-                    mLlPersonal.setVisibility(View.GONE);
-                    mLlExitLogin.setVisibility(View.GONE);
-                    Toast.makeText(this, "退出登录成功", Toast.LENGTH_SHORT).show();
-                } else if (mWeibo.isAuthValid()){
-                    mWeibo.removeAccount(true);
-                    Intent intent = new Intent("userMessage");
-                    intent.putExtra("userName", "");
-                    intent.putExtra("userIcon", "");
-                    sendBroadcast(intent);
-                    mLlPersonal.setVisibility(View.GONE);
-                    mLlExitLogin.setVisibility(View.GONE);
-                    Toast.makeText(this, "退出登录成功", Toast.LENGTH_SHORT).show();
-                }
+                exitLoginDialog();
                 break;
             case R.id.switch_setting_alerts:
                 break;
@@ -191,8 +187,10 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         View viewDialog = LayoutInflater.from(this).inflate(R.layout.dialog_remove, null);
         Button btnCancel = (Button) viewDialog.findViewById(R.id.btn_cancel_dialog);
         Button btnDetermine = (Button) viewDialog.findViewById(R.id.btn_determine_dialog);
-        TextView tvClearTitle = (TextView) viewDialog.findViewById(R.id.tv_clear_search_history);
-        tvClearTitle.setText("您确定要清除缓存?");
+        TextView tvClearSubTitle = (TextView) viewDialog.findViewById(R.id.tv_clear_search_history);
+        TextView tvClearTitle = (TextView) viewDialog.findViewById(R.id.tv_clear_title);
+        tvClearTitle.setText("清除缓存");
+        tvClearSubTitle.setText("您确定要清除缓存?");
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -211,6 +209,44 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                dialog.cancel();
+            }
+        });
+        dialog.setView(viewDialog);
+        dialog.show();
+    }
+
+    private void exitLoginDialog() {
+        final AlertDialog dialog = new AlertDialog.Builder(this).create();
+        View viewDialog = LayoutInflater.from(this).inflate(R.layout.dialog_remove, null);
+        Button btnCancel = (Button) viewDialog.findViewById(R.id.btn_cancel_dialog);
+        Button btnDetermine = (Button) viewDialog.findViewById(R.id.btn_determine_dialog);
+        TextView tvClearSubTitle = (TextView) viewDialog.findViewById(R.id.tv_clear_search_history);
+        TextView tvClearTitle = (TextView) viewDialog.findViewById(R.id.tv_clear_title);
+        tvClearTitle.setText("退出登录");
+        tvClearSubTitle.setText("您确定要退出登录?");
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+        btnDetermine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mQq = ShareSDK.getPlatform(QQ.NAME);
+                mWeibo = ShareSDK.getPlatform(SinaWeibo.NAME);
+                if (mQq.isAuthValid()) {
+                    mQq.removeAccount(true);
+                } else if (mWeibo.isAuthValid()){
+                    mWeibo.removeAccount(true);
+                }
+                Intent intent = new Intent(MineFragment.FILTER_NAME);
+                intent.putExtra(MineFragment.USER_NAME, "");
+                intent.putExtra(MineFragment.USER_ICON, "");
+                sendBroadcast(intent);
+                mLlPersonal.setVisibility(View.GONE);
+                mLlExitLogin.setVisibility(View.GONE);
                 dialog.cancel();
             }
         });
