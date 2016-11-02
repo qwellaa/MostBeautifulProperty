@@ -132,25 +132,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             case R.id.ll_setting_start_video:
                 break;
             case R.id.ll_setting_exit_login:
-                if (mQq.isAuthValid()) {
-                    mQq.removeAccount(true);
-                    Intent intent = new Intent("userMessage");
-                    intent.putExtra("userName", "");
-                    intent.putExtra("userIcon", "");
-                    sendBroadcast(intent);
-                    mLlPersonal.setVisibility(View.GONE);
-                    mLlExitLogin.setVisibility(View.GONE);
-                    Toast.makeText(this, "退出登录成功", Toast.LENGTH_SHORT).show();
-                } else if (mWeibo.isAuthValid()){
-                    mWeibo.removeAccount(true);
-                    Intent intent = new Intent("userMessage");
-                    intent.putExtra("userName", "");
-                    intent.putExtra("userIcon", "");
-                    sendBroadcast(intent);
-                    mLlPersonal.setVisibility(View.GONE);
-                    mLlExitLogin.setVisibility(View.GONE);
-                    Toast.makeText(this, "退出登录成功", Toast.LENGTH_SHORT).show();
-                }
+                exitLoginDialog();
                 break;
             case R.id.switch_setting_alerts:
                 break;
@@ -191,8 +173,10 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         View viewDialog = LayoutInflater.from(this).inflate(R.layout.dialog_remove, null);
         Button btnCancel = (Button) viewDialog.findViewById(R.id.btn_cancel_dialog);
         Button btnDetermine = (Button) viewDialog.findViewById(R.id.btn_determine_dialog);
-        TextView tvClearTitle = (TextView) viewDialog.findViewById(R.id.tv_clear_search_history);
-        tvClearTitle.setText("您确定要清除缓存?");
+        TextView tvClearSubTitle = (TextView) viewDialog.findViewById(R.id.tv_clear_search_history);
+        TextView tvClearTitle = (TextView) viewDialog.findViewById(R.id.tv_clear_title);
+        tvClearTitle.setText("清除缓存");
+        tvClearSubTitle.setText("您确定要清除缓存?");
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -211,6 +195,43 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                dialog.cancel();
+            }
+        });
+        dialog.setView(viewDialog);
+        dialog.show();
+    }
+
+    private void exitLoginDialog() {
+        final AlertDialog dialog = new AlertDialog.Builder(this).create();
+        View viewDialog = LayoutInflater.from(this).inflate(R.layout.dialog_remove, null);
+        Button btnCancel = (Button) viewDialog.findViewById(R.id.btn_cancel_dialog);
+        Button btnDetermine = (Button) viewDialog.findViewById(R.id.btn_determine_dialog);
+        TextView tvClearSubTitle = (TextView) viewDialog.findViewById(R.id.tv_clear_search_history);
+        TextView tvClearTitle = (TextView) viewDialog.findViewById(R.id.tv_clear_title);
+        tvClearTitle.setText("退出登录");
+        tvClearSubTitle.setText("您确定要退出登录?");
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+        btnDetermine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mQq.isAuthValid()) {
+                    mQq.removeAccount(true);
+                } else if (mWeibo.isAuthValid()){
+                    mWeibo.removeAccount(true);
+                }
+                Intent intent = new Intent("userMessage");
+                intent.putExtra("userName", "");
+                intent.putExtra("userIcon", "");
+                sendBroadcast(intent);
+                mLlPersonal.setVisibility(View.GONE);
+                mLlExitLogin.setVisibility(View.GONE);
+                Toast.makeText(getParent(), "退出登录成功", Toast.LENGTH_SHORT).show();
                 dialog.cancel();
             }
         });

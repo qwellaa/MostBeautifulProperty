@@ -6,15 +6,21 @@
     android:background="#80b5b5b5"
     android:id="@+id/ll_dialog_remove">
     <TextView
-        android:id="@+id/tv_clear_search_history"
-        android:background="@drawable/setting_view_border_n"
+        android:id="@+id/tv_clear_title"
+        style="@style/dialogExitLogin"
+        android:background="@color/btn_register_normal"
         android:textColor="@color/discover_title_bg"
-        android:gravity="center"
-        android:padding="10dp"
         android:textSize="20sp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/settingTitle"/>
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/tv_clear_search_history"
+        android:textColor="@color/colorShareBtnBorder"
+        android:textSize="15sp"
+        android:background="@drawable/setting_view_border_n"
+        style="@style/dialogExitLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
