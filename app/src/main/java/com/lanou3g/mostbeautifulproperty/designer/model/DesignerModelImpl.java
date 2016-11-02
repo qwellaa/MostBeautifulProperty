@@ -11,8 +11,21 @@ public class DesignerModelImpl implements IDesignerModel{
 
 
     @Override
-    public <T> void startRequest(String urlStr, Class<T> clazz, OnCompletedListener<T> listener) {
-        HttpManager.getInstance().getRequest(urlStr, clazz, listener);
+    public <T> void startRequest(String urlStr, Class<T> clazz, final OnCompletedListener<T> listener) {
+        HttpManager.getInstance().getRequest(urlStr, clazz, new OnCompletedListener<T>() {
+            @Override
+            public void onCompleted(T result) {
+                listener.onCompleted(result);
+
+
+            }
+
+            @Override
+            public void onFailed() {
+
+            }
+        });
+
     }
 
     @Override
