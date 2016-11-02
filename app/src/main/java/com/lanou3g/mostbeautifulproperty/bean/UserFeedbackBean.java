@@ -8,7 +8,6 @@ import com.litesuits.orm.db.enums.AssignType;
  */
 
 public class UserFeedbackBean {
-
     @PrimaryKey(AssignType.AUTO_INCREMENT)
     private int id;
     private String body;
