@@ -163,5 +163,20 @@
         <item name="android:padding">10dp</item>
         <item name="android:text">@string/settingTitle</item>
     </style>
+    <style name="userFeedbackPhoneLl">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:padding">5dp</item>
+    </style>
+    <style name="userFeedbackPhoneTv">
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:padding">5dp</item>
+    </style>
+    <style name="userFeedbackPhoneBtn">
+        <item name="android:background">@drawable/setting_user_feedback_edittext</item>
+        <item name="android:padding">5dp</item>
+    </style>
 </resources>
 

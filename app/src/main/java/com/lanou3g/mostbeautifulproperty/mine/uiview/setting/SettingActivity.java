@@ -9,12 +9,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseActivity;
+import com.lanou3g.mostbeautifulproperty.mine.uiview.MineFragment;
 import com.lanou3g.mostbeautifulproperty.mine.uiview.setting.clearcache.DataCleanManager;
+import com.lanou3g.mostbeautifulproperty.mine.uiview.setting.userfeedback.UserFeedbcakActivity;
 import com.lanou3g.mostbeautifulproperty.okhttp.URLValues;
 
 import cn.sharesdk.framework.Platform;
@@ -45,6 +46,8 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     private Platform mWeibo;
     private CircleImageView mIvHeadIcon;
 
+    public static final String HEADICON = "headIcon";
+
     @Override
     protected int setLayout() {
         return R.layout.activity_setting;
@@ -66,6 +69,9 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 
         mIvHeadIcon = bindView(R.id.iv_setting_head_image);
         mTvCache = bindView(R.id.tv_setting_cache);
+
+        TextView tvIncludeTitle = bindView(R.id.tv_include_setting_title);
+        tvIncludeTitle.setText("设置");
     }
 
     @Override
@@ -95,7 +101,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         }
 
         Intent intent = getIntent();
-        String headIcon = intent.getStringExtra("headIcon");
+        String headIcon = intent.getStringExtra(HEADICON);
         Glide.with(this).load(headIcon).into(mIvHeadIcon);
     }
 
@@ -121,6 +127,8 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 cacheDialog();
                 break;
             case R.id.ll_setting_user_feedback:
+                Intent intent = new Intent(SettingActivity.this, UserFeedbcakActivity.class);
+                startActivity(intent);
                 break;
             case R.id.ll_setting_give_praise:
                 break;
@@ -220,18 +228,19 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         btnDetermine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mQq = ShareSDK.getPlatform(QQ.NAME);
+                mWeibo = ShareSDK.getPlatform(SinaWeibo.NAME);
                 if (mQq.isAuthValid()) {
                     mQq.removeAccount(true);
                 } else if (mWeibo.isAuthValid()){
                     mWeibo.removeAccount(true);
                 }
-                Intent intent = new Intent("userMessage");
-                intent.putExtra("userName", "");
-                intent.putExtra("userIcon", "");
+                Intent intent = new Intent(MineFragment.FILTER_NAME);
+                intent.putExtra(MineFragment.USER_NAME, "");
+                intent.putExtra(MineFragment.USER_ICON, "");
                 sendBroadcast(intent);
                 mLlPersonal.setVisibility(View.GONE);
                 mLlExitLogin.setVisibility(View.GONE);
-                Toast.makeText(getParent(), "退出登录成功", Toast.LENGTH_SHORT).show();
                 dialog.cancel();
             }
         });

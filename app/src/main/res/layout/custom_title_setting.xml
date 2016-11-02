@@ -5,6 +5,7 @@
               android:background="@color/discover_item_bg"
               android:padding="8dp">
     <TextView
+        android:id="@+id/tv_include_setting_title"
         style="@style/settingTitle"
         android:layout_width="match_parent"
         android:layout_height="50dp"
