@@ -399,10 +399,11 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
                     mRefreshView.stopRefresh();
                 }
                 mBeanArrayList.addAll(discoverBean.getData().getProducts());
+
             } else {
                 Log.d("aaaa", "size:" + mBeanArrayList.size());
-                mBeanArrayList.addAll(discoverBean.getData().getProducts());
                 mRefreshView.stopLoadMore();
+                mBeanArrayList.addAll(discoverBean.getData().getProducts());
             }
             mListView.setAdapter(mAdapter = new CurrentAdapter<DiscoverBean.DataBean.ProductsBean>(context, mBeanArrayList, R.layout.item_discover_list) {
                 @Override
