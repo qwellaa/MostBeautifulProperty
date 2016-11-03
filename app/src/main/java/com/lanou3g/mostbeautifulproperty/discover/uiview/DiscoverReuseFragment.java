@@ -399,48 +399,49 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
                     mRefreshView.stopRefresh();
                 }
                 mBeanArrayList.addAll(discoverBean.getData().getProducts());
-                mListView.setAdapter(mAdapter = new CurrentAdapter<DiscoverBean.DataBean.ProductsBean>(context, mBeanArrayList, R.layout.item_discover_list) {
-                    @Override
-                    public void convert(final BaseViewHolder helper, final DiscoverBean.DataBean.ProductsBean item) {
-                        helper.setText(R.id.tv_discover_list_name, item.getDesigner().getName());
-                        helper.setText(R.id.tv_discover_list_identity, item.getDesigner().getLabel());
-                        helper.setText(R.id.tv_discover_list_title, item.getName());
-                        helper.setIamgeGlide(R.id.iv_discover_list_photo, item.getDesigner().getAvatar_url());
-                        helper.setIamgeGlide(R.id.iv_discover_list_title, item.getCover_images().get(0));
-                        RadioGroup group = helper.getView(R.id.radio_group);
-                        Log.d("DiscoverReuseFragment", "item.getState()获取时:" + item.getState());
-                        switch (item.getState()) {
-                            case 0:
-                                group.clearCheck();
-                                break;
-                            case 1:
-                                group.check(R.id.iv_daily_list_dislike);
-                                break;
-                            case 2:
-                                group.check(R.id.iv_daily_list_like);
-                                break;
-                        }
-                        helper.getView(R.id.iv_daily_list_dislike).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                item.setState(1);
-                                Toast.makeText(mContext, item.getUnlike_user_num() + "人不喜欢", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                        helper.getView(R.id.iv_daily_list_like).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                item.setState(2);
-                                Toast.makeText(mContext, item.getLike_user_num() + "人喜欢", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                });
+
             } else {
                 Log.d("aaaa", "size:" + mBeanArrayList.size());
-                mBeanArrayList.addAll(discoverBean.getData().getProducts());
                 mRefreshView.stopLoadMore();
+                mBeanArrayList.addAll(discoverBean.getData().getProducts());
             }
+            mListView.setAdapter(mAdapter = new CurrentAdapter<DiscoverBean.DataBean.ProductsBean>(context, mBeanArrayList, R.layout.item_discover_list) {
+                @Override
+                public void convert(final BaseViewHolder helper, final DiscoverBean.DataBean.ProductsBean item) {
+                    helper.setText(R.id.tv_discover_list_name, item.getDesigner().getName());
+                    helper.setText(R.id.tv_discover_list_identity, item.getDesigner().getLabel());
+                    helper.setText(R.id.tv_discover_list_title, item.getName());
+                    helper.setIamgeGlide(R.id.iv_discover_list_photo, item.getDesigner().getAvatar_url());
+                    helper.setIamgeGlide(R.id.iv_discover_list_title, item.getCover_images().get(0));
+                    RadioGroup group = helper.getView(R.id.radio_group);
+                    Log.d("DiscoverReuseFragment", "item.getState()获取时:" + item.getState());
+                    switch (item.getState()) {
+                        case 0:
+                            group.clearCheck();
+                            break;
+                        case 1:
+                            group.check(R.id.iv_daily_list_dislike);
+                            break;
+                        case 2:
+                            group.check(R.id.iv_daily_list_like);
+                            break;
+                    }
+                    helper.getView(R.id.iv_daily_list_dislike).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            item.setState(1);
+                            Toast.makeText(mContext, item.getUnlike_user_num() + "人不喜欢", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    helper.getView(R.id.iv_daily_list_like).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            item.setState(2);
+                            Toast.makeText(mContext, item.getLike_user_num() + "人喜欢", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            });
 
         }
     }
