@@ -32,4 +32,10 @@
     <string name="scan_open_lamp">开灯</string>
     <string name="scan_stop_lamp">关灯</string>
     <string name="weixin">微信</string>
+    <string name="userFeedbackWay">反馈前请添加联系方式(手机, QQ等)</string>
+    <string name="userFeedbackWayAdd">添加</string>
+    <string name="userFeedbackWayCache">保存</string>
+    <string name="userFeedbackPhone">请输入联系方式</string>
+    <string name="userFeedbackBody">请输入反馈内容</string>
+    <string name="userFeedbackSend">发送</string>
 </resources>
