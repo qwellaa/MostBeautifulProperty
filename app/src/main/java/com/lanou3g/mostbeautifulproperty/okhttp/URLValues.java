@@ -30,6 +30,14 @@ public final class URLValues {
         return DISCOVER_HEAD_URL + category + DISCOVER_MID_URL + page + DISCOVER_TAIL_URL + size;
     }
 
+    public static String getDISCOVER_HEAD_AND_MID_URL(int category){
+        return DISCOVER_HEAD_URL+ category + DISCOVER_MID_URL;
+    }
+
+    public static String getDISCOVER_TAIL_URL(){
+        return DISCOVER_TAIL_URL;
+    }
+
     // 最美有物下载地址
     public static final String APP_DOWNLOAD_URL = "http://design.zuimeia.com/app.html";
     //百思不得姐视频

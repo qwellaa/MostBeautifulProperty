@@ -22,6 +22,8 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.andview.refreshview.XRefreshView;
+import com.andview.refreshview.XRefreshView.SimpleXRefreshListener;
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseViewHolder;
@@ -48,7 +50,6 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     private static final int TABMEN = 6;
     private RelativeLayout mMoreTopView;
     private TextView mTitcleTv;
-    private ImageView mTitcleImg;
     private View mView;
     private PopupWindow mTitclePopupWindow;
     private TableLayout tb;
@@ -59,7 +60,6 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     private MyAdapter popupAdapter;
     private TextView mItemTv;
     private ImageView mUpImg;
-
     private int page = 1;
     private int size = 20;
     private ListView mListView;
@@ -68,63 +68,80 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     private PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean mBean;
     private PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean mBeanAll;
     private List<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean> mTitleList;
+    private XRefreshView mRefreshView;
+    private String mEndUrl;
+    private int mPopPosition;
 
-    private String[] URLJewelryList = new String[]{
-            URLValues.getDISCOVER_URL(3, page, size),
-            URLValues.getDISCOVER_URL(24, page, size),
-            URLValues.getDISCOVER_URL(23, page, size),
-            URLValues.getDISCOVER_URL(22, page, size),
-            URLValues.getDISCOVER_URL(21, page, size),
-            URLValues.getDISCOVER_URL(20, page, size)
-    };
-    private String[] URLBagList = new String[]{
-            URLValues.getDISCOVER_URL(1, page, size),
-            URLValues.getDISCOVER_URL(51, page, size),
-            URLValues.getDISCOVER_URL(32, page, size),
-            URLValues.getDISCOVER_URL(10, page, size),
-            URLValues.getDISCOVER_URL(9, page, size),
-            URLValues.getDISCOVER_URL(8, page, size),
-            URLValues.getDISCOVER_URL(7, page, size),
-            URLValues.getDISCOVER_URL(6, page, size),
-            URLValues.getDISCOVER_URL(5, page, size)
-    };
-    private String[] URLShoeList = new String[]{
-            URLValues.getDISCOVER_URL(2, page, size),
-            URLValues.getDISCOVER_URL(14, page, size),
-            URLValues.getDISCOVER_URL(49, page, size),
-            URLValues.getDISCOVER_URL(48, page, size),
-            URLValues.getDISCOVER_URL(38, page, size),
-            URLValues.getDISCOVER_URL(16, page, size),
-            URLValues.getDISCOVER_URL(15, page, size),
-            URLValues.getDISCOVER_URL(11, page, size)
-    };
-    private String[] URLManList = new String[]{
-            URLValues.getDISCOVER_URL(65, page, size)
-    };
-    //配饰
-    private String[] URLAccessoriesList = new String[]{
-            URLValues.getDISCOVER_URL(4, page, size),
-            URLValues.getDISCOVER_URL(53, page, size),
-            URLValues.getDISCOVER_URL(52, page, size),
-            URLValues.getDISCOVER_URL(45, page, size),
-            URLValues.getDISCOVER_URL(37, page, size),
-            URLValues.getDISCOVER_URL(36, page, size),
-            URLValues.getDISCOVER_URL(29, page, size),
-            URLValues.getDISCOVER_URL(27, page, size),
-            URLValues.getDISCOVER_URL(26, page, size),
-            URLValues.getDISCOVER_URL(25, page, size)
-    };
-    private String[] URLOtherList = new String[]{
-            URLValues.getDISCOVER_URL(54, page, size),
-            URLValues.getDISCOVER_URL(68, page, size),
-            URLValues.getDISCOVER_URL(64, page, size),
-            URLValues.getDISCOVER_URL(61, page, size),
-            URLValues.getDISCOVER_URL(58, page, size),
-            URLValues.getDISCOVER_URL(56, page, size),
-            URLValues.getDISCOVER_URL(42, page, size)
-    };
-    private ArrayList<String[]> URLArr = new ArrayList<>();
+    private void initLoadData() {
+        List<String> URLJewelryList = new ArrayList<>();
+        URLJewelryList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(3));
+        URLJewelryList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(24));
+        URLJewelryList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(23));
+        URLJewelryList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(22));
+        URLJewelryList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(21));
+        URLJewelryList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(20));
+
+        List<String> URLBagList = new ArrayList<>();
+        URLBagList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(1));
+        URLBagList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(51));
+        URLBagList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(32));
+        URLBagList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(10));
+        URLBagList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(9));
+        URLBagList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(8));
+        URLBagList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(7));
+        URLBagList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(6));
+        URLBagList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(5));
+
+        List<String> URLShoeList = new ArrayList<>();
+        URLShoeList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(2));
+        URLShoeList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(14));
+        URLShoeList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(49));
+        URLShoeList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(48));
+        URLShoeList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(38));
+        URLShoeList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(16));
+        URLShoeList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(15));
+        URLShoeList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(11));
+
+        List<String>URLManList = new ArrayList<>();
+        URLManList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(65));
+
+        //配饰
+        List<String>URLAccessoriesList = new ArrayList<>();
+        URLAccessoriesList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(4));
+        URLAccessoriesList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(53));
+        URLAccessoriesList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(52));
+        URLAccessoriesList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(45));
+        URLAccessoriesList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(37));
+        URLAccessoriesList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(36));
+        URLAccessoriesList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(29));
+        URLAccessoriesList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(27));
+        URLAccessoriesList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(26));
+        URLAccessoriesList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(25));
+
+        List<String>URLOtherList = new ArrayList<>();
+        URLOtherList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(54));
+        URLOtherList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(68));
+        URLOtherList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(64));
+        URLOtherList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(61));
+        URLOtherList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(58));
+        URLOtherList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(56));
+        URLOtherList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(42));
+
+        mEndUrl = URLValues.getDISCOVER_TAIL_URL();
+
+        URLHeadAndMid.add(URLJewelryList);
+        URLHeadAndMid.add(URLBagList);
+        URLHeadAndMid.add(URLShoeList);
+        URLHeadAndMid.add(URLManList);
+        URLHeadAndMid.add(URLAccessoriesList);
+        URLHeadAndMid.add(URLOtherList);
+
+    }
+
+
+    private ArrayList<List> URLHeadAndMid = new ArrayList<>();
     private List<DiscoverBean.DataBean.ProductsBean> mBeanArrayList;
+    private String mUrl;
 
 
     public static DiscoverReuseFragment newInstance(int position) {
@@ -156,7 +173,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
         mUpImg.setOnClickListener(this);
         mPopupWindowGrideView = bindView(R.id.popuuwindow_gridview, mView);
         mItemTv = bindView(R.id.item_popupwindow_tv);
-
+        mRefreshView = bindView(R.id.discover_refresh);
 
         mListView = bindView(R.id.lv_discover_refuse);
         mDialog = createDialog();
@@ -191,12 +208,8 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
 
     @Override
     protected void initData() {
-        URLArr.add(URLJewelryList);
-        URLArr.add(URLBagList);
-        URLArr.add(URLShoeList);
-        URLArr.add(URLManList);
-        URLArr.add(URLAccessoriesList);
-        URLArr.add(URLOtherList);
+        mBeanArrayList = new ArrayList<>();
+        initLoadData();
 
         Bundle args = getArguments();
         mPosition = args.getInt("position");
@@ -207,11 +220,38 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
             mPresenter.startRequest(URLValues.POPUPWINDOW_URL, PopupwindowBean.class);
         }
 
-        String[] URLStrs = URLArr.get(mPosition - 3);
-        String url = URLStrs[0];
-        mPresenter.startRequest(url, DiscoverBean.class);
+        List URLStrs = URLHeadAndMid.get(mPosition - 3);
+        mUrl = ((String) URLStrs.get(0)) + page + mEndUrl + size;
+        mPresenter.startRequest(mUrl, DiscoverBean.class);
+        //设置是否可以下拉刷新
+        mRefreshView.setPullRefreshEnable(true);
+        //设置是否可以上拉加载
+        mRefreshView.setPullLoadEnable(true);
+        refresh();
 
+    }
 
+    private void refresh() {
+        mRefreshView.setXRefreshViewListener(new SimpleXRefreshListener() {
+            @Override
+            public void onRefresh() {
+                        mPresenter.startRequest(mUrl, DiscoverBean.class);
+                        Log.d("DiscoverReuseFragment", mUrl);
+
+            }
+
+            @Override
+            public void onLoadMore(boolean isSilence) {
+                        page = page + 1;
+                        Log.d("DiscoverReuseFragment", "page:" + page);
+                        initLoadData();
+                        List URLStrs = URLHeadAndMid.get(mPosition - 3);
+                        mUrl = (String) URLStrs.get(mPopPosition) + page + mEndUrl + size;
+                        Log.d("DiscoverReuseFragment", mUrl);
+                        mPresenter.startRequest(mUrl, DiscoverBean.class);
+
+                    }
+        });
     }
 
 
@@ -290,6 +330,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
         mPopupWindowGrideView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mPopPosition = position;
                 TextView tv = (TextView) view.findViewById(R.id.item_popupwindow_tv);
                 for (int i = 0; i < mTitleList.size(); i++) {
                     View v = parent.getChildAt(i);
@@ -307,8 +348,8 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
 
                 String title = mTitleList.get(position).getName();
                 mTitcleTv.setText(title);
-                String[] URLStrings = URLArr.get(mPosition - 3);
-                String urls = URLStrings[position];
+                List URLStrings = URLHeadAndMid.get(mPosition - 3);
+                String urls = ((String) URLStrings.get(position)) + page + mEndUrl + size;
                 mPresenter.startRequest(urls, DiscoverBean.class);
                 mTitclePopupWindow.dismiss();
                 Toast.makeText(context, "position:" + position, Toast.LENGTH_SHORT).show();
@@ -350,49 +391,57 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
             mDialog.dismiss();
         }
         if (result instanceof DiscoverBean) {
-
             DiscoverBean discoverBean = (DiscoverBean) result;
-            mBeanArrayList = discoverBean.getData().getProducts();
-//            for (DiscoverBean.DataBean.ProductsBean productsBean : mBeanArrayList) {
-//                productsBean.setState(1);
-//            }
-            mListView.setAdapter(mAdapter = new CurrentAdapter<DiscoverBean.DataBean.ProductsBean>(context, mBeanArrayList, R.layout.item_discover_list) {
-                @Override
-                public void convert(final BaseViewHolder helper, final DiscoverBean.DataBean.ProductsBean item) {
-                    helper.setText(R.id.tv_discover_list_name, item.getDesigner().getName());
-                    helper.setText(R.id.tv_discover_list_identity, item.getDesigner().getLabel());
-                    helper.setText(R.id.tv_discover_list_title, item.getName());
-                    helper.setIamgeGlide(R.id.iv_discover_list_photo, item.getDesigner().getAvatar_url());
-                    helper.setIamgeGlide(R.id.iv_discover_list_title, item.getCover_images().get(0));
-                    RadioGroup group = helper.getView(R.id.radio_group);
-                    Log.d("DiscoverReuseFragment", "item.getState()获取时:" + item.getState());
-                    switch (item.getState()) {
-                        case 0:
-                            group.clearCheck();
-                            break;
-                        case 1:
-                            group.check(R.id.iv_daily_list_dislike);
-                            break;
-                        case 2:
-                            group.check(R.id.iv_daily_list_like);
-                            break;
-                    }
-                    helper.getView(R.id.iv_daily_list_dislike).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            item.setState(1);
-                            Toast.makeText(mContext, item.getUnlike_user_num() + "人不喜欢", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    helper.getView(R.id.iv_daily_list_like).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            item.setState(2);
-                            Toast.makeText(mContext, item.getLike_user_num() + "人喜欢", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+            if (page == 1){
+                Log.d("aaaa", "page:" + page);
+                if (mBeanArrayList.size() != 0) {
+                    mBeanArrayList.clear();
+                    mRefreshView.stopRefresh();
                 }
-            });
+                mBeanArrayList.addAll(discoverBean.getData().getProducts());
+                mListView.setAdapter(mAdapter = new CurrentAdapter<DiscoverBean.DataBean.ProductsBean>(context, mBeanArrayList, R.layout.item_discover_list) {
+                    @Override
+                    public void convert(final BaseViewHolder helper, final DiscoverBean.DataBean.ProductsBean item) {
+                        helper.setText(R.id.tv_discover_list_name, item.getDesigner().getName());
+                        helper.setText(R.id.tv_discover_list_identity, item.getDesigner().getLabel());
+                        helper.setText(R.id.tv_discover_list_title, item.getName());
+                        helper.setIamgeGlide(R.id.iv_discover_list_photo, item.getDesigner().getAvatar_url());
+                        helper.setIamgeGlide(R.id.iv_discover_list_title, item.getCover_images().get(0));
+                        RadioGroup group = helper.getView(R.id.radio_group);
+                        Log.d("DiscoverReuseFragment", "item.getState()获取时:" + item.getState());
+                        switch (item.getState()) {
+                            case 0:
+                                group.clearCheck();
+                                break;
+                            case 1:
+                                group.check(R.id.iv_daily_list_dislike);
+                                break;
+                            case 2:
+                                group.check(R.id.iv_daily_list_like);
+                                break;
+                        }
+                        helper.getView(R.id.iv_daily_list_dislike).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                item.setState(1);
+                                Toast.makeText(mContext, item.getUnlike_user_num() + "人不喜欢", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        helper.getView(R.id.iv_daily_list_like).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                item.setState(2);
+                                Toast.makeText(mContext, item.getLike_user_num() + "人喜欢", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+            } else {
+                Log.d("aaaa", "size:" + mBeanArrayList.size());
+                mBeanArrayList.addAll(discoverBean.getData().getProducts());
+                mRefreshView.stopLoadMore();
+            }
+
         }
     }
 
