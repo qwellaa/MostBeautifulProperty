@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -34,6 +35,7 @@ public class DesignAdapter extends BaseAdapter {
 
     public void setDesignerBean(DesignerBean designerBean) {
         mDesignerBean = designerBean;
+
         notifyDataSetChanged();
     }
 
@@ -99,13 +101,15 @@ public class DesignAdapter extends BaseAdapter {
         viewHolder.tvDown.setText(listBean.getDown() + "");
         viewHolder.tvComment.setText(listBean.getComment());
         viewHolder.tvForward.setText(listBean.getForward() + "");
-
+        Log.d("傻逼", "listBean.getNum():" + listBean.getNum());
         switch (listBean.getNum()) {
             case 0:
                 viewHolder.upImagButton.setBackgroundResource(R.mipmap.ding_not_clicked);
                 viewHolder.downImagButton.setBackgroundResource(R.mipmap.cai_not_clicked);
                 viewHolder.tvUp.setTextColor(Color.GRAY);
                 viewHolder.tvDown.setTextColor(Color.GRAY);
+                viewHolder.downImagButton.setFocusable(true);
+                viewHolder.upImagButton.setFocusable(true);
                 break;
 
             case 1:
@@ -140,8 +144,6 @@ public class DesignAdapter extends BaseAdapter {
 
                     finalViewHolder.downImagButton.setClickable(false);
                     finalViewHolder.tvUp.setText("" + ((Integer.decode(listBean.getUp())) + 1));
-                    Log.d("哈哈哈", "Integer.decode(listBean.getUp()):" + Integer.decode(listBean.getUp()));
-                    Log.d("哈哈哈", "Integer.decode(listBean.getUp()):" + Integer.parseInt(listBean.getUp()));
                     listBean.setNum(1);
                     goodView.setText("+1");
                     goodView.setTranslateY(finalViewHolder.upImagButton.getBottom(), finalViewHolder.upImagButton.getTop());
@@ -157,15 +159,28 @@ public class DesignAdapter extends BaseAdapter {
             public void onClick(View v) {
                 if (finalViewHolder.downImagButton.isFocusable()) {
                     finalViewHolder.downImagButton.setBackgroundResource(R.mipmap.cai_has_clicked);
-                    finalViewHolder.upImagButton.setClickable(false);
+
                     goodView.setText("+1");
                     goodView.setDistance(1);
                     finalViewHolder.tvDown.setText("" + (listBean.getDown() - 1));
                     finalViewHolder.tvDown.setTextColor(Color.RED);
                     goodView.show(v);
-                    finalViewHolder.downImagButton.setClickable(false);
                     listBean.setNum(2);
+                    finalViewHolder.upImagButton.setClickable(false);
+                    finalViewHolder.downImagButton.setClickable(false);
                 }
+            }
+        });
+        viewHolder.forwardLL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        viewHolder.commentLL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 
@@ -196,6 +211,8 @@ public class DesignAdapter extends BaseAdapter {
         private JCVideoPlayerStandard jcVideoPlayer;
         private ImageButton upImagButton;
         private ImageButton downImagButton;
+        private LinearLayout forwardLL;
+        private LinearLayout commentLL;
 
         public ViewHolder(View view) {
             tvName = (TextView) view.findViewById(R.id.fragment_design_item_tv_username);
@@ -211,6 +228,9 @@ public class DesignAdapter extends BaseAdapter {
             tvComment = (TextView) view.findViewById(R.id.item_design_comment_tv);
             upImagButton = (ImageButton) view.findViewById(R.id.item_design_up_img);
             downImagButton = (ImageButton) view.findViewById(R.id.item_design_down_img);
+            forwardLL = (LinearLayout) view.findViewById(R.id.item_design_forward_linear);
+            commentLL = (LinearLayout) view.findViewById(R.id.item_design_comment_linear);
+
 
 
         }
