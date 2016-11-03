@@ -83,7 +83,7 @@
 
     </RelativeLayout>
 
- <LinearLayout
+ <RadioGroup
 
      android:layout_marginTop="15dp"
      android:layout_width="match_parent"
@@ -95,6 +95,10 @@
          android:layout_height="wrap_content"
          android:layout_weight="1"
        >
+
+
+
+
          <LinearLayout
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
@@ -135,7 +139,7 @@
              android:id="@+id/item_design_down_img"
              android:layout_width="20dp"
              android:layout_height="20dp"
-             android:background="@drawable/designer_imagebutton"/>
+             android:background="@mipmap/cai_not_clicked"/>
          <TextView
              android:id="@+id/item_design_down_tv"
              android:layout_width="wrap_content"
@@ -144,6 +148,8 @@
              android:layout_marginLeft="10dp"
              android:layout_gravity="center"/>
          </LinearLayout>
+
+
      </LinearLayout>
      <LinearLayout
          android:layout_width="0dp"
@@ -196,7 +202,7 @@
 
 
 
- </LinearLayout>
+ </RadioGroup>
 
 
 

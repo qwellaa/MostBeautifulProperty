@@ -35,8 +35,9 @@ public class DesignAdapter extends BaseAdapter {
         mDesignerBean = designerBean;
         notifyDataSetChanged();
     }
-    public void setMoreDesignerBean(DesignerBean designerBean){
-       mDesignerBean.getList().addAll(designerBean.getList());
+
+    public void setMoreDesignerBean(DesignerBean designerBean) {
+        mDesignerBean.getList().addAll(designerBean.getList());
         notifyDataSetChanged();
 
 
@@ -68,7 +69,7 @@ public class DesignAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         DesignerBean.ListBean.VideoBean videoBean = mDesignerBean.getList().get(position).getVideo();
         int time = mDesignerBean.getList().get(position).getVideo().getDuration();
-        DesignerBean.ListBean listBean = mDesignerBean.getList().get(position);
+        final DesignerBean.ListBean listBean = mDesignerBean.getList().get(position);
         ViewHolder viewHolder = null;
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.item_design, null);
@@ -97,16 +98,70 @@ public class DesignAdapter extends BaseAdapter {
         viewHolder.tvDown.setText(listBean.getDown() + "");
         viewHolder.tvComment.setText(listBean.getComment());
         viewHolder.tvForward.setText(listBean.getForward() + "");
+
+        switch (listBean.getNum()) {
+            case 0:
+                viewHolder.upImagButton.setBackgroundResource(R.mipmap.ding_not_clicked);
+                viewHolder.downImagButton.setBackgroundResource(R.mipmap.cai_not_clicked);
+                break;
+
+            case 1:
+                viewHolder.upImagButton.setBackgroundResource(R.mipmap.ding_has_clicked);
+             //   viewHolder.downImagButton.setClickable(false);
+                viewHolder.downImagButton.setFocusable(false);
+             //   viewHolder.upImagButton.setClickable(false);
+                viewHolder.upImagButton.setFocusable(false);
+
+                break;
+
+            case 2:
+                viewHolder.downImagButton.setBackgroundResource(R.mipmap.cai_has_clicked);
+          //      viewHolder.upImagButton.setClickable(false);
+         //       viewHolder.downImagButton.setClickable(false);
+                viewHolder.upImagButton.setFocusable(false);
+                viewHolder.downImagButton.setFocusable(false);
+
+                break;
+
+
+        }
         final GoodView goodView = new GoodView(mContext);
         final ViewHolder finalViewHolder = viewHolder;
+
+
         viewHolder.upImagButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(View v) {
-                finalViewHolder.upImagButton.setBackgroundResource(R.mipmap.ding_has_clicked);
-                goodView.setText("+1");
-                goodView.show(v);
+                if (finalViewHolder.upImagButton.isFocusable()) {
 
+
+                    finalViewHolder.upImagButton.setBackgroundResource(R.mipmap.ding_has_clicked);
+
+                    finalViewHolder.downImagButton.setClickable(false);
+
+                    listBean.setNum(1);
+                    goodView.setText("+1");
+                    goodView.show(v);
+                    finalViewHolder.upImagButton.setClickable(false);
+                }
+            }
+        });
+
+
+        viewHolder.downImagButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (finalViewHolder.downImagButton.isFocusable()) {
+
+
+                    finalViewHolder.downImagButton.setBackgroundResource(R.mipmap.cai_has_clicked);
+                    finalViewHolder.upImagButton.setClickable(false);
+                    goodView.setText("-1");
+                    goodView.show(v);
+                    finalViewHolder.downImagButton.setClickable(false);
+                    listBean.setNum(2);
+                }
             }
         });
 
@@ -121,8 +176,6 @@ public class DesignAdapter extends BaseAdapter {
         minute %= 60;
         return String.format("%02d:%02d", minute, second);
     }
-
-
 
 
     class ViewHolder {

@@ -19,11 +19,11 @@ public class DesignerPresenter<T> {
     }
 
     public void startRequest(String urlStr, Class<T> clazz) {
-      //  mView.showDialog();
+         mView.showDialog();
         mModel.startRequest(urlStr, clazz, new OnCompletedListener<T>() {
             @Override
             public void onCompleted(T result) {
-             //   mView.dismissDialog();
+              mView.dismissDialog();
                 mView.onResponse(result);
             }
 
@@ -39,6 +39,7 @@ public class DesignerPresenter<T> {
         mModel.queryGankAll(new OnCompletedListener<Object>() {
             @Override
             public void onCompleted(Object result) {
+
 
             }
 

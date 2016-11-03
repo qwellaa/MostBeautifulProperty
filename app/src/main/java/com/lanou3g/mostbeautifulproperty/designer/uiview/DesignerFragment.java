@@ -2,7 +2,9 @@ package com.lanou3g.mostbeautifulproperty.designer.uiview;
 
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
@@ -14,6 +16,7 @@ import com.lanou3g.mostbeautifulproperty.bean.DesignerBean;
 import com.lanou3g.mostbeautifulproperty.designer.presenter.DesignerPresenter;
 import com.lanou3g.mostbeautifulproperty.designer.uiview.designeradapter.DesignAdapter;
 import com.lanou3g.mostbeautifulproperty.okhttp.URLValues;
+import com.lanou3g.mostbeautifulproperty.view.LVGhost;
 
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
@@ -24,7 +27,7 @@ import static android.content.Context.SENSOR_SERVICE;
  *
  */
 
-public class DesignerFragment extends BaseFragment implements IDesignerView<DesignerBean>{
+public class DesignerFragment extends BaseFragment implements IDesignerView<DesignerBean> {
     private ListView mListView;
     private DesignerPresenter<DesignerBean> mDesignerPresenter;
     private SensorManager mSensorManager;
@@ -32,6 +35,8 @@ public class DesignerFragment extends BaseFragment implements IDesignerView<Desi
     private XRefreshView mRefreshView;
     int Page = 0;
     private DesignAdapter mDesignAdapter;
+    public static long lastRefreshTime;
+    private AlertDialog mDialog;
 
     @Override
     protected int setLayout() {
@@ -41,19 +46,22 @@ public class DesignerFragment extends BaseFragment implements IDesignerView<Desi
     @Override
     protected void initView() {
         mListView = bindView(R.id.design_fragemrnt_listview);
+        mDialog = createDialog();
         mSensorManager = (SensorManager) getActivity().getSystemService(SENSOR_SERVICE);
         sensorEventListner = new JCVideoPlayer.JCAutoFullscreenListener();
         mRefreshView = bindView(R.id.design_fragment_xefreshview);
         mRefreshView.setPullRefreshEnable(true);
         mRefreshView.setPullLoadEnable(true);
+        mRefreshView.restoreLastRefreshTime(lastRefreshTime);
 
 
     }
+
     @Override
     protected void initData() {
         mDesignerPresenter = new DesignerPresenter<>(this);
 
-        mDesignerPresenter.startRequest(URLValues.getVIDEO_URL(Page),DesignerBean.class);
+        mDesignerPresenter.startRequest(URLValues.getVIDEO_URL(Page), DesignerBean.class);
 
         mDesignAdapter = new DesignAdapter(context);
         mListView.setAdapter(mDesignAdapter);
@@ -63,26 +71,26 @@ public class DesignerFragment extends BaseFragment implements IDesignerView<Desi
     }
 
     private void onRefresh() {
-        mRefreshView.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener(){
-                                                 @Override
-                                                 public void onRefresh() {
-                                                     super.onRefresh();
-                                                     Page = 0;
-                                                     mDesignerPresenter.startRequest(URLValues.getVIDEO_URL(Page),DesignerBean.class);
+        mRefreshView.setXRefreshViewListener(
+                new XRefreshView.SimpleXRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        super.onRefresh();
+                        Page = 0;
+                        mDesignerPresenter.startRequest(URLValues.getVIDEO_URL(Page), DesignerBean.class);
+                        lastRefreshTime = mRefreshView.getLastRefreshTime();
 
 
+                    }
+
+                    @Override
+                    public void onLoadMore(boolean isSilence) {
+                        super.onLoadMore(isSilence);
+                        mDesignerPresenter.startRequest(URLValues.getVIDEO_URL(Page), DesignerBean.class);
 
 
-                                                 }
-
-                                                 @Override
-                                                 public void onLoadMore(boolean isSilence) {
-                                                     super.onLoadMore(isSilence);
-                                                     mDesignerPresenter.startRequest(URLValues.getVIDEO_URL(Page),DesignerBean.class);
-
-
-                                                 }
-                                             }
+                    }
+                }
         );
 
     }
@@ -128,31 +136,40 @@ public class DesignerFragment extends BaseFragment implements IDesignerView<Desi
         return super.onOptionsItemSelected(item);
     }
 
+    private AlertDialog createDialog() {
+        AlertDialog dialog = new AlertDialog.Builder(context).create();
+        dialog.setCanceledOnTouchOutside(true);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_loading, null);
+        LVGhost mLvGhost = (LVGhost) view.findViewById(R.id.dialog_lvghost);
+        mLvGhost.startAnim();
+        dialog.setView(view);
+        return dialog;
+
+    }
+
     @Override
     public void showDialog() {
+        mDialog.show();
 
     }
 
     @Override
     public void dismissDialog() {
+        mDialog.dismiss();
 
     }
 
     @Override
     public void onResponse(DesignerBean designerBeen) {
-      if (Page == 0){
-          mDesignAdapter.setDesignerBean(designerBeen);
-          mRefreshView.stopRefresh();
-          Page = (int) designerBeen.getInfo().getNp();
-      } else {
-          mDesignAdapter.setMoreDesignerBean(designerBeen);
-          mRefreshView.stopLoadMore();
-          Page = (int) designerBeen.getInfo().getNp();
-      }
-
-
-
-
+        if (Page == 0) {
+            mDesignAdapter.setDesignerBean(designerBeen);
+            mRefreshView.stopRefresh();
+            Page = (int) designerBeen.getInfo().getNp();
+        } else {
+            mDesignAdapter.setMoreDesignerBean(designerBeen);
+            mRefreshView.stopLoadMore();
+            Page = (int) designerBeen.getInfo().getNp();
+        }
 
 
     }
