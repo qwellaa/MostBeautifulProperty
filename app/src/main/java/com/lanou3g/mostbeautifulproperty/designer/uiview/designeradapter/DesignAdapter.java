@@ -4,11 +4,13 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -33,10 +35,12 @@ public class DesignAdapter extends BaseAdapter {
 
     public void setDesignerBean(DesignerBean designerBean) {
         mDesignerBean = designerBean;
+
         notifyDataSetChanged();
     }
-    public void setMoreDesignerBean(DesignerBean designerBean){
-       mDesignerBean.getList().addAll(designerBean.getList());
+
+    public void setMoreDesignerBean(DesignerBean designerBean) {
+        mDesignerBean.getList().addAll(designerBean.getList());
         notifyDataSetChanged();
 
 
@@ -68,7 +72,7 @@ public class DesignAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         DesignerBean.ListBean.VideoBean videoBean = mDesignerBean.getList().get(position).getVideo();
         int time = mDesignerBean.getList().get(position).getVideo().getDuration();
-        DesignerBean.ListBean listBean = mDesignerBean.getList().get(position);
+        final DesignerBean.ListBean listBean = mDesignerBean.getList().get(position);
         ViewHolder viewHolder = null;
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.item_design, null);
@@ -97,15 +101,85 @@ public class DesignAdapter extends BaseAdapter {
         viewHolder.tvDown.setText(listBean.getDown() + "");
         viewHolder.tvComment.setText(listBean.getComment());
         viewHolder.tvForward.setText(listBean.getForward() + "");
+        Log.d("傻逼", "listBean.getNum():" + listBean.getNum());
+        switch (listBean.getNum()) {
+            case 0:
+                viewHolder.upImagButton.setBackgroundResource(R.mipmap.ding_not_clicked);
+                viewHolder.downImagButton.setBackgroundResource(R.mipmap.cai_not_clicked);
+                viewHolder.tvUp.setTextColor(Color.GRAY);
+                viewHolder.tvDown.setTextColor(Color.GRAY);
+                viewHolder.downImagButton.setFocusable(true);
+                viewHolder.upImagButton.setFocusable(true);
+                break;
+
+            case 1:
+                viewHolder.upImagButton.setBackgroundResource(R.mipmap.ding_has_clicked);
+                viewHolder.tvUp.setTextColor(Color.RED);
+                viewHolder.downImagButton.setFocusable(false);
+                viewHolder.upImagButton.setFocusable(false);
+
+                break;
+
+            case 2:
+                viewHolder.downImagButton.setBackgroundResource(R.mipmap.cai_has_clicked);
+                viewHolder.tvDown.setTextColor(Color.RED);
+                viewHolder.upImagButton.setFocusable(false);
+                viewHolder.downImagButton.setFocusable(false);
+
+                break;
+
+
+        }
         final GoodView goodView = new GoodView(mContext);
         final ViewHolder finalViewHolder = viewHolder;
+
+
         viewHolder.upImagButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(View v) {
-                finalViewHolder.upImagButton.setBackgroundResource(R.mipmap.ding_has_clicked);
-                goodView.setText("+1");
-                goodView.show(v);
+                if (finalViewHolder.upImagButton.isFocusable()) {
+
+                    finalViewHolder.upImagButton.setBackgroundResource(R.mipmap.ding_has_clicked);
+
+                    finalViewHolder.downImagButton.setClickable(false);
+                    finalViewHolder.tvUp.setText("" + ((Integer.decode(listBean.getUp())) + 1));
+                    listBean.setNum(1);
+                    goodView.setText("+1");
+                    goodView.setTranslateY(finalViewHolder.upImagButton.getBottom(), finalViewHolder.upImagButton.getTop());
+                    finalViewHolder.tvUp.setTextColor(Color.RED);
+                    goodView.show(v);
+                    finalViewHolder.upImagButton.setClickable(false);
+                }
+            }
+        });
+
+        viewHolder.downImagButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (finalViewHolder.downImagButton.isFocusable()) {
+                    finalViewHolder.downImagButton.setBackgroundResource(R.mipmap.cai_has_clicked);
+
+                    goodView.setText("+1");
+                    goodView.setDistance(1);
+                    finalViewHolder.tvDown.setText("" + (listBean.getDown() - 1));
+                    finalViewHolder.tvDown.setTextColor(Color.RED);
+                    goodView.show(v);
+                    listBean.setNum(2);
+                    finalViewHolder.upImagButton.setClickable(false);
+                    finalViewHolder.downImagButton.setClickable(false);
+                }
+            }
+        });
+        viewHolder.forwardLL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        viewHolder.commentLL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
             }
         });
@@ -123,8 +197,6 @@ public class DesignAdapter extends BaseAdapter {
     }
 
 
-
-
     class ViewHolder {
         private TextView tvName;
         private TextView tvTime;
@@ -139,6 +211,8 @@ public class DesignAdapter extends BaseAdapter {
         private JCVideoPlayerStandard jcVideoPlayer;
         private ImageButton upImagButton;
         private ImageButton downImagButton;
+        private LinearLayout forwardLL;
+        private LinearLayout commentLL;
 
         public ViewHolder(View view) {
             tvName = (TextView) view.findViewById(R.id.fragment_design_item_tv_username);
@@ -154,6 +228,9 @@ public class DesignAdapter extends BaseAdapter {
             tvComment = (TextView) view.findViewById(R.id.item_design_comment_tv);
             upImagButton = (ImageButton) view.findViewById(R.id.item_design_up_img);
             downImagButton = (ImageButton) view.findViewById(R.id.item_design_down_img);
+            forwardLL = (LinearLayout) view.findViewById(R.id.item_design_forward_linear);
+            commentLL = (LinearLayout) view.findViewById(R.id.item_design_comment_linear);
+
 
 
         }

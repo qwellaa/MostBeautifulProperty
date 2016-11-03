@@ -16,4 +16,7 @@
     <color name="cardViewBack">#00000000</color>
     <color name="loginText">#ffffff</color>
     <color name="colorPress_scan_btn_Bg">#CCf57257</color>
+    <color name="designLinear">#fafafa</color>
+    <color name="designLinearPress">#d2cdcd</color>
+
 </resources>

@@ -8,4 +8,6 @@
     <dimen name="moreTextTitle">12sp</dimen>
     <dimen name="moreTitleDistan">8dp</dimen>
     <dimen name="left_img">10dp</dimen>
+    <dimen name="viedeoTitcle">8dp</dimen>
+    <dimen name="titleImgLeft">10dp</dimen>
 </resources>

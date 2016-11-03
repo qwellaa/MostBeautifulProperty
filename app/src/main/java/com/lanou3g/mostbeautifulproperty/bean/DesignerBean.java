@@ -80,6 +80,15 @@ public class DesignerBean {
         private String share_url;
         private int down;
         private int forward;
+        private int num;
+
+        public int getNum() {
+            return num;
+        }
+
+        public void setNum(int num) {
+            this.num = num;
+        }
 
         /**
          * header : ["http://wimg.spriteapp.cn/profile/large/2016/08/19/57b71b5307519_mini.jpg","http://dimg.spriteapp.cn/profile/large/2016/08/19/57b71b5307519_mini.jpg"]

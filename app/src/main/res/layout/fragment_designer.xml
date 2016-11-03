@@ -9,7 +9,7 @@
     android:orientation="vertical"
     xrefreshview:isHeightMatchParent="true"
     xrefreshview:isWidthMatchParent="true"
-    android:layout_margin="10dp">
+    android:layout_margin="6dp">
 
     <ListView
         android:id="@+id/design_fragemrnt_listview"

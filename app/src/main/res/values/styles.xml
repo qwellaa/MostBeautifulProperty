@@ -158,6 +158,7 @@
         <item name="android:textSize">10sp</item>
         <item name="android:textColor">#000000</item>
     </style>
+
     <style name="dialogExitLogin">
         <item name="android:gravity">center</item>
         <item name="android:padding">10dp</item>
@@ -177,6 +178,55 @@
     <style name="userFeedbackPhoneBtn">
         <item name="android:background">@drawable/setting_user_feedback_edittext</item>
         <item name="android:padding">5dp</item>
+
+    </style>
+    <style name="itemDesignTime">
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="videoTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">19sp</item>
+        <item name="android:textColor">@color/bottom_bar_normal_bg</item>
+    </style>
+
+    <style name="videoRelative">
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">200dp</item>
+    </style>
+
+    <style name="videoReplay">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/btn_white_normal</item>
+
+    </style>
+    <style name="videoTimes">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/btn_white_normal</item>
+        <item name="android:layout_alignParentRight">true</item>
+    </style>
+
+    <style name="videoImagButton">
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:background">@mipmap/ding_not_clicked</item>
+    </style>
+
+    <style name="videoUpAndDown">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginLeft">10dp</item>
+
     </style>
 </resources>
 
