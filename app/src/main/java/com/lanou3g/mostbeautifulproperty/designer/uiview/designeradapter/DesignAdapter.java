@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,21 +104,21 @@ public class DesignAdapter extends BaseAdapter {
             case 0:
                 viewHolder.upImagButton.setBackgroundResource(R.mipmap.ding_not_clicked);
                 viewHolder.downImagButton.setBackgroundResource(R.mipmap.cai_not_clicked);
+                viewHolder.tvUp.setTextColor(Color.GRAY);
+                viewHolder.tvDown.setTextColor(Color.GRAY);
                 break;
 
             case 1:
                 viewHolder.upImagButton.setBackgroundResource(R.mipmap.ding_has_clicked);
-             //   viewHolder.downImagButton.setClickable(false);
+                viewHolder.tvUp.setTextColor(Color.RED);
                 viewHolder.downImagButton.setFocusable(false);
-             //   viewHolder.upImagButton.setClickable(false);
                 viewHolder.upImagButton.setFocusable(false);
 
                 break;
 
             case 2:
                 viewHolder.downImagButton.setBackgroundResource(R.mipmap.cai_has_clicked);
-          //      viewHolder.upImagButton.setClickable(false);
-         //       viewHolder.downImagButton.setClickable(false);
+                viewHolder.tvDown.setTextColor(Color.RED);
                 viewHolder.upImagButton.setFocusable(false);
                 viewHolder.downImagButton.setFocusable(false);
 
@@ -135,29 +136,32 @@ public class DesignAdapter extends BaseAdapter {
             public void onClick(View v) {
                 if (finalViewHolder.upImagButton.isFocusable()) {
 
-
                     finalViewHolder.upImagButton.setBackgroundResource(R.mipmap.ding_has_clicked);
 
                     finalViewHolder.downImagButton.setClickable(false);
-
+                    finalViewHolder.tvUp.setText("" + ((Integer.decode(listBean.getUp())) + 1));
+                    Log.d("哈哈哈", "Integer.decode(listBean.getUp()):" + Integer.decode(listBean.getUp()));
+                    Log.d("哈哈哈", "Integer.decode(listBean.getUp()):" + Integer.parseInt(listBean.getUp()));
                     listBean.setNum(1);
                     goodView.setText("+1");
+                    goodView.setTranslateY(finalViewHolder.upImagButton.getBottom(), finalViewHolder.upImagButton.getTop());
+                    finalViewHolder.tvUp.setTextColor(Color.RED);
                     goodView.show(v);
                     finalViewHolder.upImagButton.setClickable(false);
                 }
             }
         });
 
-
         viewHolder.downImagButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (finalViewHolder.downImagButton.isFocusable()) {
-
-
                     finalViewHolder.downImagButton.setBackgroundResource(R.mipmap.cai_has_clicked);
                     finalViewHolder.upImagButton.setClickable(false);
-                    goodView.setText("-1");
+                    goodView.setText("+1");
+                    goodView.setDistance(1);
+                    finalViewHolder.tvDown.setText("" + (listBean.getDown() - 1));
+                    finalViewHolder.tvDown.setTextColor(Color.RED);
                     goodView.show(v);
                     finalViewHolder.downImagButton.setClickable(false);
                     listBean.setNum(2);
