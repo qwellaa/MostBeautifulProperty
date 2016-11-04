@@ -16,17 +16,19 @@ public class MagazineLiteBean {
     private String title;
     private String subTitle;
     private String imageUrl;
+    private int detailsID;
 
     public MagazineLiteBean() {
     }
 
-    public MagazineLiteBean(int id, String userHead, String userName, String title, String subTitle, String imageUrl) {
+    public MagazineLiteBean(int id, String userHead, String userName, String title, String subTitle, String imageUrl, int detailsID) {
         this.id = id;
         this.userHead = userHead;
         this.userName = userName;
         this.title = title;
         this.subTitle = subTitle;
         this.imageUrl = imageUrl;
+        this.detailsID = detailsID;
     }
 
     public int getId() {
@@ -75,5 +77,13 @@ public class MagazineLiteBean {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public int getDetailsID() {
+        return detailsID;
+    }
+
+    public void setDetailsID(int detailsID) {
+        this.detailsID = detailsID;
     }
 }

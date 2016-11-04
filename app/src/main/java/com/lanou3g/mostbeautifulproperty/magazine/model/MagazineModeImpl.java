@@ -29,6 +29,7 @@ public class MagazineModeImpl implements IMagazineModel<MagazineLiteBean>{
                         bean.setTitle(result.getData().getArticles().get(i).getTitle());
                         bean.setSubTitle(result.getData().getArticles().get(i).getSub_title());
                         bean.setImageUrl(result.getData().getArticles().get(i).getImage_url());
+                        bean.setDetailsID(result.getData().getArticles().get(i).getId());
                         beanList.add(bean);
                     }
                     listener.onFinished(beanList);
