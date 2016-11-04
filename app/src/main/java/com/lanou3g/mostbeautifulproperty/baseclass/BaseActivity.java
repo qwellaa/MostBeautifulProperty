@@ -45,6 +45,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected <T extends View> T bindView(int id) {
         return (T) findViewById(id);
     }
+    protected <T extends View> T bindView(int id, View v){
+        return (T) v.findViewById(id);
+    }
 
     @Override
     protected void onResume() {
