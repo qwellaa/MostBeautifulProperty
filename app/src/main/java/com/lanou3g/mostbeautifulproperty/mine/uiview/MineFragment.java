@@ -21,6 +21,7 @@ import com.lanou3g.mostbeautifulproperty.mine.uiview.chat.MessageMainActivity;
 import com.lanou3g.mostbeautifulproperty.mine.uiview.scan.ScanActivity;
 import com.lanou3g.mostbeautifulproperty.mine.uiview.setting.SettingActivity;
 import com.lanou3g.mostbeautifulproperty.okhttp.URLValues;
+import com.lanou3g.mostbeautifulproperty.view.BounceScrollView;
 
 import java.util.HashMap;
 import java.util.List;
@@ -41,7 +42,7 @@ import pub.devrel.easypermissions.EasyPermissions;
  *
  */
 
-public class MineFragment extends BaseFragment implements View.OnClickListener,EasyPermissions.PermissionCallbacks {
+public class MineFragment extends BaseFragment implements View.OnClickListener,EasyPermissions.PermissionCallbacks, BounceScrollView.OnScrollViewListener {
 
     private LinearLayout mMessageLl;
     private ImageView mSetting;
@@ -60,6 +61,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
     public static final String FILTER_NAME = "userMessage";
     public static final String USER_NAME = "userName";
     public static final String USER_ICON = "userIcon";
+    private BounceScrollView mBounceScrollView;
 
     @Override
     protected int setLayout() {
@@ -89,6 +91,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
         mLlAttention = bindView(R.id.fragment_mine_attention_ll);
         mLlWish = bindView(R.id.fragment_mine_wish_ll);
 
+        mBounceScrollView = bindView(R.id.mine_bounce_scroll);
     }
 
     @Override
@@ -98,6 +101,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
         mLlDaily.setOnClickListener(this);
         mLlWish.setOnClickListener(this);
         mLlAttention.setOnClickListener(this);
+        mBounceScrollView.setListener(this);
 
 
         mReceiver = new MyDisOrderBroadCastReceiver();
@@ -327,6 +331,16 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
         if (!EasyPermissions.hasPermissions(context, perms)) {
             EasyPermissions.requestPermissions(this, "扫描二维码需要打开相机和散光灯的权限", REQUEST_CODE_QRCODE_PERMISSIONS, perms);
         }
+    }
+
+    @Override
+    public void onSlide() {
+
+    }
+
+    @Override
+    public void onDecline() {
+
     }
 
     private class MyDisOrderBroadCastReceiver extends BroadcastReceiver {

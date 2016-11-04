@@ -19,6 +19,7 @@ import com.lanou3g.mostbeautifulproperty.mine.uiview.setting.clearcache.DataClea
 import com.lanou3g.mostbeautifulproperty.mine.uiview.setting.startvideo.StartVideoActivity;
 import com.lanou3g.mostbeautifulproperty.mine.uiview.setting.userfeedback.UserFeedbcakActivity;
 import com.lanou3g.mostbeautifulproperty.okhttp.URLValues;
+import com.lanou3g.mostbeautifulproperty.view.BounceScrollView;
 
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.ShareSDK;
@@ -31,7 +32,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  *
  */
 
-public class SettingActivity extends BaseActivity implements View.OnClickListener {
+public class SettingActivity extends BaseActivity implements View.OnClickListener, BounceScrollView.OnScrollViewListener {
 
     private LinearLayout mLlPersonal;
     private Switch mStAlerts;
@@ -49,6 +50,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     private CircleImageView mIvHeadIcon;
 
     public static final String HEADICON = "headIcon";
+    private BounceScrollView mBounceScrollView;
 
     @Override
     protected int setLayout() {
@@ -71,6 +73,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 
         mIvHeadIcon = bindView(R.id.iv_setting_head_image);
         mTvCache = bindView(R.id.tv_setting_cache);
+        mBounceScrollView = bindView(R.id.setting_bounce_scroll);
 
         TextView tvIncludeTitle = bindView(R.id.tv_include_setting_title);
         tvIncludeTitle.setText("设置");
@@ -118,6 +121,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         mLlStartVideo.setOnClickListener(this);
         mLlExitLogin.setOnClickListener(this);
         mIvReturn.setOnClickListener(this);
+        mBounceScrollView.setListener(this);
     }
 
     @Override
@@ -252,5 +256,15 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         });
         dialog.setView(viewDialog);
         dialog.show();
+    }
+
+    @Override
+    public void onSlide() {
+
+    }
+
+    @Override
+    public void onDecline() {
+
     }
 }

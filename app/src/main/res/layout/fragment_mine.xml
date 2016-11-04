@@ -5,6 +5,7 @@
                 android:orientation="vertical"
     >
     <com.lanou3g.mostbeautifulproperty.view.BounceScrollView
+        android:id="@+id/mine_bounce_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
