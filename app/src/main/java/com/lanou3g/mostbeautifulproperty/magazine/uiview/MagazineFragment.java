@@ -1,5 +1,6 @@
 package com.lanou3g.mostbeautifulproperty.magazine.uiview;
 
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,7 +65,12 @@ public class MagazineFragment extends BaseFragment implements IMagazineView<Maga
         mStackView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                MagazineLiteBean bean = (MagazineLiteBean) parent.getItemAtPosition(position);
+                int derailsId  = bean.getDetailsID();
 
+                Intent intent = new Intent(context, MagaDetailsActivity.class);
+                intent.putExtra("id", derailsId);
+                startActivity(intent);
             }
         });
     }
