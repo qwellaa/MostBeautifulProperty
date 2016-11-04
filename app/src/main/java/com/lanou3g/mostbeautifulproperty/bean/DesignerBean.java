@@ -1,13 +1,15 @@
 package com.lanou3g.mostbeautifulproperty.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by dllo on 16/10/25.
  */
 
-public class DesignerBean {
+public class DesignerBean implements Serializable{
 
+    //public static final long serializableUID = 1L;
 
     /**
      * count : 4131
@@ -50,7 +52,7 @@ public class DesignerBean {
         this.list = list;
     }
 
-    public static class InfoBean {
+    public static class InfoBean implements Serializable{
         private int count;
         private double np;
 
@@ -71,7 +73,7 @@ public class DesignerBean {
         }
     }
 
-    public static class ListBean {
+    public static class ListBean implements Serializable{
         private int status;
         private String comment;
         private String bookmark;
@@ -239,7 +241,7 @@ public class DesignerBean {
             this.tags = tags;
         }
 
-        public static class UBean {
+        public static class UBean implements Serializable{
             private boolean is_v;
             private String uid;
             private boolean is_vip;
@@ -287,7 +289,7 @@ public class DesignerBean {
             }
         }
 
-        public static class VideoBean {
+        public static class VideoBean implements Serializable {
             private int playfcount;
             private int height;
             private int width;
@@ -371,7 +373,7 @@ public class DesignerBean {
             }
         }
 
-        public static class TagsBean {
+        public static class TagsBean implements Serializable{
             private int id;
             private String name;
 
