@@ -18,6 +18,8 @@ import com.lanou3g.mostbeautifulproperty.okhttp.URLValues;
 import com.lanou3g.mostbeautifulproperty.view.BounceScrollView;
 import com.lanou3g.mostbeautifulproperty.view.htmltextview.HtmlTextView;
 
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -29,11 +31,12 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
 
     private CircleImageView mCvReturn, mCvDesignerHead, mCvUserIcon;
     private TextView mTvDesignerName, mTvCity, mTvTitle, mTvSubTitle, mTvUserName, mTvSign;
-    private ImageView mIvImage;
+    private ImageView mIvImage, mSina, mQq,mWeiXin;
     private HtmlTextView mHtmlTextView;
     private LinearLayout mDesignerll;
     private BounceScrollView mScrollView;
     private int mVisibility;
+    private String mWebUrl;
 
     @Override
     protected int setLayout() {
@@ -42,6 +45,8 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
 
     @Override
     protected void initView() {
+        ShareSDK.initSDK(this);
+
         mDesignerll = bindView(R.id.include_magazine_ll);
         mCvReturn = bindView(R.id.include_magazine_btn_return);
         mCvDesignerHead = bindView(R.id.include_magazine_magazine_icon);
@@ -58,12 +63,19 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
         mTvSign = bindView(R.id.magazine_details_user_sign);
 
         mHtmlTextView = bindView(R.id.magazine_details_html_text_view);
+
+        mSina = bindView(R.id.magazine_details_sina);
+        mQq = bindView(R.id.magazine_details_qq);
+        mWeiXin = bindView(R.id.magazine_details_weixin);
     }
 
     @Override
     protected void initData() {
         mCvReturn.setOnClickListener(this);
         mScrollView.setListener(this);
+        mSina.setOnClickListener(this);
+        mQq.setOnClickListener(this);
+        mWeiXin.setOnClickListener(this);
 
         startRequest();
     }
@@ -109,6 +121,8 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
             mHtmlTextView.setHtmlFromString(bean.getData().getContent());
 
             mVisibility = mDesignerll.getVisibility();
+
+            mWebUrl = bean.getData().getWeb_url();
         }
     }
 
@@ -135,11 +149,46 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
         }
     }
 
+    private void showShare() {
+        ShareSDK.initSDK(this);
+        OnekeyShare oks = new OnekeyShare();
+        //关闭sso授权
+        oks.disableSSOWhenAuthorize();
+        // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间等使用
+        oks.setTitle("「最美有物」全球原创设计师产…");
+        // titleUrl是标题的网络链接，QQ和QQ空间等使用
+        oks.setTitleUrl(mWebUrl);
+        // text是分享文本，所有平台都需要这个字段
+        oks.setText("我们一起 \n" + "在「最美有物」");
+        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+        //        oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
+        // url仅在微信（包括好友和朋友圈）中使用
+        oks.setUrl(mWebUrl);
+        // comment是我对这条分享的评论，仅在人人网和QQ空间使用
+        oks.setComment("在乎颜值 \n" + "不讲究不凑合 \n" + "不一样的好品位");
+        // site是分享此内容的网站名称，仅在QQ空间使用
+        oks.setSite(getString(R.string.app_name));
+        // siteUrl是分享此内容的网站地址，仅在QQ空间使用
+        oks.setSiteUrl(mWebUrl);
+
+        // 启动分享GUI
+        oks.show(this);
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.include_magazine_btn_return:
                 finish();
+                break;
+            case R.id.magazine_details_sina:
+                showShare();
+                break;
+            case R.id.magazine_details_qq:
+                showShare();
+                break;
+            case R.id.magazine_details_weixin:
+                showShare();
                 break;
         }
     }
