@@ -16,4 +16,5 @@
     <color name="cardViewBack">#00000000</color>
     <color name="loginText">#ffffff</color>
     <color name="colorPress_scan_btn_Bg">#CCf57257</color>
+    <color name="colorDetailsAuthor">#50b5b5b5</color>
 </resources>
