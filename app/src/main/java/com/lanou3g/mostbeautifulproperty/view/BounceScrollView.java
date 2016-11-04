@@ -26,6 +26,12 @@ public class BounceScrollView extends ScrollView {
 
     private boolean isCount = false;// 是否开始计算
 
+    private OnScrollViewListener mListener;
+
+    public void setListener(OnScrollViewListener listener) {
+        mListener = listener;
+    }
+
     public BounceScrollView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -81,6 +87,13 @@ public class BounceScrollView extends ScrollView {
                 final float preY = y;// 按下时的y坐标
                 float nowY = ev.getY();// 时时y坐标
                 int deltaY = (int) (preY - nowY);// 滑动距离
+
+                if (deltaY > 0) {
+                    mListener.onDecline();
+                } else if (deltaY < 0){
+                    mListener.onSlide();
+                }
+
                 if (!isCount) {
                     deltaY = 0; // 在这里要归0.
                 }
@@ -150,5 +163,10 @@ public class BounceScrollView extends ScrollView {
             return true;
         }
         return false;
+    }
+
+    public interface OnScrollViewListener {
+        void onSlide();
+        void onDecline();
     }
 }

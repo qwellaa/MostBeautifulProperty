@@ -18,5 +18,6 @@
     <color name="colorPress_scan_btn_Bg">#CCf57257</color>
     <color name="designLinear">#fafafa</color>
     <color name="designLinearPress">#d2cdcd</color>
+    <color name="colorDetailsAuthor">#50b5b5b5</color>
 
 </resources>

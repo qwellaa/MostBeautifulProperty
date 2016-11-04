@@ -12,6 +12,14 @@ public final class URLValues {
     public static String getMagazineUrl(int page, int pageSize) {
         return MAGAZINE_HEAD_URL + page + MAGAZINE_TAIL_URL + pageSize;
     }
+
+    // 第一页 画报详情
+    private static final String MAGAZINE_DETAILS_TOP_URL = "http://design.zuimeia.com/api/v1/article/";
+    private static final String MAGAZINE_DETAILS_BOTTOM_URL = "/";
+    public static String getMAGAZINEDETAILS_URL(int id){
+        return MAGAZINE_DETAILS_TOP_URL + id + MAGAZINE_DETAILS_BOTTOM_URL;
+    }
+
     public static final String POPUPWINDOW_URL = "http://design.zuimeia.com/api/v1/product/categories/";
 
     // 有物 daily
