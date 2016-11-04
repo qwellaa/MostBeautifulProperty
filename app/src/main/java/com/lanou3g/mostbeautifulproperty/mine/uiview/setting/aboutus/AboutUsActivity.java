@@ -6,16 +6,18 @@ import android.widget.TextView;
 
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseActivity;
+import com.lanou3g.mostbeautifulproperty.view.BounceScrollView;
 
 /**
  *
  */
 
-public class AboutUsActivity extends BaseActivity{
+public class AboutUsActivity extends BaseActivity implements BounceScrollView.OnScrollViewListener {
 
     private TextView mTvBody;
     private TextView mTvTitle;
     private ImageView mIvReturn;
+    private BounceScrollView mBounceScrollView;
 
     @Override
     protected int setLayout() {
@@ -24,6 +26,7 @@ public class AboutUsActivity extends BaseActivity{
 
     @Override
     protected void initView() {
+        mBounceScrollView = bindView(R.id.about_us_bounce_scroll);
         mTvBody = bindView(R.id.tv_about_us_body);
         mTvTitle = bindView(R.id.tv_include_setting_title);
         mIvReturn = bindView(R.id.btn_include_setting_return);
@@ -31,6 +34,7 @@ public class AboutUsActivity extends BaseActivity{
 
     @Override
     protected void initData() {
+        mBounceScrollView.setListener(this);
         mTvTitle.setText("关于我们");
         mTvBody.setText("「最美有物」全球原创设计师产品发现和评价平台——不从众的好设计\n" +
                 "\n" +
@@ -61,5 +65,15 @@ public class AboutUsActivity extends BaseActivity{
                 finish();
             }
         });
+    }
+
+    @Override
+    public void onSlide() {
+
+    }
+
+    @Override
+    public void onDecline() {
+
     }
 }

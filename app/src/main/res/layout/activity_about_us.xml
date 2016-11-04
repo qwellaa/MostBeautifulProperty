@@ -6,6 +6,7 @@
     <include layout="@layout/custom_title_setting"
              android:id="@+id/include_title_setting"/>
     <com.lanou3g.mostbeautifulproperty.view.BounceScrollView
+        android:id="@+id/about_us_bounce_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
