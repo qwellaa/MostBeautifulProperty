@@ -3,6 +3,8 @@ package com.lanou3g.mostbeautifulproperty.magazine.uiview;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -29,14 +31,16 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, BounceScrollView.OnScrollViewListener, View.OnClickListener {
 
-    private CircleImageView mCvReturn, mCvDesignerHead, mCvUserIcon;
-    private TextView mTvDesignerName, mTvCity, mTvTitle, mTvSubTitle, mTvUserName, mTvSign;
+    private CircleImageView mCvReturn, mCvDesignerHead, mCvUserIcon, mModDesignerHead;
+    private TextView mTvDesignerName, mTvCity, mTvTitle, mTvSubTitle, mTvUserName, mTvSign, mModDesignerName,
+                     mModDesignerLabel, mModDesignerDes;
     private ImageView mIvImage, mSina, mQq,mWeiXin;
     private HtmlTextView mHtmlTextView;
-    private LinearLayout mDesignerll;
+    private LinearLayout mDesignerll, mModDesignerLl;
     private BounceScrollView mScrollView;
     private int mVisibility;
     private String mWebUrl;
+    private CheckBox mModDesignerFocus;
 
     @Override
     protected int setLayout() {
@@ -67,6 +71,14 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
         mSina = bindView(R.id.magazine_details_sina);
         mQq = bindView(R.id.magazine_details_qq);
         mWeiXin = bindView(R.id.magazine_details_weixin);
+
+        // 设计师
+        mModDesignerLl = bindView(R.id.magazine_details_ll_designer_mod);
+        mModDesignerHead = bindView(R.id.magazine_details_cv_designer_head);
+        mModDesignerName = bindView(R.id.magazine_details_tv_designer_name);
+        mModDesignerLabel = bindView(R.id.magazine_details_tv_designer_label);
+        mModDesignerDes = bindView(R.id.magazine_details_tv_designer_description);
+        mModDesignerFocus = bindView(R.id.magazine_details_cb_designer_focus);
     }
 
     @Override
@@ -78,6 +90,20 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
         mWeiXin.setOnClickListener(this);
 
         startRequest();
+        focusOnCheckChange();
+    }
+
+    private void focusOnCheckChange() {
+        mModDesignerFocus.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mModDesignerFocus.setText("取消关注");
+                } else {
+                    mModDesignerFocus.setText("+关注");
+                }
+            }
+        });
     }
 
     private void startRequest() {
@@ -107,8 +133,14 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
                 Glide.with(this).load(bean.getData().getDesigners().get(0).getAvatar_url()).into(mCvDesignerHead);
                 mTvDesignerName.setText(bean.getData().getDesigners().get(0).getName());
                 mTvCity.setText(bean.getData().getDesigners().get(0).getCity());
+
+                Glide.with(this).load(bean.getData().getDesigners().get(0).getAvatar_url()).into(mModDesignerHead);
+                mModDesignerName.setText(bean.getData().getDesigners().get(0).getName());
+                mModDesignerLabel.setText(bean.getData().getDesigners().get(0).getLabel());
+                mModDesignerDes.setText(bean.getData().getDesigners().get(0).getDescription());
             } else {
                 mDesignerll.setVisibility(View.GONE);
+                mModDesignerLl.setVisibility(View.GONE);
             }
             mTvTitle.setText(bean.getData().getTitle());
             mTvSubTitle.setText(bean.getData().getSub_title());
