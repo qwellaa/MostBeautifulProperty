@@ -39,4 +39,7 @@
     <string name="userFeedbackBody">请输入反馈内容</string>
     <string name="userFeedbackSend">发送</string>
     <string name="magaDetailsAuthorName">作者</string>
+    <string name="magaDetailsDesignerMode">设计师〥作者</string>
+    <string name="magaDetailsDesignerComments">说点什么吧</string>
+    <string name="focusOn">+关注</string>
 </resources>

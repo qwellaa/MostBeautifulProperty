@@ -168,17 +168,15 @@ public class MagaDetailsBean {
             private String label;
             private String avatar_url;
             private String description;
+            private int id;
+            private int follow_num;
 
-            @Override
-            public String toString() {
-                return "DesignersBean{" +
-                        "city='" + city + '\'' +
-                        ", concept='" + concept + '\'' +
-                        ", name='" + name + '\'' +
-                        ", label='" + label + '\'' +
-                        ", avatar_url='" + avatar_url + '\'' +
-                        ", description='" + description + '\'' +
-                        '}';
+            public int getFollow_num() {
+                return follow_num;
+            }
+
+            public void setFollow_num(int follow_num) {
+                this.follow_num = follow_num;
             }
 
             public String getCity() {
@@ -227,6 +225,14 @@ public class MagaDetailsBean {
 
             public void setDescription(String description) {
                 this.description = description;
+            }
+
+            public int getId() {
+                return id;
+            }
+
+            public void setId(int id) {
+                this.id = id;
             }
         }
     }

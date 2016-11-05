@@ -69,7 +69,7 @@ public class MagazineFragment extends BaseFragment implements IMagazineView<Maga
                 int derailsId  = bean.getDetailsID();
 
                 Intent intent = new Intent(context, MagaDetailsActivity.class);
-                intent.putExtra("id", derailsId);
+                intent.putExtra(MagaDetailsActivity.KEY_ID, derailsId);
                 startActivity(intent);
             }
         });

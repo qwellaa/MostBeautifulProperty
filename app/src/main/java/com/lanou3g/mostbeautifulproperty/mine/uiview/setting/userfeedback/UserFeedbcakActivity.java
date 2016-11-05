@@ -71,10 +71,13 @@ public class UserFeedbcakActivity extends BaseActivity implements View.OnClickLi
         String strContact = sp.getString(SP_CONTACT_KEY, "反馈前请添加联系方式(手机, QQ等)");
         if (strContact.equals("")) {
             mTvPhoneWay.setText("反馈前请添加联系方式(手机, QQ等)");
+            mEtAddPhone.setText(strContact);
+        } else if (strContact.equals("反馈前请添加联系方式(手机, QQ等)")) {
+            mEtAddPhone.setText("");
         } else {
             mTvPhoneWay.setText("联系方式 : " + strContact);
+            mEtAddPhone.setText(strContact);
         }
-        mEtAddPhone.setText(strContact);
 
         mReceiver = new UserFeedbackReceiver();
         IntentFilter filter = new IntentFilter();

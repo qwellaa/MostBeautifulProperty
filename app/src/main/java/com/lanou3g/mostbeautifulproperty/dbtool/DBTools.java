@@ -1,15 +1,19 @@
 package com.lanou3g.mostbeautifulproperty.dbtool;
 
-;import android.os.Handler;
+import android.os.Handler;
 import android.os.Looper;
 
 import com.lanou3g.mostbeautifulproperty.app.MostBeautifulApp;
 import com.litesuits.orm.LiteOrm;
+import com.litesuits.orm.db.assit.QueryBuilder;
+import com.litesuits.orm.db.assit.WhereBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+;
 
 /**
  * Created by dllo on 16/10/27.
@@ -77,6 +81,28 @@ public class DBTools {
             }
         });
     }
+
+    // 按条件查询数据
+    public <T>void getQueryByWhere(final Class<T> clazz, final String field, final Object[] value, final QueryListener<T> queryListener) {
+       threadPool.execute(new Runnable() {
+           @Override
+           public void run() {
+               List<T> list = mLiteOrm.query(new QueryBuilder<T>(clazz).where(field + "=?", value));
+               mHandler.post(new HandlerRunnable<T>(list, queryListener));
+           }
+       });
+    }
+
+    // 按条件删除
+    public <T> void deleteWhere(final Class<T> clazz, final String field, final Object[] value){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                mLiteOrm.delete(WhereBuilder.create(clazz).where(field + "=?", value));
+            }
+        }).start();
+    }
+
     // 删除数据
     public <T> void deleteAll(final Class<T> tClass){
         if (tClass == null) {

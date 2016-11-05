@@ -195,7 +195,7 @@
     <style name="videoRelative">
         <item name="android:layout_marginTop">10dp</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">200dp</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="videoReplay">
@@ -236,6 +236,16 @@
     <style name="magaDetailsTitle">
         <item name="android:padding">5dp</item>
         <item name="android:gravity">center</item>
+    </style>
+    <style name="magaDetailsComments">
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:background">@color/nameText</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="focusDesignerLv">
+        <item name="android:background">@color/colorInterfaceBackground</item>
     </style>
 </resources>
 

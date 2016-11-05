@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-                android:background="@color/nameText"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
     <com.lanou3g.mostbeautifulproperty.view.BounceScrollView
         android:id="@+id/details_bouncescrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/nameText">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -129,8 +129,105 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+            <RelativeLayout
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/magazine_details_ll_designer_mod"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="5dp"
+                    android:background="@color/colorInterfaceBackground">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/magaDetailsDesignerMode"
+                        android:padding="5dp"
+                        android:textColor="@color/nameText"/>
+                    <LinearLayout
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/nameText"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_marginTop="15dp"
+                            android:id="@+id/magazine_details_tv_designer_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorInterfaceBackground"
+                            style="@style/magaDetailsTitle"/>
+                        <TextView
+                            android:id="@+id/magazine_details_tv_designer_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorInterfaceBackground"/>
+                        <CheckBox
+                            android:id="@+id/magazine_details_cb_designer_focus"
+                            style="@style/magaDetailsTitle"
+                            android:layout_width="80dp"
+                            android:layout_height="30dp"
+                            android:button="@null"
+                            android:text="@string/focusOn"
+                            android:background="@drawable/check_box_bg"/>
+                        <TextView
+                            android:id="@+id/magazine_details_tv_designer_description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorInterfaceBackground"
+                            style="@style/magaDetailsTitle"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/magazine_details_cv_designer_head"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
         </LinearLayout>
     </com.lanou3g.mostbeautifulproperty.view.BounceScrollView>
     <include layout="@layout/include_magazine"
              android:id="@+id/include_magazine"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        style="@style/magaDetailsComments">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/ic_launcher"/>
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/magaDetailsDesignerComments"
+            android:background="@color/colorShareBtnBorder"/>
+        <ImageView
+            android:layout_marginRight="10dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@mipmap/article_comment_icon"/>
+        <CheckBox
+            android:id="@+id/magazine_details_cb_collection"
+            android:layout_marginRight="10dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:button="@null"
+            android:background="@drawable/check_collection_bg"/>
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@mipmap/article_more_icon"/>
+    </LinearLayout>
 </RelativeLayout>

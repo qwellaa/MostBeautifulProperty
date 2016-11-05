@@ -1,6 +1,7 @@
 package com.lanou3g.mostbeautifulproperty.designer.uiview.designeradapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.bean.DesignerBean;
+import com.lanou3g.mostbeautifulproperty.designer.uiview.VideoDetailActivity;
 import com.wx.goodview.GoodView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -60,7 +62,7 @@ public class DesignAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return mDesignerBean.getList().get(position);
     }
 
     @Override
@@ -69,7 +71,7 @@ public class DesignAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         DesignerBean.ListBean.VideoBean videoBean = mDesignerBean.getList().get(position).getVideo();
         int time = mDesignerBean.getList().get(position).getVideo().getDuration();
         final DesignerBean.ListBean listBean = mDesignerBean.getList().get(position);
@@ -180,6 +182,12 @@ public class DesignAdapter extends BaseAdapter {
         viewHolder.commentLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent videoIntent = new Intent(mContext, VideoDetailActivity.class);
+                videoIntent.putExtra("video",mDesignerBean);
+                videoIntent.putExtra("position",position);
+                mContext.startActivity(videoIntent);
+
+
 
             }
         });
@@ -214,22 +222,28 @@ public class DesignAdapter extends BaseAdapter {
         private LinearLayout forwardLL;
         private LinearLayout commentLL;
 
+
         public ViewHolder(View view) {
-            tvName = (TextView) view.findViewById(R.id.fragment_design_item_tv_username);
-            tvTime = (TextView) view.findViewById(R.id.fragment_design_item_tv_time);
-            tvTitle = (TextView) view.findViewById(R.id.fragment_design_item_tv_titlce);
-            jcVideoPlayer = (JCVideoPlayerStandard) view.findViewById(R.id.fragment_design_videoplayer);
-            cirImg = (CircleImageView) view.findViewById(R.id.fragment_design_item_user_hander_img);
-            tvPlayTimes = (TextView) view.findViewById(R.id.item_design_play_times_tv);
-            tvVideoTime = (TextView) view.findViewById(R.id.item_design_video_time_tv);
-            tvUp = (TextView) view.findViewById(R.id.item_design_up_tv);
-            tvDown = (TextView) view.findViewById(R.id.item_design_down_tv);
-            tvForward = (TextView) view.findViewById(R.id.item_design_forward_tv);
-            tvComment = (TextView) view.findViewById(R.id.item_design_comment_tv);
-            upImagButton = (ImageButton) view.findViewById(R.id.item_design_up_img);
-            downImagButton = (ImageButton) view.findViewById(R.id.item_design_down_img);
-            forwardLL = (LinearLayout) view.findViewById(R.id.item_design_forward_linear);
-            commentLL = (LinearLayout) view.findViewById(R.id.item_design_comment_linear);
+            View viewVideo =  view.findViewById(R.id.include_item_design);
+
+
+            tvName = (TextView) viewVideo.findViewById(R.id.fragment_design_item_tv_username);
+            tvTime = (TextView) viewVideo.findViewById(R.id.fragment_design_item_tv_time);
+            tvTitle = (TextView) viewVideo.findViewById(R.id.fragment_design_item_tv_titlce);
+            jcVideoPlayer = (JCVideoPlayerStandard) viewVideo.findViewById(R.id.fragment_design_videoplayer);
+            cirImg = (CircleImageView) viewVideo.findViewById(R.id.fragment_design_item_user_hander_img);
+            tvPlayTimes = (TextView) viewVideo.findViewById(R.id.item_design_play_times_tv);
+            tvVideoTime = (TextView) viewVideo.findViewById(R.id.item_design_video_time_tv);
+            tvUp = (TextView) viewVideo.findViewById(R.id.item_design_up_tv);
+            tvDown = (TextView) viewVideo.findViewById(R.id.item_design_down_tv);
+            tvForward = (TextView) viewVideo.findViewById(R.id.item_design_forward_tv);
+            tvComment = (TextView) viewVideo.findViewById(R.id.item_design_comment_tv);
+            upImagButton = (ImageButton) viewVideo.findViewById(R.id.item_design_up_img);
+            downImagButton = (ImageButton) viewVideo.findViewById(R.id.item_design_down_img);
+            forwardLL = (LinearLayout) viewVideo.findViewById(R.id.item_design_forward_linear);
+            commentLL = (LinearLayout) viewVideo.findViewById(R.id.item_design_comment_linear);
+
+
 
 
 
