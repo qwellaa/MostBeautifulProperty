@@ -1,9 +1,11 @@
-package com.lanou3g.mostbeautifulproperty.designer;
+package com.lanou3g.mostbeautifulproperty.designer.uiview;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -16,7 +18,6 @@ import com.lanou3g.mostbeautifulproperty.baseclass.CurrentAdapter;
 import com.lanou3g.mostbeautifulproperty.bean.DesignViedeDedailBean;
 import com.lanou3g.mostbeautifulproperty.bean.DesignerBean;
 import com.lanou3g.mostbeautifulproperty.designer.presenter.DesignerPresenter;
-import com.lanou3g.mostbeautifulproperty.designer.uiview.IDesignerView;
 import com.lanou3g.mostbeautifulproperty.okhttp.URLValues;
 import com.wx.goodview.GoodView;
 
@@ -25,6 +26,8 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
+
+import static com.lanou3g.mostbeautifulproperty.R.id.video_detail_comment_img;
 
 /**
  * Created by dllo on 16/11/4.
@@ -53,6 +56,7 @@ public class VideoDetailActivity extends BaseActivity implements IDesignerView<D
     private int mTime;
     private ListView mHotCommentListView;
     private CurrentAdapter<DesignViedeDedailBean.HotBean.ListBean> hotAdapter;
+    private ImageView mCommentDetailImg;
 
     @Override
     protected int setLayout() {
@@ -61,24 +65,28 @@ public class VideoDetailActivity extends BaseActivity implements IDesignerView<D
 
     @Override
     protected void initView() {
-        View viewInclude =  findViewById(R.id.include_item_video_detail);
-        tvName = bindView(R.id.fragment_design_item_tv_username,viewInclude);
-        tvTime = bindView(R.id.fragment_design_item_tv_time,viewInclude);
-        tvTitle = bindView(R.id.fragment_design_item_tv_titlce,viewInclude);
-        jcVideoPlayer = bindView(R.id.fragment_design_videoplayer,viewInclude);
-        cirImg = bindView(R.id.fragment_design_item_user_hander_img,viewInclude);
-        tvPlayTimes =bindView(R.id.item_design_play_times_tv,viewInclude);
-        tvVideoTime = bindView(R.id.item_design_video_time_tv,viewInclude);
-        tvUp = bindView(R.id.item_design_up_tv,viewInclude);
-        tvDown = bindView(R.id.item_design_down_tv,viewInclude);
-        tvForward = bindView(R.id.item_design_forward_tv,viewInclude);
-        tvComment =bindView (R.id.item_design_comment_tv,viewInclude);
-        upImagButton = bindView(R.id.item_design_up_img,viewInclude);
-        downImagButton = bindView(R.id.item_design_down_img,viewInclude);
-        forwardLL = bindView(R.id.item_design_forward_linear,viewInclude);
-        commentLL = bindView(R.id.item_design_comment_linear,viewInclude);
+        //View viewInclude =  findViewById(R.id.include_item_video_detail);
+        View viewTop = LayoutInflater.from(this).inflate(R.layout.videodetail_top, null);
+        View view = viewTop.findViewById(R.id.include_item_video_detail);
+        tvName = bindView(R.id.fragment_design_item_tv_username, view);
+        tvTime = bindView(R.id.fragment_design_item_tv_time, view);
+        tvTitle = bindView(R.id.fragment_design_item_tv_titlce, view);
+        jcVideoPlayer = bindView(R.id.fragment_design_videoplayer, view);
+        cirImg = bindView(R.id.fragment_design_item_user_hander_img, view);
+        tvPlayTimes = bindView(R.id.item_design_play_times_tv, view);
+        tvVideoTime = bindView(R.id.item_design_video_time_tv, view);
+        tvUp = bindView(R.id.item_design_up_tv, view);
+        tvDown = bindView(R.id.item_design_down_tv, view);
+        tvForward = bindView(R.id.item_design_forward_tv, view);
+        tvComment = bindView(R.id.item_design_comment_tv, view);
+        upImagButton = bindView(R.id.item_design_up_img, view);
+        downImagButton = bindView(R.id.item_design_down_img, view);
+        forwardLL = bindView(R.id.item_design_forward_linear, view);
+        commentLL = bindView(R.id.item_design_comment_linear, view);
         mHotCommentListView = bindView(R.id.video_detail_listview);
-
+        mHotCommentListView.addHeaderView(viewTop);
+        //评论详情中布局
+        View itemVideoDetailView = LayoutInflater.from(this).inflate(R.layout.itemvideo_detail,null);
 
 
 
@@ -91,17 +99,17 @@ public class VideoDetailActivity extends BaseActivity implements IDesignerView<D
 
         Intent intent = getIntent();
         mBean = (DesignerBean) intent.getSerializableExtra("video");
-        mPosition = intent.getIntExtra("position",1);
+        mPosition = intent.getIntExtra("position", 1);
         mVideoBean = mBean.getList().get(mPosition).getVideo();
         mTime = mBean.getList().get(mPosition).getVideo().getDuration();
         mListBean = mBean.getList().get(mPosition);
         initSetDetail();
         DesignerPresenter presenter = new DesignerPresenter(this);
-        presenter.startRequest(URLValues.getVideoDetailUrl(mListBean.getId()),DesignViedeDedailBean.class);
-
+        presenter.startRequest(URLValues.getVideoDetailUrl(mListBean.getId()), DesignViedeDedailBean.class);
 
 
     }
+
     private String toTime(int time) {
 
         int minute = time / 60;
@@ -145,7 +153,7 @@ public class VideoDetailActivity extends BaseActivity implements IDesignerView<D
                 break;
 
             case 1:
-               upImagButton.setBackgroundResource(R.mipmap.ding_has_clicked);
+                upImagButton.setBackgroundResource(R.mipmap.ding_has_clicked);
                 tvUp.setTextColor(Color.RED);
                 downImagButton.setFocusable(false);
                 upImagButton.setFocusable(false);
@@ -163,7 +171,6 @@ public class VideoDetailActivity extends BaseActivity implements IDesignerView<D
 
         }
         final GoodView goodView = new GoodView(this);
-
 
 
         upImagButton.setOnClickListener(new View.OnClickListener() {
@@ -186,7 +193,7 @@ public class VideoDetailActivity extends BaseActivity implements IDesignerView<D
             }
         });
 
-       downImagButton.setOnClickListener(new View.OnClickListener() {
+        downImagButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (downImagButton.isFocusable()) {
@@ -198,7 +205,7 @@ public class VideoDetailActivity extends BaseActivity implements IDesignerView<D
                     tvDown.setTextColor(Color.RED);
                     goodView.show(v);
                     mListBean.setNum(2);
-                     upImagButton.setClickable(false);
+                    upImagButton.setClickable(false);
                     downImagButton.setClickable(false);
                 }
             }
@@ -219,21 +226,34 @@ public class VideoDetailActivity extends BaseActivity implements IDesignerView<D
 
     @Override
     public void onResponse(DesignViedeDedailBean designViedeDedailBean) {
-       List<DesignViedeDedailBean.HotBean.ListBean> dedailList = designViedeDedailBean.getHot().getList();
+        List<DesignViedeDedailBean.HotBean.ListBean> dedailList = designViedeDedailBean.getHot().getList();
         List<DesignViedeDedailBean.NormalBean.ListBean> listBeen = designViedeDedailBean.getNormal().getList();
-        mHotCommentListView.setAdapter(hotAdapter = new CurrentAdapter<DesignViedeDedailBean.HotBean.ListBean>(this,dedailList,R.layout.itemvideo_detail) {
+        mHotCommentListView.setAdapter(hotAdapter = new CurrentAdapter<DesignViedeDedailBean.HotBean.ListBean>(this, dedailList, R.layout.itemvideo_detail) {
             @Override
-            public void convert(BaseViewHolder helper, DesignViedeDedailBean.HotBean.ListBean item) {
+            public void convert(BaseViewHolder helper, final DesignViedeDedailBean.HotBean.ListBean item) {
 
-                    helper.setIamgeGlide(R.id.video_detail_comment_title_circle,item.getUser().getProfile_image());
-                    helper.setText(R.id.video_detail_username_tv,item.getUser().getUsername());
-                    helper.setText(R.id.video_detail_up_tv,item.getLike_count()+"");
-                    if (item.getType().equals("text")){
-                        helper.setText(R.id.video_detail_comment_tv,item.getContent());
-                } else if (item.getType().equals("image")){
-                        helper.setText(R.id.video_detail_comment_tv,item.getContent());
-                        helper.setText(R.id.video_detail_comment_img,item.getImage().getThumbnail().get(0));
-                    }
+                helper.setIamgeGlide(R.id.video_detail_comment_title_circle, item.getUser().getProfile_image());
+                helper.setText(R.id.video_detail_username_tv, item.getUser().getUsername());
+                helper.setText(R.id.video_detail_up_tv, item.getLike_count() + "");
+                if (item.getType().equals("text")) {
+                    helper.setViewVisible(video_detail_comment_img,View.GONE);
+                    helper.setText(R.id.video_detail_comment_tv, item.getContent());
+                } else if (item.getType().equals("image")) {
+
+                    helper.setText(R.id.video_detail_comment_tv, item.getContent());
+                    helper.setIamgeGlide(video_detail_comment_img, item.getImage().getThumbnail().get(0));
+                    helper.setViewVisible(video_detail_comment_img,View.VISIBLE);
+                    helper.setOnClickImg(video_detail_comment_img, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent commentImgIntent = new Intent(VideoDetailActivity.this,ImgDetailActivity.class);
+                            commentImgIntent.putExtra("commentURL",item.getImage().getImages().get(0));
+                            startActivity(commentImgIntent);
+
+                        }
+                    });
+
+                }
 
 
             }
@@ -242,12 +262,11 @@ public class VideoDetailActivity extends BaseActivity implements IDesignerView<D
 //
 
 
-
-
     }
 
     @Override
     public void onError() {
 
     }
+
 }

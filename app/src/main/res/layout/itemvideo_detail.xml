@@ -12,9 +12,10 @@
     android:orientation="horizontal">
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_margin="10dp"
         android:id="@+id/video_detail_comment_title_circle"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         tools:src="@mipmap/adasd"
         />
 
@@ -51,6 +52,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
+                android:textColor="@color/comment_detail_textcolor"
                 android:id="@+id/video_detail_comment_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,9 +60,10 @@
                 />
             <ImageView
                 android:id="@+id/video_detail_comment_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:src="@mipmap/ding_not_clicked"/>
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                tools:src="@mipmap/ding_not_clicked"
+                android:visibility="gone"/>
 
 
         </LinearLayout>

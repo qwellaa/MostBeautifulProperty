@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.bean.DesignerBean;
-import com.lanou3g.mostbeautifulproperty.designer.VideoDetailActivity;
+import com.lanou3g.mostbeautifulproperty.designer.uiview.VideoDetailActivity;
 import com.wx.goodview.GoodView;
 
 import de.hdodenhof.circleimageview.CircleImageView;

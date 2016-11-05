@@ -105,7 +105,8 @@
         </activity>
         <activity android:name=".mine.uiview.setting.startvideo.StartVideoActivity">
         </activity>
-        <activity android:name=".designer.VideoDetailActivity"/>
+        <activity android:name=".designer.uiview.VideoDetailActivity"/>
+        <activity android:name=".designer.uiview.ImgDetailActivity"/>
     </application>
 
 </manifest>

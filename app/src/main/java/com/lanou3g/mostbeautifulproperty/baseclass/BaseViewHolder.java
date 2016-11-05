@@ -115,6 +115,19 @@ public class BaseViewHolder {
         return this;
     }
 
+    public BaseViewHolder setViewVisible(int viewId, int visible) {
+        ImageView view = getView(viewId);
+        view.setVisibility(visible);
+        return this;
+
+    }
+    public BaseViewHolder setOnClickImg(int viewId, View.OnClickListener listener){
+        ImageView view  = getView(viewId);
+        view.setOnClickListener(listener);
+
+        return this;
+    }
+
 
     public int getPosition() {
         return mPosition;
