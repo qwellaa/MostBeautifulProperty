@@ -11,3 +11,12 @@ ListView的Adapter的基类写的不对
 功能完成的太慢    
 
 孟祥东你自己的分支干嘛总往远程推送
+
+-------
+
+多写一个GridAdapter干嘛的,跟CurrentAdapter不是一样的么
+
+封装了适配器为什么不使用呢
+
+声明集合的时候使用List,不要指定写ArrayList
+
