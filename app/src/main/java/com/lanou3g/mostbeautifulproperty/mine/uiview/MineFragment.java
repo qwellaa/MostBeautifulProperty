@@ -293,6 +293,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
                 } else {
                     mDialog.show();
                 }
+                Intent focusIntent = new Intent(context, FocusDesignerActivyity.class);
+                startActivity(focusIntent);
                 break;
             case R.id.fragment_mine_wish_ll:
                 if (mQq.isAuthValid()) {

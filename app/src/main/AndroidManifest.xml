@@ -109,6 +109,8 @@
         </activity>
         <activity android:name=".mine.uiview.MineMagazineActivity">
         </activity>
+        <activity android:name=".mine.uiview.FocusDesignerActivyity">
+        </activity>
     </application>
 
 </manifest>
