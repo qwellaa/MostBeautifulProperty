@@ -105,12 +105,24 @@
         </activity>
         <activity android:name=".mine.uiview.setting.startvideo.StartVideoActivity">
         </activity>
+
         <activity android:name=".magazine.uiview.MagaDetailsActivity">
         </activity>
         <activity android:name=".mine.uiview.MineMagazineActivity">
         </activity>
         <activity android:name=".mine.uiview.FocusDesignerActivyity">
         </activity>
+
+        <activity android:name=".designer.uiview.VideoDetailActivity"
+                  android:configChanges="orientation|screenSize|keyboardHidden"
+                  android:screenOrientation="portrait" >
+
+        </activity>
+        <activity android:name=".designer.uiview.ImgDetailActivity"
+            >
+
+        </activity>
+
     </application>
 
 </manifest>

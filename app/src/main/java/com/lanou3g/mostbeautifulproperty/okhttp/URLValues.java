@@ -57,7 +57,16 @@ public final class URLValues {
 
         return VIDEO_TOP_URL + page + VIDEO_BUTTOM_URL;
 
+        //http://c.api.budejie.com/topic/comment_list/21800460/0/budejie-android-6.5.7/0-20.json
+        //http://c.api.budejie.com/topic/comment_list/21812462/0/budejie-android-6.5.7/0-20.json
 
+    }
+
+    public static final String VIDEO_DETAIL_UP_URL = "http://c.api.budejie.com/topic/comment_list/";
+    public static final String VIDEO_DERAIL_DOWN_URL = "/0/budejie-android-6.5.7/0-20.json";
+    public static final String getVideoDetailUrl (String page){
+
+        return VIDEO_DETAIL_UP_URL + page + VIDEO_DERAIL_DOWN_URL;
     }
 
 }

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:descendantFocusability="blocksDescendants"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/viedeoTitcle"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/fragment_design_item_user_hander_img"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/titleImgLeft"
+            >
+
+            <TextView
+                android:id="@+id/fragment_design_item_tv_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/holo_red_light"
+                tools:text="mingzi"/>
+
+            <TextView
+
+                android:id="@+id/fragment_design_item_tv_time"
+                style="@style/itemDesignTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="时间"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+
+        android:id="@+id/fragment_design_item_tv_titlce"
+        style="@style/videoTitle"
+        tools:text="标题哈哈哈哈哈哈洗"/>
+
+    <RelativeLayout
+        style="@style/videoRelative">
+
+        <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
+            android:id="@+id/fragment_design_videoplayer"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/btn_white_normal"
+            />
+
+
+        <TextView
+            android:id="@+id/item_design_play_times_tv"
+            style="@style/videoReplay"
+            tools:text="播放"/>
+
+        <TextView
+            android:id="@+id/item_design_video_time_tv"
+            style="@style/videoTimes"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+
+
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+
+            >
+
+
+            <LinearLayout
+                android:background="@color/designLinear"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <ImageButton
+                    android:id="@+id/item_design_up_img"
+                    style="@style/videoImagButton"/>
+
+                <TextView
+                    android:id="@+id/item_design_up_tv"
+                    style="@style/videoUpAndDown"
+                    tools:text="555"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="@color/designLinear"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <ImageButton
+                    android:id="@+id/item_design_down_img"
+                    style="@style/videoImagButton"/>
+
+                <TextView
+                    android:id="@+id/item_design_down_tv"
+                    style="@style/videoUpAndDown"
+                    tools:text="555"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
+
+            <LinearLayout
+                android:id="@+id/item_design_forward_linear"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/item_design_linearback"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/item_design_forward_imagebutton"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@mipmap/posts_detail_forward_night"/>
+
+                <TextView
+                    android:id="@+id/item_design_forward_tv"
+                    style="@style/videoUpAndDown"
+                    tools:text="555"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
+
+            <LinearLayout
+                android:id="@+id/item_design_comment_linear"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/item_design_linearback"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/item_design_commed_imagebutton"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@mipmap/commend_black"/>
+
+                <TextView
+                    android:id="@+id/item_design_comment_tv"
+                    style="@style/videoUpAndDown"
+                    tools:text="555"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

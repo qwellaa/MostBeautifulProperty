@@ -13,9 +13,12 @@ public class DesignerPresenter<T> {
     private IDesignerView mView;
     private IDesignerModel mModel;
 
+
+
     public DesignerPresenter(IDesignerView view) {
         mView = view;
         mModel = new DesignerModelImpl();
+
     }
 
     public void startRequest(String urlStr, Class<T> clazz) {
@@ -34,6 +37,7 @@ public class DesignerPresenter<T> {
             }
         });
     }
+
 
     private void queryDB(){
         mModel.queryGankAll(new OnCompletedListener<Object>() {
