@@ -287,9 +287,9 @@ public class VideoDetailActivity extends BaseActivity implements IDesignerView<D
                 } else if (item.getType().equals("image")) {
 
                     helper.setText(R.id.video_detail_comment_tv, item.getContent());
-                    helper.setIamgeGlide(video_detail_comment_img, item.getImage().getThumbnail().get(0));
-                    helper.setViewVisible(video_detail_comment_img,View.VISIBLE);
-                    helper.setOnClickImg(video_detail_comment_img, new View.OnClickListener() {
+                    helper.setIamgeGlide(R.id.video_detail_comment_img, item.getImage().getThumbnail().get(0));
+                    helper.setViewVisible(R.id.video_detail_comment_img,View.VISIBLE);
+                    helper.setOnClickImg(R.id.video_detail_comment_img, new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Intent commentImgIntent = new Intent(VideoDetailActivity.this,ImgDetailActivity.class);
@@ -298,6 +298,7 @@ public class VideoDetailActivity extends BaseActivity implements IDesignerView<D
 
                         }
                     });
+
 
                 }
 
