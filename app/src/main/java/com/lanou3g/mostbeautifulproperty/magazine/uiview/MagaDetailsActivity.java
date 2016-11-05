@@ -1,6 +1,7 @@
 package com.lanou3g.mostbeautifulproperty.magazine.uiview;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseActivity;
+import com.lanou3g.mostbeautifulproperty.bean.FocusDesignerBean;
 import com.lanou3g.mostbeautifulproperty.bean.MagaDetailsBean;
 import com.lanou3g.mostbeautifulproperty.bean.MyMagazineBean;
 import com.lanou3g.mostbeautifulproperty.dbtool.DBTools;
@@ -46,8 +48,11 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
     private CheckBox mModDesignerFocus, mCollection;
     private MyMagazineBean mMyMagazineBean;
     private List<MyMagazineBean> mList;
+    private List<FocusDesignerBean> mDesignerList;
 
     public static final String KEY_ID = "id";
+    private FocusDesignerBean mDesignerBean;
+
     @Override
     protected int setLayout() {
         return R.layout.activity_maga_details;
@@ -107,9 +112,13 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     mModDesignerFocus.setText("取消关注");
-                    Toast.makeText(MagaDetailsActivity.this, "关注", Toast.LENGTH_SHORT).show();
+                    if (mDesignerList.size() == 0) {
+                        DBTools.getInstance().insertDB(mDesignerBean);
+                        Toast.makeText(MagaDetailsActivity.this, "关注成功", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     mModDesignerFocus.setText("+关注");
+                    DBTools.getInstance().deleteWhere(FocusDesignerBean.class, "designerId", new Integer[]{mDesignerBean.getDesignerId()});
                     Toast.makeText(MagaDetailsActivity.this, "取消关注", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -169,15 +178,38 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
 
         if (result instanceof MagaDetailsBean) {
             MagaDetailsBean bean = (MagaDetailsBean) result;
+            mDesignerBean = new FocusDesignerBean();
             if (bean.getData().getDesigners().size() != 0) {
-                Glide.with(this).load(bean.getData().getDesigners().get(0).getAvatar_url()).into(mCvDesignerHead);
-                mTvDesignerName.setText(bean.getData().getDesigners().get(0).getName());
-                mTvCity.setText(bean.getData().getDesigners().get(0).getCity());
+                MagaDetailsBean.Databean.DesignersBean designersBean = bean.getData().getDesigners().get(0);
+                Glide.with(this).load(designersBean.getAvatar_url()).into(mCvDesignerHead);
+                mTvDesignerName.setText(designersBean.getName());
+                mTvCity.setText(designersBean.getCity());
 
-                Glide.with(this).load(bean.getData().getDesigners().get(0).getAvatar_url()).into(mModDesignerHead);
-                mModDesignerName.setText(bean.getData().getDesigners().get(0).getName());
-                mModDesignerLabel.setText(bean.getData().getDesigners().get(0).getLabel());
-                mModDesignerDes.setText(bean.getData().getDesigners().get(0).getDescription());
+                Glide.with(this).load(designersBean.getAvatar_url()).into(mModDesignerHead);
+                mModDesignerName.setText(designersBean.getName());
+                mModDesignerLabel.setText(designersBean.getLabel());
+                mModDesignerDes.setText(designersBean.getDescription());
+
+                // 给 关注设计师bean类 赋值
+                mDesignerBean.setDesignerId(designersBean.getId());
+                mDesignerBean.setImageUrl(bean.getData().getImage_url());
+                mDesignerBean.setName(designersBean.getName());
+                mDesignerBean.setConcept(designersBean.getConcept());
+                mDesignerBean.setFollowNum(designersBean.getFollow_num());
+                mDesignerBean.setIconHeadUrl(designersBean.getAvatar_url());
+                mDesignerBean.setLabel(designersBean.getLabel());
+
+                DBTools.getInstance().getQueryByWhere(FocusDesignerBean.class, "designerId", new Integer[]{designersBean.getId()}, new DBTools.QueryListener<FocusDesignerBean>() {
+                    @Override
+                    public void onQuery(List<FocusDesignerBean> beanArrayList) {
+                        mDesignerList = beanArrayList;
+                        if (mDesignerList.size() != 0) {
+                            mModDesignerFocus.setChecked(true);
+                        } else {
+                            mModDesignerFocus.setChecked(false);
+                        }
+                    }
+                });
             } else {
                 mDesignerll.setVisibility(View.GONE);
                 mModDesignerLl.setVisibility(View.GONE);
@@ -197,7 +229,7 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
             // 分享网址
             mWebUrl = bean.getData().getWeb_url();
 
-            // 给 MyMagazineBean 赋值
+            // 给 收藏画报bean类 MyMagazineBean 赋值
             mMyMagazineBean.setTitle(bean.getData().getTitle());
             mMyMagazineBean.setSubTitle(bean.getData().getSub_title());
             mMyMagazineBean.setImageUrl(bean.getData().getImage_url());

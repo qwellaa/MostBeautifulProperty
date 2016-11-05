@@ -169,6 +169,15 @@ public class MagaDetailsBean {
             private String avatar_url;
             private String description;
             private int id;
+            private int follow_num;
+
+            public int getFollow_num() {
+                return follow_num;
+            }
+
+            public void setFollow_num(int follow_num) {
+                this.follow_num = follow_num;
+            }
 
             public String getCity() {
                 return city;

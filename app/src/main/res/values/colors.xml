@@ -19,5 +19,5 @@
     <color name="designLinear">#fafafa</color>
     <color name="designLinearPress">#d2cdcd</color>
     <color name="colorDetailsAuthor">#50b5b5b5</color>
-
+    <color name="colorAlphaWhite">#80ffffff</color>
 </resources>

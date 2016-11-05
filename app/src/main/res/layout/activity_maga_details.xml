@@ -129,61 +129,66 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-            <LinearLayout
-                android:id="@+id/magazine_details_ll_designer_mod"
+            <RelativeLayout
                 android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="5dp"
-                android:background="@color/colorInterfaceBackground">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/magaDetailsDesignerMode"
-                    android:padding="5dp"
-                    android:textColor="@color/nameText"/>
+                android:layout_height="wrap_content">
                 <LinearLayout
-                    android:layout_marginBottom="5dp"
+                    android:id="@+id/magazine_details_ll_designer_mod"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/nameText"
-                    android:gravity="center"
-                    android:orientation="vertical">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/magazine_details_cv_designer_head"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"/>
+                    android:orientation="vertical"
+                    android:padding="5dp"
+                    android:background="@color/colorInterfaceBackground">
                     <TextView
-                        android:id="@+id/magazine_details_tv_designer_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="名字"
-                        android:textColor="@color/colorInterfaceBackground"
-                        style="@style/magaDetailsTitle"/>
-                    <TextView
-                        android:id="@+id/magazine_details_tv_designer_label"
-                        android:layout_width="wrap_content"
+                        android:text="@string/magaDetailsDesignerMode"
+                        android:padding="5dp"
+                        android:textColor="@color/nameText"/>
+                    <LinearLayout
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="label"
-                        android:textColor="@color/colorInterfaceBackground"/>
-                    <CheckBox
-                        android:id="@+id/magazine_details_cb_designer_focus"
-                        style="@style/magaDetailsTitle"
-                        android:layout_width="80dp"
-                        android:layout_height="30dp"
-                        android:button="@null"
-                        android:text="+关注"
-                        android:background="@drawable/check_box_bg"/>
-                    <TextView
-                        android:id="@+id/magazine_details_tv_designer_description"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="description"
-                        android:textColor="@color/colorInterfaceBackground"
-                        style="@style/magaDetailsTitle"/>
+                        android:background="@color/nameText"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_marginTop="15dp"
+                            android:id="@+id/magazine_details_tv_designer_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorInterfaceBackground"
+                            style="@style/magaDetailsTitle"/>
+                        <TextView
+                            android:id="@+id/magazine_details_tv_designer_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorInterfaceBackground"/>
+                        <CheckBox
+                            android:id="@+id/magazine_details_cb_designer_focus"
+                            style="@style/magaDetailsTitle"
+                            android:layout_width="80dp"
+                            android:layout_height="30dp"
+                            android:button="@null"
+                            android:text="@string/focusOn"
+                            android:background="@drawable/check_box_bg"/>
+                        <TextView
+                            android:id="@+id/magazine_details_tv_designer_description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorInterfaceBackground"
+                            style="@style/magaDetailsTitle"/>
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/magazine_details_cv_designer_head"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+            </RelativeLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"/>
