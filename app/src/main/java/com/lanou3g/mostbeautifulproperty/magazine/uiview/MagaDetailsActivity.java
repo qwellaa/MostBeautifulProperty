@@ -14,6 +14,8 @@ import com.bumptech.glide.Glide;
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseActivity;
 import com.lanou3g.mostbeautifulproperty.bean.MagaDetailsBean;
+import com.lanou3g.mostbeautifulproperty.bean.MyMagazineBean;
+import com.lanou3g.mostbeautifulproperty.dbtool.DBTools;
 import com.lanou3g.mostbeautifulproperty.discover.presenter.DiscoverPresenter;
 import com.lanou3g.mostbeautifulproperty.discover.uiview.IDiscoverView;
 import com.lanou3g.mostbeautifulproperty.okhttp.URLValues;
@@ -41,6 +43,7 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
     private int mVisibility;
     private String mWebUrl;
     private CheckBox mModDesignerFocus, mCollection;
+    private MyMagazineBean mMyMagazineBean;
 
     @Override
     protected int setLayout() {
@@ -101,8 +104,10 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     mModDesignerFocus.setText("取消关注");
+                    Toast.makeText(MagaDetailsActivity.this, "关注", Toast.LENGTH_SHORT).show();
                 } else {
                     mModDesignerFocus.setText("+关注");
+                    Toast.makeText(MagaDetailsActivity.this, "取消关注", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -110,9 +115,11 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-
+                    DBTools.getInstance().insertDB(mMyMagazineBean);
+                    Toast.makeText(MagaDetailsActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
                 } else {
-
+                    DBTools.getInstance().deleteWhere(MyMagazineBean.class, "detailsId", new Integer[]{mMyMagazineBean.getDetailsId()});
+                    Toast.makeText(MagaDetailsActivity.this, "取消收藏", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -122,6 +129,11 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
         Intent intent = getIntent();
         int id = intent.getIntExtra("id", 0);
         Log.d("MagaDetailsActivity", "id:" + id);
+
+        // 收藏用到的 MyMagazineBean
+        mMyMagazineBean = new MyMagazineBean();
+        mMyMagazineBean.setDetailsId(id);
+
         final DiscoverPresenter presenter = new DiscoverPresenter(this);
         presenter.startRequest(URLValues.getMAGAZINEDETAILS_URL(id), MagaDetailsBean.class);
     }
@@ -166,7 +178,14 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
 
             mVisibility = mDesignerll.getVisibility();
 
+            // 分享网址
             mWebUrl = bean.getData().getWeb_url();
+
+            // 给 MyMagazineBean 赋值
+            mMyMagazineBean.setTitle(bean.getData().getTitle());
+            mMyMagazineBean.setSubTitle(bean.getData().getSub_title());
+            mMyMagazineBean.setImageUrl(bean.getData().getImage_url());
+
         }
     }
 

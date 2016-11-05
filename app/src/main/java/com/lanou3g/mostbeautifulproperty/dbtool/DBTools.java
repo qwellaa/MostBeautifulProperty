@@ -83,7 +83,7 @@ public class DBTools {
     }
 
     // 按条件查询数据
-    public <T>void getQueryByWhere(final Class<T> clazz, final String field, final String[] value, final QueryListener<T> queryListener) {
+    public <T>void getQueryByWhere(final Class<T> clazz, final String field, final Object[] value, final QueryListener<T> queryListener) {
        threadPool.execute(new Runnable() {
            @Override
            public void run() {
@@ -94,7 +94,7 @@ public class DBTools {
     }
 
     // 按条件删除
-    public <T> void deleteWhere(final Class<T> clazz, final String field, final String [] value){
+    public <T> void deleteWhere(final Class<T> clazz, final String field, final Object[] value){
         new Thread(new Runnable() {
             @Override
             public void run() {
