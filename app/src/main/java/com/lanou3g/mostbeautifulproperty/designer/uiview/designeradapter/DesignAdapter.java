@@ -62,7 +62,7 @@ public class DesignAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return mDesignerBean.getList().get(position);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.lanou3g.mostbeautifulproperty.designer.uiview;
 
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.support.v7.app.AlertDialog;
@@ -7,6 +8,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.andview.refreshview.XRefreshView;
@@ -37,6 +39,7 @@ public class DesignerFragment extends BaseFragment implements IDesignerView<Desi
     private DesignAdapter mDesignAdapter;
     public static long lastRefreshTime;
     private AlertDialog mDialog;
+    private DesignerBean designBeanP;
 
     @Override
     protected int setLayout() {
@@ -59,15 +62,30 @@ public class DesignerFragment extends BaseFragment implements IDesignerView<Desi
 
     @Override
     protected void initData() {
-        mDesignerPresenter = new DesignerPresenter<>(this);
-
-        mDesignerPresenter.startRequest(URLValues.getVIDEO_URL(Page), DesignerBean.class);
 
         mDesignAdapter = new DesignAdapter(context);
         mListView.setAdapter(mDesignAdapter);
+        mDesignerPresenter = new DesignerPresenter<>(this);
+
+        mDesignerPresenter.startRequest(URLValues.getVIDEO_URL(Page), DesignerBean.class);
         onRefresh();
+        onClickListView();
+    }
+
+    private void onClickListView() {
 
 
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent videoIntent = new Intent(context, VideoDetailActivity.class);
+                videoIntent.putExtra("video",designBeanP);
+                videoIntent.putExtra("position",position);
+                context.startActivity(videoIntent);
+
+
+            }
+        });
     }
 
     private void onRefresh() {
@@ -161,6 +179,8 @@ public class DesignerFragment extends BaseFragment implements IDesignerView<Desi
 
     @Override
     public void onResponse(DesignerBean designerBeen) {
+        designBeanP = designerBeen;
+
         if (Page == 0) {
             mDesignAdapter.setDesignerBean(designerBeen);
             mRefreshView.stopRefresh();

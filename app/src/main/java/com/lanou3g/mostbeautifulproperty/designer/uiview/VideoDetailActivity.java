@@ -2,7 +2,10 @@ package com.lanou3g.mostbeautifulproperty.designer.uiview;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -57,6 +60,8 @@ public class VideoDetailActivity extends BaseActivity implements IDesignerView<D
     private ListView mHotCommentListView;
     private CurrentAdapter<DesignViedeDedailBean.HotBean.ListBean> hotAdapter;
     private ImageView mCommentDetailImg;
+    private SensorManager mSensorManager;
+    private JCVideoPlayer.JCAutoFullscreenListener sensorEventListner;
 
     @Override
     protected int setLayout() {
@@ -85,8 +90,10 @@ public class VideoDetailActivity extends BaseActivity implements IDesignerView<D
         commentLL = bindView(R.id.item_design_comment_linear, view);
         mHotCommentListView = bindView(R.id.video_detail_listview);
         mHotCommentListView.addHeaderView(viewTop);
+        mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+        sensorEventListner = new JCVideoPlayer.JCAutoFullscreenListener();
         //评论详情中布局
-        View itemVideoDetailView = LayoutInflater.from(this).inflate(R.layout.itemvideo_detail,null);
+
 
 
 
@@ -109,6 +116,45 @@ public class VideoDetailActivity extends BaseActivity implements IDesignerView<D
 
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Sensor accelerometerSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mSensorManager.registerListener(sensorEventListner, accelerometerSensor, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+
+        if (JCVideoPlayer.backPress()) {
+            return;
+        }
+
+
+
+         super.onBackPressed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mSensorManager.unregisterListener(sensorEventListner);
+        JCVideoPlayer.releaseAllVideos();
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
 
     private String toTime(int time) {
 
