@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseActivity;
+import com.lanou3g.mostbeautifulproperty.baseclass.BaseViewHolder;
 import com.lanou3g.mostbeautifulproperty.baseclass.CurrentAdapter;
 import com.lanou3g.mostbeautifulproperty.bean.DesignViedeDedailBean;
 import com.lanou3g.mostbeautifulproperty.bean.DesignerBean;
@@ -51,7 +52,7 @@ public class VideoDetailActivity extends BaseActivity implements IDesignerView<D
     private DesignerBean.ListBean mListBean;
     private int mTime;
     private ListView mHotCommentListView;
-    private CurrentAdapter<DesignerBean> hotAdapter;
+    private CurrentAdapter<DesignViedeDedailBean.HotBean.ListBean> hotAdapter;
 
     @Override
     protected int setLayout() {
@@ -76,7 +77,7 @@ public class VideoDetailActivity extends BaseActivity implements IDesignerView<D
         downImagButton = bindView(R.id.item_design_down_img,viewInclude);
         forwardLL = bindView(R.id.item_design_forward_linear,viewInclude);
         commentLL = bindView(R.id.item_design_comment_linear,viewInclude);
-        mHotCommentListView = bindView(R.id.video_detail_listview,viewInclude);
+        mHotCommentListView = bindView(R.id.video_detail_listview);
 
 
 
@@ -218,13 +219,26 @@ public class VideoDetailActivity extends BaseActivity implements IDesignerView<D
 
     @Override
     public void onResponse(DesignViedeDedailBean designViedeDedailBean) {
-        List<DesignViedeDedailBean> hotBeen = (List<DesignViedeDedailBean>) designViedeDedailBean;
-//        mHotCommentListView.setAdapter( hotAdapter = new CurrentAdapter<DesignerBean>(this,hotBeen,R.layout.itemvideo_detail) {
-//            @Override
-//            public void convert(BaseViewHolder helper, DesignerBean item) {
-//
-//            }
-//        });
+       List<DesignViedeDedailBean.HotBean.ListBean> dedailList = designViedeDedailBean.getHot().getList();
+        List<DesignViedeDedailBean.NormalBean.ListBean> listBeen = designViedeDedailBean.getNormal().getList();
+        mHotCommentListView.setAdapter(hotAdapter = new CurrentAdapter<DesignViedeDedailBean.HotBean.ListBean>(this,dedailList,R.layout.itemvideo_detail) {
+            @Override
+            public void convert(BaseViewHolder helper, DesignViedeDedailBean.HotBean.ListBean item) {
+
+                    helper.setIamgeGlide(R.id.video_detail_comment_title_circle,item.getUser().getProfile_image());
+                    helper.setText(R.id.video_detail_username_tv,item.getUser().getUsername());
+                    helper.setText(R.id.video_detail_up_tv,item.getLike_count()+"");
+                    if (item.getType().equals("text")){
+                        helper.setText(R.id.video_detail_comment_tv,item.getContent());
+                } else if (item.getType().equals("image")){
+                        helper.setText(R.id.video_detail_comment_tv,item.getContent());
+                        helper.setText(R.id.video_detail_comment_img,item.getImage().getThumbnail().get(0));
+                    }
+
+
+            }
+        });
+
 //
 
 

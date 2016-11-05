@@ -102,6 +102,16 @@ public class DesignViedeDedailBean {
             private int data_id;
             private String content;
             private int like_count;
+            private ImageBean image;
+
+            public ImageBean getImage() {
+                return image;
+            }
+
+            public void setImage(ImageBean image) {
+                this.image = image;
+            }
+
             /**
              * username : 风轻云淡画意浓丶
              * qq_uid :
@@ -323,6 +333,29 @@ public class DesignViedeDedailBean {
                 public void setRoom_icon(String room_icon) {
                     this.room_icon = room_icon;
                 }
+            }
+            public static  class ImageBean{
+               private List<String> images;
+                private List<String>thumbnail;
+
+                public List<String> getThumbnail() {
+                    return thumbnail;
+                }
+
+                public void setThumbnail(List<String> thumbnail) {
+                    this.thumbnail = thumbnail;
+                }
+
+                public List<String> getImages() {
+                    return images;
+                }
+
+                public void setImages(List<String> images) {
+                    this.images = images;
+                }
+
+
+
             }
         }
     }
