@@ -30,19 +30,16 @@
             style="@style/moreTitleImg"/>
 
     </RelativeLayout>
-    <com.andview.refreshview.XRefreshView
-        xmlns:xrefreshview="http://schemas.android.com/apk/res-auto"
+    <LinearLayout
         android:id="@+id/discover_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#fff"
-        android:orientation="vertical"
-        xrefreshview:isHeightMatchParent="true"
-        xrefreshview:isWidthMatchParent="true">
-        <ListView
+        android:orientation="vertical">
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
             android:id="@+id/lv_discover_refuse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        </ListView>
-    </com.andview.refreshview.XRefreshView>
+        </com.handmark.pulltorefresh.library.PullToRefreshListView>
+    </LinearLayout>
 </LinearLayout>

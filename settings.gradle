@@ -1,5 +1,5 @@
 
-include ':app', ':magicindicator'
+include ':app', ':magicindicator', ':PullToRefresh'
 include ':easeUI_CN'
 
 include ':app', ':magicindicator', 'xrefreshlibrary'
