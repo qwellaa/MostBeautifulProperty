@@ -168,18 +168,7 @@ public class MagaDetailsBean {
             private String label;
             private String avatar_url;
             private String description;
-
-            @Override
-            public String toString() {
-                return "DesignersBean{" +
-                        "city='" + city + '\'' +
-                        ", concept='" + concept + '\'' +
-                        ", name='" + name + '\'' +
-                        ", label='" + label + '\'' +
-                        ", avatar_url='" + avatar_url + '\'' +
-                        ", description='" + description + '\'' +
-                        '}';
-            }
+            private int id;
 
             public String getCity() {
                 return city;
@@ -227,6 +216,14 @@ public class MagaDetailsBean {
 
             public void setDescription(String description) {
                 this.description = description;
+            }
+
+            public int getId() {
+                return id;
+            }
+
+            public void setId(int id) {
+                this.id = id;
             }
         }
     }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include layout="@layout/custom_title_setting"
+             android:id="@+id/include_title_setting"/>
+    <ListView
+        android:padding="10dp"
+        android:id="@+id/mine_magazine_lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorInterfaceBackground">
+    </ListView>
+</LinearLayout>

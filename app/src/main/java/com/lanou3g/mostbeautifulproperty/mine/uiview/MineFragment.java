@@ -282,6 +282,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
                 } else {
                     mDialog.show();
                 }
+                Intent dailyIntent = new Intent(context, MineMagazineActivity.class);
+                startActivity(dailyIntent);
                 break;
             case R.id.fragment_mine_attention_ll:
                 if (mQq.isAuthValid()) {

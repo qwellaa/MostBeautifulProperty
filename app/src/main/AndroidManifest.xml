@@ -107,6 +107,8 @@
         </activity>
         <activity android:name=".magazine.uiview.MagaDetailsActivity">
         </activity>
+        <activity android:name=".mine.uiview.MineMagazineActivity">
+        </activity>
     </application>
 
 </manifest>

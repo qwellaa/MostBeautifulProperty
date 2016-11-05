@@ -1,7 +1,6 @@
 package com.lanou3g.mostbeautifulproperty.magazine.uiview;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -21,6 +20,8 @@ import com.lanou3g.mostbeautifulproperty.discover.uiview.IDiscoverView;
 import com.lanou3g.mostbeautifulproperty.okhttp.URLValues;
 import com.lanou3g.mostbeautifulproperty.view.BounceScrollView;
 import com.lanou3g.mostbeautifulproperty.view.htmltextview.HtmlTextView;
+
+import java.util.List;
 
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
@@ -44,7 +45,9 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
     private String mWebUrl;
     private CheckBox mModDesignerFocus, mCollection;
     private MyMagazineBean mMyMagazineBean;
+    private List<MyMagazineBean> mList;
 
+    public static final String KEY_ID = "id";
     @Override
     protected int setLayout() {
         return R.layout.activity_maga_details;
@@ -115,8 +118,10 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    DBTools.getInstance().insertDB(mMyMagazineBean);
-                    Toast.makeText(MagaDetailsActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
+                    if (mList.size() == 0) {
+                        DBTools.getInstance().insertDB(mMyMagazineBean);
+                        Toast.makeText(MagaDetailsActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     DBTools.getInstance().deleteWhere(MyMagazineBean.class, "detailsId", new Integer[]{mMyMagazineBean.getDetailsId()});
                     Toast.makeText(MagaDetailsActivity.this, "取消收藏", Toast.LENGTH_SHORT).show();
@@ -127,8 +132,7 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
 
     private void startRequest() {
         Intent intent = getIntent();
-        int id = intent.getIntExtra("id", 0);
-        Log.d("MagaDetailsActivity", "id:" + id);
+        int id = intent.getIntExtra(KEY_ID, 0);
 
         // 收藏用到的 MyMagazineBean
         mMyMagazineBean = new MyMagazineBean();
@@ -136,6 +140,18 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
 
         final DiscoverPresenter presenter = new DiscoverPresenter(this);
         presenter.startRequest(URLValues.getMAGAZINEDETAILS_URL(id), MagaDetailsBean.class);
+
+        DBTools.getInstance().getQueryByWhere(MyMagazineBean.class, "detailsId", new Integer[]{id}, new DBTools.QueryListener<MyMagazineBean>() {
+            @Override
+            public void onQuery(List<MyMagazineBean> beanArrayList) {
+                mList = beanArrayList;
+                if (mList.size() != 0) {
+                    mCollection.setChecked(true);
+                } else {
+                    mCollection.setChecked(false);
+                }
+            }
+        });
     }
 
     @Override
