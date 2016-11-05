@@ -10,6 +10,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.lanou3g.mostbeautifulproperty.R;
@@ -47,6 +48,8 @@ public class DiscoverResuseAdapter extends BaseAdapter implements StickyListHead
         return null;
     }
 
+
+
     @Override
     public long getHeaderId(int position) {
         return 0;
@@ -83,6 +86,32 @@ public class DiscoverResuseAdapter extends BaseAdapter implements StickyListHead
         viewHolder.mTitle.setText(info.getName());
         Glide.with(mContext).load(info.getDesigner().getAvatar_url()).into(viewHolder.mPhoto);
         Glide.with(mContext).load(info.getCover_images().get(0)).into(viewHolder.mIv);
+        switch (info.getState()){
+            case 0:
+                viewHolder.mRadioGroup.clearCheck();
+                break;
+            case 1:
+                viewHolder.mRadioGroup.check(R.id.iv_daily_list_dislike);
+                break;
+            case 2:
+                viewHolder.mRadioGroup.check(R.id.iv_daily_list_like);
+                break;
+        }
+        viewHolder.mDisLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                info.setState(1);
+                Toast.makeText(mContext,info.getUnlike_user_num()+"人不喜欢", Toast.LENGTH_SHORT).show();
+            }
+        });
+        viewHolder.mLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                info.setState(2);
+                Toast.makeText(mContext,info.getLike_user_num()+"人喜欢", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return convertView;
     }
     private class ViewHolder {
@@ -124,6 +153,7 @@ public class DiscoverResuseAdapter extends BaseAdapter implements StickyListHead
     public int getSectionForPosition(int position) {
         return 0;
     }
+
 
 
 }
