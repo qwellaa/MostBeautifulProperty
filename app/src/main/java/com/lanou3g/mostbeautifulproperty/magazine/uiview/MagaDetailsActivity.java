@@ -40,7 +40,7 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
     private BounceScrollView mScrollView;
     private int mVisibility;
     private String mWebUrl;
-    private CheckBox mModDesignerFocus;
+    private CheckBox mModDesignerFocus, mCollection;
 
     @Override
     protected int setLayout() {
@@ -79,6 +79,8 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
         mModDesignerLabel = bindView(R.id.magazine_details_tv_designer_label);
         mModDesignerDes = bindView(R.id.magazine_details_tv_designer_description);
         mModDesignerFocus = bindView(R.id.magazine_details_cb_designer_focus);
+        // 收藏
+        mCollection = bindView(R.id.magazine_details_cb_collection);
     }
 
     @Override
@@ -101,6 +103,16 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
                     mModDesignerFocus.setText("取消关注");
                 } else {
                     mModDesignerFocus.setText("+关注");
+                }
+            }
+        });
+        mCollection.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+
+                } else {
+
                 }
             }
         });
