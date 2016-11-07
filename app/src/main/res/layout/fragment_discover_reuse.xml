@@ -31,14 +31,11 @@
 
     </RelativeLayout>
     <com.andview.refreshview.XRefreshView
-        xmlns:xrefreshview="http://schemas.android.com/apk/res-auto"
         android:id="@+id/discover_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#fff"
-        android:orientation="vertical"
-        xrefreshview:isHeightMatchParent="true"
-        xrefreshview:isWidthMatchParent="true">
+        android:orientation="vertical">
         <ListView
             android:id="@+id/lv_discover_refuse"
             android:layout_width="match_parent"

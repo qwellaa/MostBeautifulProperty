@@ -16,7 +16,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
@@ -26,8 +25,6 @@ import com.andview.refreshview.XRefreshView;
 import com.andview.refreshview.XRefreshView.SimpleXRefreshListener;
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
-import com.lanou3g.mostbeautifulproperty.baseclass.BaseViewHolder;
-import com.lanou3g.mostbeautifulproperty.baseclass.CurrentAdapter;
 import com.lanou3g.mostbeautifulproperty.baseclass.GirdAdapter;
 import com.lanou3g.mostbeautifulproperty.baseclass.GirdHolder;
 import com.lanou3g.mostbeautifulproperty.bean.DiscoverBean;
@@ -63,7 +60,6 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     private int page = 1;
     private int size = 20;
     private ListView mListView;
-    private CurrentAdapter mAdapter;
     private AlertDialog mDialog;
     private PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean mBean;
     private PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean mBeanAll;
@@ -71,6 +67,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     private XRefreshView mRefreshView;
     private String mEndUrl;
     private int mPopPosition;
+    private DiscoverResuseAdapter mAdapter;
 
     private void initLoadData() {
         List<String> URLJewelryList = new ArrayList<>();
@@ -209,7 +206,9 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     @Override
     protected void initData() {
         mBeanArrayList = new ArrayList<>();
-        initLoadData();
+        mAdapter = new DiscoverResuseAdapter(context);
+        mListView.setAdapter(mAdapter);
+                initLoadData();
 
         Bundle args = getArguments();
         mPosition = args.getInt("position");
@@ -392,57 +391,13 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
         }
         if (result instanceof DiscoverBean) {
             DiscoverBean discoverBean = (DiscoverBean) result;
+            List<DiscoverBean.DataBean.ProductsBean>list = discoverBean.getData().getProducts();
             if (page == 1){
-                Log.d("aaaa", "page:" + page);
-                if (mBeanArrayList.size() != 0) {
-                    mBeanArrayList.clear();
-                    mRefreshView.stopRefresh();
-                }
-                mBeanArrayList.addAll(discoverBean.getData().getProducts());
-
-            } else {
-                Log.d("aaaa", "size:" + mBeanArrayList.size());
-                mRefreshView.stopLoadMore();
-                mBeanArrayList.addAll(discoverBean.getData().getProducts());
+                mAdapter.setDataListRefresh(list);
+                mRefreshView.stopRefresh();
             }
-            mListView.setAdapter(mAdapter = new CurrentAdapter<DiscoverBean.DataBean.ProductsBean>(context, mBeanArrayList, R.layout.item_discover_list) {
-                @Override
-                public void convert(final BaseViewHolder helper, final DiscoverBean.DataBean.ProductsBean item) {
-                    helper.setText(R.id.tv_discover_list_name, item.getDesigner().getName());
-                    helper.setText(R.id.tv_discover_list_identity, item.getDesigner().getLabel());
-                    helper.setText(R.id.tv_discover_list_title, item.getName());
-                    helper.setIamgeGlide(R.id.iv_discover_list_photo, item.getDesigner().getAvatar_url());
-                    helper.setIamgeGlide(R.id.iv_discover_list_title, item.getCover_images().get(0));
-                    RadioGroup group = helper.getView(R.id.radio_group);
-                    Log.d("DiscoverReuseFragment", "item.getState()获取时:" + item.getState());
-                    switch (item.getState()) {
-                        case 0:
-                            group.clearCheck();
-                            break;
-                        case 1:
-                            group.check(R.id.iv_daily_list_dislike);
-                            break;
-                        case 2:
-                            group.check(R.id.iv_daily_list_like);
-                            break;
-                    }
-                    helper.getView(R.id.iv_daily_list_dislike).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            item.setState(1);
-                            Toast.makeText(mContext, item.getUnlike_user_num() + "人不喜欢", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    helper.getView(R.id.iv_daily_list_like).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            item.setState(2);
-                            Toast.makeText(mContext, item.getLike_user_num() + "人喜欢", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-            });
-
+            mAdapter.setDataListLoad(list);
+            mRefreshView.stopLoadMore();
         }
     }
 
