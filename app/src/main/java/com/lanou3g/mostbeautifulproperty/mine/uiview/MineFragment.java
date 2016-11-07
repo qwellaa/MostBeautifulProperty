@@ -277,24 +277,28 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
             case R.id.fragment_mine_daily_ll:
                 if (mQq.isAuthValid()) {
                     Toast.makeText(context, "qq关注", Toast.LENGTH_SHORT).show();
+                    Intent dailyIntent = new Intent(context, MineMagazineActivity.class);
+                    startActivity(dailyIntent);
                 } else if (mWeibo.isAuthValid()){
                     Toast.makeText(context, "微博关注", Toast.LENGTH_SHORT).show();
+                    Intent dailyIntent = new Intent(context, MineMagazineActivity.class);
+                    startActivity(dailyIntent);
                 } else {
                     mDialog.show();
                 }
-                Intent dailyIntent = new Intent(context, MineMagazineActivity.class);
-                startActivity(dailyIntent);
                 break;
             case R.id.fragment_mine_attention_ll:
                 if (mQq.isAuthValid()) {
                     Toast.makeText(context, "qq关注", Toast.LENGTH_SHORT).show();
+                    Intent focusIntent = new Intent(context, FocusDesignerActivyity.class);
+                    startActivity(focusIntent);
                 } else if (mWeibo.isAuthValid()){
                     Toast.makeText(context, "微博关注", Toast.LENGTH_SHORT).show();
+                    Intent focusIntent = new Intent(context, FocusDesignerActivyity.class);
+                    startActivity(focusIntent);
                 } else {
                     mDialog.show();
                 }
-                Intent focusIntent = new Intent(context, FocusDesignerActivyity.class);
-                startActivity(focusIntent);
                 break;
             case R.id.fragment_mine_wish_ll:
                 if (mQq.isAuthValid()) {
