@@ -247,5 +247,18 @@
     <style name="focusDesignerLv">
         <item name="android:background">@color/colorInterfaceBackground</item>
     </style>
+    <style name="focusDesignerConcept">
+        <item name="android:gravity">center</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_marginBottom">20dp</item>
+        <item name="android:textColor">@color/colorShareBtnBorder</item>
+    </style>
+    <style name="focusDesignerName">
+        <item name="android:padding">5dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_marginTop">25dp</item>
+        <item name="android:textColor">@color/nameText</item>
+    </style>
 </resources>
 
