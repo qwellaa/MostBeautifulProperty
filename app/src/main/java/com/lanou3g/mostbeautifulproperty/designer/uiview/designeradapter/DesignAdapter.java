@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,29 +29,21 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
 public class DesignAdapter extends BaseAdapter {
     private Context mContext;
-
-
     private DesignerBean mDesignerBean;
-
 
     public void setDesignerBean(DesignerBean designerBean) {
         mDesignerBean = designerBean;
-
         notifyDataSetChanged();
     }
 
     public void setMoreDesignerBean(DesignerBean designerBean) {
         mDesignerBean.getList().addAll(designerBean.getList());
         notifyDataSetChanged();
-
-
     }
 
 
     public DesignAdapter(Context context) {
         mContext = context;
-
-
     }
 
     @Override
@@ -103,7 +94,6 @@ public class DesignAdapter extends BaseAdapter {
         viewHolder.tvDown.setText(listBean.getDown() + "");
         viewHolder.tvComment.setText(listBean.getComment());
         viewHolder.tvForward.setText(listBean.getForward() + "");
-        Log.d("傻逼", "listBean.getNum():" + listBean.getNum());
         switch (listBean.getNum()) {
             case 0:
                 viewHolder.upImagButton.setBackgroundResource(R.mipmap.ding_not_clicked);
@@ -186,25 +176,17 @@ public class DesignAdapter extends BaseAdapter {
                 videoIntent.putExtra("video",mDesignerBean);
                 videoIntent.putExtra("position",position);
                 mContext.startActivity(videoIntent);
-
-
-
             }
         });
 
         return convertView;
     }
-
-
     private String toTime(int time) {
-
         int minute = time / 60;
         int second = time % 60;
         minute %= 60;
         return String.format("%02d:%02d", minute, second);
     }
-
-
     class ViewHolder {
         private TextView tvName;
         private TextView tvTime;
@@ -226,7 +208,6 @@ public class DesignAdapter extends BaseAdapter {
         public ViewHolder(View view) {
             View viewVideo =  view.findViewById(R.id.include_item_design);
 
-
             tvName = (TextView) viewVideo.findViewById(R.id.fragment_design_item_tv_username);
             tvTime = (TextView) viewVideo.findViewById(R.id.fragment_design_item_tv_time);
             tvTitle = (TextView) viewVideo.findViewById(R.id.fragment_design_item_tv_titlce);
@@ -242,10 +223,6 @@ public class DesignAdapter extends BaseAdapter {
             downImagButton = (ImageButton) viewVideo.findViewById(R.id.item_design_down_img);
             forwardLL = (LinearLayout) viewVideo.findViewById(R.id.item_design_forward_linear);
             commentLL = (LinearLayout) viewVideo.findViewById(R.id.item_design_comment_linear);
-
-
-
-
 
         }
     }

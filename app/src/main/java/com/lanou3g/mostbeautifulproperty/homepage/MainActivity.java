@@ -53,7 +53,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private void initStartRun() {
         mRBtnMagazine.setChecked(true);
 
-        // 默认显示的碎片
+        // 默认显示的fragment
         FragmentManager manager = getSupportFragmentManager();
         /**
          * 使用Fragment时，可以通过用户交互来执行一些动作，比如增加、移除、替换等。

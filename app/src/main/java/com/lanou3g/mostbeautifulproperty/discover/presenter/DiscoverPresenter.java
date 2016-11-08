@@ -35,21 +35,5 @@ public class DiscoverPresenter{
 
             }
         });
-//        mDiscoverModel.startRequest(strUrl, new OnFinishDiscoverListener<PopupwindowBean>() {
-//            @Override
-//            public void onFinished(PopupwindowBean popupwindowBean) {
-//                mIDiscoverView.onResponse(popupwindowBean);
-//
-//            }
-//
-//            @Override
-//            public void onError() {
-//
-//            }
-//        });
-//
-//
     }
-
-
 }

@@ -15,7 +15,7 @@ import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseActivity;
 import com.lanou3g.mostbeautifulproperty.mine.uiview.MineFragment;
 import com.lanou3g.mostbeautifulproperty.mine.uiview.setting.aboutus.AboutUsActivity;
-import com.lanou3g.mostbeautifulproperty.mine.uiview.setting.clearcache.DataCleanManager;
+import com.lanou3g.mostbeautifulproperty.tool.DataCleanManager;
 import com.lanou3g.mostbeautifulproperty.mine.uiview.setting.startvideo.StartVideoActivity;
 import com.lanou3g.mostbeautifulproperty.mine.uiview.setting.userfeedback.UserFeedbcakActivity;
 import com.lanou3g.mostbeautifulproperty.okhttp.URLValues;
@@ -82,14 +82,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     @Override
     protected void initData() {
         initSetOnClick();
-
-        try {
-            // 获取缓存大小
-            String file = DataCleanManager.getTotalCacheSize(this);
-            mTvCache.setText(file);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        initCache();
 
         mQq = ShareSDK.getPlatform(QQ.NAME);
         mWeibo = ShareSDK.getPlatform(SinaWeibo.NAME);
@@ -108,6 +101,16 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         Intent intent = getIntent();
         String headIcon = intent.getStringExtra(HEADICON);
         Glide.with(this).load(headIcon).into(mIvHeadIcon);
+    }
+
+    private void initCache() {
+        try {
+            // 获取缓存大小
+            String file = DataCleanManager.getTotalCacheSize(this);
+            mTvCache.setText(file);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void initSetOnClick() {
@@ -206,13 +209,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             public void onClick(View v) {
                 // 清除
                 DataCleanManager.clearAllCache(SettingActivity.this);
-                try {
-                    // 获取大小
-                    String file = DataCleanManager.getTotalCacheSize(SettingActivity.this);
-                    mTvCache.setText(file);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                initCache();
                 dialog.cancel();
             }
         });

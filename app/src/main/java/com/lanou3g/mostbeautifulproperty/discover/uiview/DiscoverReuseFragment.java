@@ -25,8 +25,8 @@ import com.andview.refreshview.XRefreshView;
 import com.andview.refreshview.XRefreshView.SimpleXRefreshListener;
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseFragment;
-import com.lanou3g.mostbeautifulproperty.baseclass.GirdAdapter;
-import com.lanou3g.mostbeautifulproperty.baseclass.GirdHolder;
+import com.lanou3g.mostbeautifulproperty.baseclass.BaseViewHolder;
+import com.lanou3g.mostbeautifulproperty.baseclass.CurrentAdapter;
 import com.lanou3g.mostbeautifulproperty.bean.DiscoverBean;
 import com.lanou3g.mostbeautifulproperty.bean.PopupwindowBean;
 import com.lanou3g.mostbeautifulproperty.discover.presenter.DiscoverPresenter;
@@ -408,20 +408,15 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     }
 
 
-    class MyAdapter extends GirdAdapter<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean> {
+    class MyAdapter extends CurrentAdapter<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean> {
         private int selectPos = 0;
 
         public MyAdapter(Context context, List<PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean> mDatas, int itemLayoutId) {
             super(context, mDatas, itemLayoutId);
         }
 
-        public void setSelectPos(int selectPos) {
-            this.selectPos = selectPos;
-            notifyDataSetChanged();
-        }
-
         @Override
-        public void convert(GirdHolder helper, PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean item) {
+        public void convert(BaseViewHolder helper, PopupwindowBean.DataBean.CategoriesBean.SubCategoriesBean item) {
             helper.setText(R.id.item_popupwindow_tv, item.getName());
             mBean.setName(item.getName());
             TextView textView = helper.getView(R.id.item_popupwindow_tv);
@@ -435,6 +430,12 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
             }
 
         }
+
+        public void setSelectPos(int selectPos) {
+            this.selectPos = selectPos;
+            notifyDataSetChanged();
+        }
+
     }
 
 }

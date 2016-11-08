@@ -16,7 +16,7 @@ import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.baseclass.BaseActivity;
 import com.lanou3g.mostbeautifulproperty.bean.UserFeedbackBean;
 import com.lanou3g.mostbeautifulproperty.dbtool.DBTools;
-import com.lanou3g.mostbeautifulproperty.magazine.uiview.adapter.UserFeedbackAdapter;
+import com.lanou3g.mostbeautifulproperty.mine.uiview.adapter.UserFeedbackAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,8 +34,6 @@ public class UserFeedbcakActivity extends BaseActivity implements View.OnClickLi
 
     private final String SP_CONTACT_KEY = "userFeedbackContact";
     private final String FILTER_FEEDBACK = "userFeedbackBody";
-    private final String FEEDBACK_BODY = "feedbackBody";
-    private final String FEEDBACK_TIME = "feedbackTime";
     private UserFeedbackAdapter mAdapter;
 
 

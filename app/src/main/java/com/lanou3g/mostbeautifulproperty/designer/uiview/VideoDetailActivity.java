@@ -93,12 +93,6 @@ public class VideoDetailActivity extends BaseActivity implements IDesignerView<D
         mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
         sensorEventListner = new JCVideoPlayer.JCAutoFullscreenListener();
         //评论详情中布局
-
-
-
-
-
-
     }
 
     @Override
@@ -113,8 +107,6 @@ public class VideoDetailActivity extends BaseActivity implements IDesignerView<D
         initSetDetail();
         DesignerPresenter presenter = new DesignerPresenter(this);
         presenter.startRequest(URLValues.getVideoDetailUrl(mListBean.getId()), DesignViedeDedailBean.class);
-
-
     }
 
     @Override
@@ -127,12 +119,9 @@ public class VideoDetailActivity extends BaseActivity implements IDesignerView<D
     @Override
     public void onBackPressed() {
 
-
         if (JCVideoPlayer.backPress()) {
             return;
         }
-
-
 
          super.onBackPressed();
     }

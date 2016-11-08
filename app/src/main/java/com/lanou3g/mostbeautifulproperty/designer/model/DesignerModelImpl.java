@@ -16,8 +16,6 @@ public class DesignerModelImpl implements IDesignerModel{
             @Override
             public void onCompleted(T result) {
                 listener.onCompleted(result);
-
-
             }
 
             @Override
