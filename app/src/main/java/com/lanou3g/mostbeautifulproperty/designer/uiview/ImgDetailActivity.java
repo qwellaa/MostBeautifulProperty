@@ -25,8 +25,6 @@ public class ImgDetailActivity extends BaseActivity implements  View.OnClickList
     protected void initView() {
         mDeTailImageView = bindView(R.id.imagedetail_comment_img);
         mDeTailImageView.setOnClickListener(this);
-
-
     }
 
     @Override
@@ -34,14 +32,6 @@ public class ImgDetailActivity extends BaseActivity implements  View.OnClickList
         Intent intent = getIntent();
         String imgUrl = intent.getStringExtra("commentURL");
         Glide.with(this).load(imgUrl).into(mDeTailImageView);
-
-
-
-
-
-
-
-
     }
 
 
