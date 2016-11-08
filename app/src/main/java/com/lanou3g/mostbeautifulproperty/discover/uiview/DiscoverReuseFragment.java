@@ -68,75 +68,12 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     private String mEndUrl;
     private int mPopPosition;
     private DiscoverResuseAdapter mAdapter;
-
-    private void initLoadData() {
-        List<String> URLJewelryList = new ArrayList<>();
-        URLJewelryList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(3));
-        URLJewelryList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(24));
-        URLJewelryList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(23));
-        URLJewelryList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(22));
-        URLJewelryList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(21));
-        URLJewelryList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(20));
-
-        List<String> URLBagList = new ArrayList<>();
-        URLBagList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(1));
-        URLBagList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(51));
-        URLBagList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(32));
-        URLBagList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(10));
-        URLBagList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(9));
-        URLBagList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(8));
-        URLBagList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(7));
-        URLBagList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(6));
-        URLBagList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(5));
-
-        List<String> URLShoeList = new ArrayList<>();
-        URLShoeList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(2));
-        URLShoeList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(14));
-        URLShoeList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(49));
-        URLShoeList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(48));
-        URLShoeList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(38));
-        URLShoeList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(16));
-        URLShoeList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(15));
-        URLShoeList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(11));
-
-        List<String>URLManList = new ArrayList<>();
-        URLManList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(65));
-
-        //配饰
-        List<String>URLAccessoriesList = new ArrayList<>();
-        URLAccessoriesList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(4));
-        URLAccessoriesList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(53));
-        URLAccessoriesList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(52));
-        URLAccessoriesList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(45));
-        URLAccessoriesList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(37));
-        URLAccessoriesList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(36));
-        URLAccessoriesList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(29));
-        URLAccessoriesList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(27));
-        URLAccessoriesList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(26));
-        URLAccessoriesList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(25));
-
-        List<String>URLOtherList = new ArrayList<>();
-        URLOtherList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(54));
-        URLOtherList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(68));
-        URLOtherList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(64));
-        URLOtherList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(61));
-        URLOtherList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(58));
-        URLOtherList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(56));
-        URLOtherList.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(42));
-
-        mEndUrl = URLValues.getDISCOVER_TAIL_URL();
-
-        URLHeadAndMid.add(URLJewelryList);
-        URLHeadAndMid.add(URLBagList);
-        URLHeadAndMid.add(URLShoeList);
-        URLHeadAndMid.add(URLManList);
-        URLHeadAndMid.add(URLAccessoriesList);
-        URLHeadAndMid.add(URLOtherList);
-
-    }
+    private static final String KEY = "position";
 
 
-    private ArrayList<List> URLHeadAndMid = new ArrayList<>();
+
+
+    private List<List<String>> URLHeadAndMid = URLValues.URL_HEAD_AND_MID();
     private List<DiscoverBean.DataBean.ProductsBean> mBeanArrayList;
     private String mUrl;
 
@@ -144,7 +81,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     public static DiscoverReuseFragment newInstance(int position) {
 
         Bundle args = new Bundle();
-        args.putInt("position", position);
+        args.putInt(KEY, position);
         DiscoverReuseFragment fragment = new DiscoverReuseFragment();
         fragment.setArguments(args);
         return fragment;
@@ -208,10 +145,9 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
         mBeanArrayList = new ArrayList<>();
         mAdapter = new DiscoverResuseAdapter(context);
         mListView.setAdapter(mAdapter);
-                initLoadData();
 
         Bundle args = getArguments();
-        mPosition = args.getInt("position");
+        mPosition = args.getInt(KEY);
         mPresenter = new DiscoverPresenter(this);
         if (TABMEN == mPosition) {
             mMoreTopView.setVisibility(View.INVISIBLE);
@@ -243,7 +179,6 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
             public void onLoadMore(boolean isSilence) {
                         page = page + 1;
                         Log.d("DiscoverReuseFragment", "page:" + page);
-                        initLoadData();
                         List URLStrs = URLHeadAndMid.get(mPosition - 3);
                         mUrl = (String) URLStrs.get(mPopPosition) + page + mEndUrl + size;
                         Log.d("DiscoverReuseFragment", mUrl);
