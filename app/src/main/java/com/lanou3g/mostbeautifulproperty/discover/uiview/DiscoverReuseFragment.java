@@ -68,6 +68,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     private String mEndUrl;
     private int mPopPosition;
     private DiscoverResuseAdapter mAdapter;
+    private static final String KEY = "position";
 
 
 
@@ -80,7 +81,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
     public static DiscoverReuseFragment newInstance(int position) {
 
         Bundle args = new Bundle();
-        args.putInt("position", position);
+        args.putInt(KEY, position);
         DiscoverReuseFragment fragment = new DiscoverReuseFragment();
         fragment.setArguments(args);
         return fragment;
@@ -146,7 +147,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
         mListView.setAdapter(mAdapter);
 
         Bundle args = getArguments();
-        mPosition = args.getInt("position");
+        mPosition = args.getInt(KEY);
         mPresenter = new DiscoverPresenter(this);
         if (TABMEN == mPosition) {
             mMoreTopView.setVisibility(View.INVISIBLE);
