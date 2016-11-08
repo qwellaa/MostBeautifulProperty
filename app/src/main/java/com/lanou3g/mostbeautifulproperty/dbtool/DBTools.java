@@ -76,7 +76,7 @@ public class DBTools {
             public void run() {
                 final ArrayList<T> beanArrayList = mLiteOrm.query(clazz);
                 // handler 的post 方法 可以把一个runnable
-                // 发送到主线程去执行
+                // 发送到主线程去执行送到主线程去执行
                 mHandler.post(new HandlerRunnable<T>(beanArrayList, queryListener));
             }
         });

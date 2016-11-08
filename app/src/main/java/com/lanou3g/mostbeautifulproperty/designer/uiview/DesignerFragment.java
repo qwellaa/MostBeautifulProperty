@@ -79,8 +79,8 @@ public class DesignerFragment extends BaseFragment implements IDesignerView<Desi
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent videoIntent = new Intent(context, VideoDetailActivity.class);
-                videoIntent.putExtra("video",designBeanP);
-                videoIntent.putExtra("position",position);
+                videoIntent.putExtra(VideoDetailActivity.VIDEO_DETAILBEAN,designBeanP);
+                videoIntent.putExtra(VideoDetailActivity.VIDEO_DETAILBEAN_POSITOIN,position);
                 context.startActivity(videoIntent);
 
 

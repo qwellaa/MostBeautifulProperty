@@ -62,6 +62,8 @@ public class VideoDetailActivity extends BaseActivity implements IDesignerView<D
     private ImageView mCommentDetailImg;
     private SensorManager mSensorManager;
     private JCVideoPlayer.JCAutoFullscreenListener sensorEventListner;
+    public static final String VIDEO_DETAILBEAN ="video";
+    public static final String VIDEO_DETAILBEAN_POSITOIN ="position";
 
     @Override
     protected int setLayout() {
