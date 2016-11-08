@@ -33,6 +33,7 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 public class DesignAdapter extends BaseAdapter {
     private Context mContext;
     private DesignerBean mDesignerBean;
+    private Intent mVideoIntent;
 
     public void setDesignerBean(DesignerBean designerBean) {
         mDesignerBean = designerBean;
@@ -179,13 +180,23 @@ public class DesignAdapter extends BaseAdapter {
 
             }
         });
+        mVideoIntent = new Intent(mContext, VideoDetailActivity.class);
         viewHolder.commentLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent videoIntent = new Intent(mContext, VideoDetailActivity.class);
-                videoIntent.putExtra("video",mDesignerBean);
-                videoIntent.putExtra("position",position);
-                mContext.startActivity(videoIntent);
+
+                mVideoIntent.putExtra("video",mDesignerBean);
+                mVideoIntent.putExtra("position",position);
+                mContext.startActivity(mVideoIntent);
+            }
+        });
+        viewHolder.listTitleLL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mVideoIntent.putExtra("video",mDesignerBean);
+                mVideoIntent.putExtra("position",position);
+                mContext.startActivity(mVideoIntent);
+
             }
         });
 
@@ -242,7 +253,7 @@ public class DesignAdapter extends BaseAdapter {
         private ImageButton downImagButton;
         private LinearLayout forwardLL;
         private LinearLayout commentLL;
-
+        private LinearLayout listTitleLL;
 
         public ViewHolder(View view) {
             View viewVideo =  view.findViewById(R.id.include_item_design);
@@ -262,6 +273,8 @@ public class DesignAdapter extends BaseAdapter {
             downImagButton = (ImageButton) viewVideo.findViewById(R.id.item_design_down_img);
             forwardLL = (LinearLayout) viewVideo.findViewById(R.id.item_design_forward_linear);
             commentLL = (LinearLayout) viewVideo.findViewById(R.id.item_design_comment_linear);
+            listTitleLL = (LinearLayout) viewVideo.findViewById(R.id.video_detail_title_linear);
+
 
         }
     }

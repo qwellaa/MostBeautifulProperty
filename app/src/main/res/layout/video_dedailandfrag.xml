@@ -4,11 +4,12 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:orientation="vertical"
-              android:descendantFocusability="blocksDescendants"
+
     >
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/video_detail_title_linear"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/viedeoTitcle"
         android:orientation="horizontal">

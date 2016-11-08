@@ -15,6 +15,7 @@ import com.lanou3g.mostbeautifulproperty.baseclass.BaseActivity;
 public class ImgDetailActivity extends BaseActivity implements  View.OnClickListener {
 
     private ImageView mDeTailImageView;
+    public static String IMG_URL = "commentURL";
 
     @Override
     protected int setLayout() {
@@ -30,7 +31,7 @@ public class ImgDetailActivity extends BaseActivity implements  View.OnClickList
     @Override
     protected void initData() {
         Intent intent = getIntent();
-        String imgUrl = intent.getStringExtra("commentURL");
+        String imgUrl = intent.getStringExtra(IMG_URL);
         Glide.with(this).load(imgUrl).into(mDeTailImageView);
     }
 

@@ -40,6 +40,7 @@ public class DesignerFragment extends BaseFragment implements IDesignerView<Desi
     public static long lastRefreshTime;
     private AlertDialog mDialog;
     private DesignerBean designBeanP;
+    private static int PAGE_NUM = 0;
 
     @Override
     protected int setLayout() {
@@ -69,7 +70,7 @@ public class DesignerFragment extends BaseFragment implements IDesignerView<Desi
 
         mDesignerPresenter.startRequest(URLValues.getVIDEO_URL(Page), DesignerBean.class);
         onRefresh();
-        onClickListView();
+     //   onClickListView();
     }
 
     private void onClickListView() {
@@ -94,7 +95,7 @@ public class DesignerFragment extends BaseFragment implements IDesignerView<Desi
                     @Override
                     public void onRefresh() {
                         super.onRefresh();
-                        Page = 0;
+                        Page = PAGE_NUM;
                         mDesignerPresenter.startRequest(URLValues.getVIDEO_URL(Page), DesignerBean.class);
                         lastRefreshTime = mRefreshView.getLastRefreshTime();
 
@@ -181,7 +182,7 @@ public class DesignerFragment extends BaseFragment implements IDesignerView<Desi
     public void onResponse(DesignerBean designerBeen) {
         designBeanP = designerBeen;
 
-        if (Page == 0) {
+        if (Page == PAGE_NUM) {
             mDesignAdapter.setDesignerBean(designerBeen);
             mRefreshView.stopRefresh();
             Page = (int) designerBeen.getInfo().getNp();

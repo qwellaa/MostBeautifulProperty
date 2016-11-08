@@ -36,7 +36,7 @@ import static com.lanou3g.mostbeautifulproperty.R.id.video_detail_comment_img;
  * Created by dllo on 16/11/4.
  */
 
-public class VideoDetailActivity extends BaseActivity implements IDesignerView<DesignViedeDedailBean> {
+public class VideoDetailActivity extends BaseActivity implements IDesignerView<DesignViedeDedailBean>, View.OnClickListener {
     private TextView tvName;
     private TextView tvTime;
     private TextView tvTitle;
@@ -64,6 +64,7 @@ public class VideoDetailActivity extends BaseActivity implements IDesignerView<D
     private JCVideoPlayer.JCAutoFullscreenListener sensorEventListner;
     public static final String VIDEO_DETAILBEAN ="video";
     public static final String VIDEO_DETAILBEAN_POSITOIN ="position";
+    private ImageView mReturnImg;
 
     @Override
     protected int setLayout() {
@@ -94,15 +95,17 @@ public class VideoDetailActivity extends BaseActivity implements IDesignerView<D
         mHotCommentListView.addHeaderView(viewTop);
         mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
         sensorEventListner = new JCVideoPlayer.JCAutoFullscreenListener();
-        //评论详情中布局
+        mReturnImg = bindView(R.id.video_detail_return_img);
+        mReturnImg.setOnClickListener(this);
+
     }
 
     @Override
     protected void initData() {
 
         Intent intent = getIntent();
-        mBean = (DesignerBean) intent.getSerializableExtra("video");
-        mPosition = intent.getIntExtra("position", 1);
+        mBean = (DesignerBean) intent.getSerializableExtra(VIDEO_DETAILBEAN);
+        mPosition = intent.getIntExtra(VIDEO_DETAILBEAN_POSITOIN, 1);
         mVideoBean = mBean.getList().get(mPosition).getVideo();
         mTime = mBean.getList().get(mPosition).getVideo().getDuration();
         mListBean = mBean.getList().get(mPosition);
@@ -284,7 +287,7 @@ public class VideoDetailActivity extends BaseActivity implements IDesignerView<D
                         @Override
                         public void onClick(View v) {
                             Intent commentImgIntent = new Intent(VideoDetailActivity.this,ImgDetailActivity.class);
-                            commentImgIntent.putExtra("commentURL",item.getImage().getImages().get(0));
+                            commentImgIntent.putExtra(ImgDetailActivity.IMG_URL,item.getImage().getImages().get(0));
                             startActivity(commentImgIntent);
 
                         }
@@ -307,4 +310,12 @@ public class VideoDetailActivity extends BaseActivity implements IDesignerView<D
 
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.video_detail_return_img:
+                finish();
+                break;
+        }
+    }
 }

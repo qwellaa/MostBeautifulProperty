@@ -3,16 +3,25 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:orientation="vertical">-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/black_deep">
+        <ImageView
 
+            android:id="@+id/video_detail_return_img"
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:layout_margin="10dp"
+            android:src="@mipmap/collect_left_button_night"/>
+        <TextView
 
-    <!--<include layout="@layout/video_dedailandfrag"-->
-    <!--android:id="@+id/include_item_video_detail"-->
-    <!--&gt;-->
-    <!--</include>-->
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/titleTx"
+            style="@style/titleText"/>
+    </RelativeLayout>
+
 
 
     <ListView
