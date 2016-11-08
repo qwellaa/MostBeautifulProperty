@@ -1,4 +1,4 @@
-package com.lanou3g.mostbeautifulproperty.magazine.uiview.adapter;
+package com.lanou3g.mostbeautifulproperty.mine.uiview.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

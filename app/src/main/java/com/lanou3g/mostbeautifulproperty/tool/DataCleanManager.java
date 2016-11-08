@@ -1,4 +1,4 @@
-package com.lanou3g.mostbeautifulproperty.mine.uiview.setting.clearcache;
+package com.lanou3g.mostbeautifulproperty.tool;
 
 import android.content.Context;
 import android.os.Environment;

@@ -80,7 +80,6 @@ public class DiscoverDailyFragment extends BaseFragment implements IDiscoverView
         mRefreshView.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener(){
             @Override
             public void onRefresh() {
-//                initInternetDate();
                 mLd = mFirstTime;
                 presenter.startRequest(URLValues.getDaily_HEAD_URL(mLd), DailyBean.class);
             }
@@ -103,7 +102,7 @@ public class DiscoverDailyFragment extends BaseFragment implements IDiscoverView
                     URLConnection uc= null;//生成连接对象
                     uc = url.openConnection();
                     uc.connect(); //发出连接
-                    //取得网站日期时间
+                    //取得时间
                     mLd = uc.getDate();
                     mFirstTime = mLd;
                 } catch (MalformedURLException e) {

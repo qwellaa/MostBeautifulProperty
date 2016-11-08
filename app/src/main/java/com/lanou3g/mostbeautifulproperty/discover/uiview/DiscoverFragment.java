@@ -22,6 +22,7 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.Be
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -31,7 +32,7 @@ public class DiscoverFragment extends BaseFragment{
 
     private MagicIndicator mTabDiscover;
     private ViewPager mVpDiscover;
-    private ArrayList<String> mTitles;
+    private List<String> mTitles;
 
     @Override
     protected int setLayout() {
@@ -49,7 +50,7 @@ public class DiscoverFragment extends BaseFragment{
 
         mTitles = initTitles();
 
-        ArrayList<Fragment> fragments = getFragments();
+        List<Fragment> fragments = getFragments();
 
         DiscoverAdapter adapter = new DiscoverAdapter(getChildFragmentManager());
         adapter.setTitles(mTitles);
@@ -101,9 +102,9 @@ public class DiscoverFragment extends BaseFragment{
         ViewPagerHelper.bind(mTabDiscover, mVpDiscover);
     }
 
-    private ArrayList<String> initTitles() {
+    private List<String> initTitles() {
 
-        ArrayList<String> titles = new ArrayList<>();
+        List<String> titles = new ArrayList<>();
 
         titles.add("喜欢的");
         titles.add("设计师动态");
@@ -118,8 +119,8 @@ public class DiscoverFragment extends BaseFragment{
     }
 
     @NonNull
-    private ArrayList<Fragment> getFragments() {
-        ArrayList<Fragment> fragments = new ArrayList<>();
+    private List<Fragment> getFragments() {
+        List<Fragment> fragments = new ArrayList<>();
         fragments.add(new DiscoverLikeFragment());
         fragments.add(new DiscoverDynamicFragment());
         fragments.add(new DiscoverDailyFragment());

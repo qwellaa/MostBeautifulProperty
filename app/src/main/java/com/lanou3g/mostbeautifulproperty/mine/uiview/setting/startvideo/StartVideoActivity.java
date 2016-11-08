@@ -1,8 +1,6 @@
 package com.lanou3g.mostbeautifulproperty.mine.uiview.setting.startvideo;
 
 import android.net.Uri;
-import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.widget.MediaController;
 import android.widget.VideoView;
@@ -46,11 +44,7 @@ public class StartVideoActivity extends BaseActivity{
 
         MediaController controller = new MediaController(this);
         mVideoView.setMediaController(controller);
-        mVideoView.setVideoURI(Uri.parse("android.resource://com.lanou3g.mostbeautifulproperty/"+R.raw.video));
-        //        Uri videoUri = Uri.parse(Environment.getExternalStorageDirectory()
-        //                .getPath() + "/" + R.raw.video);
-        //        videoView.setVideoURI(videoUri);
-        Log.d("SecondActivity", Environment.getExternalStorageDirectory().getPath());
+        mVideoView.setVideoURI(Uri.parse("android.resource://com.lanou3g.mostbeautifulproperty/" + R.raw.video));
         mVideoView.start();
     }
 }

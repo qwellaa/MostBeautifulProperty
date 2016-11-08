@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.lanou3g.mostbeautifulproperty.discover.uiview.DiscoverReuseFragment;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -14,16 +14,16 @@ import java.util.ArrayList;
 
 public class DiscoverAdapter extends FragmentPagerAdapter{
 
-    private ArrayList<Fragment> mFragments;
-    private ArrayList<String> mTitles;
+    private List<Fragment> mFragments;
+    private List<String> mTitles;
 
 
-    public void setFragments(ArrayList<Fragment> fragments) {
+    public void setFragments(List<Fragment> fragments) {
         mFragments = fragments;
         notifyDataSetChanged();
     }
 
-    public void setTitles(ArrayList<String> titles) {
+    public void setTitles(List<String> titles) {
         mTitles = titles;
     }
 
