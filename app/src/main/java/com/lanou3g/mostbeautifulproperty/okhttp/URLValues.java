@@ -1,5 +1,8 @@
 package com.lanou3g.mostbeautifulproperty.okhttp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  */
@@ -67,6 +70,88 @@ public final class URLValues {
     public static final String getVideoDetailUrl (String page){
 
         return VIDEO_DETAIL_UP_URL + page + VIDEO_DERAIL_DOWN_URL;
+    }
+
+    private static final List<String> URL_JEWERY_LIST(){
+        List<String>URL_JEWERY_LIST = new ArrayList<>();
+        URL_JEWERY_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(3));
+        URL_JEWERY_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(24));
+        URL_JEWERY_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(23));
+        URL_JEWERY_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(22));
+        URL_JEWERY_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(21));
+        URL_JEWERY_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(20));
+        return URL_JEWERY_LIST;
+    }
+
+    private static final List<String> URL_BAG_LIST(){
+        List<String>URL_BAG_LIST = new ArrayList<>();
+        URL_BAG_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(1));
+        URL_BAG_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(51));
+        URL_BAG_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(32));
+        URL_BAG_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(10));
+        URL_BAG_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(9));
+        URL_BAG_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(8));
+        URL_BAG_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(7));
+        URL_BAG_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(6));
+        URL_BAG_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(5));
+        return URL_BAG_LIST;
+    }
+
+    private static final List<String> URL_SHOE_LIST(){
+        List<String>URL_SHOE_LIST = new ArrayList<>();
+        URL_SHOE_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(2));
+        URL_SHOE_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(14));
+        URL_SHOE_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(49));
+        URL_SHOE_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(48));
+        URL_SHOE_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(38));
+        URL_SHOE_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(16));
+        URL_SHOE_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(15));
+        URL_SHOE_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(11));
+        return URL_SHOE_LIST;
+    }
+
+    private static final List<String> URL_MAN_LIST(){
+        ArrayList<String>URL_MAN_LIST = new ArrayList<>();
+        URL_MAN_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(65));
+        return URL_MAN_LIST;
+    }
+
+    private static final List<String> URL_ACCESSORIES_LIST(){
+        List<String>URL_ACCESSORIES_LIST = new ArrayList<>();
+        URL_ACCESSORIES_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(4));
+        URL_ACCESSORIES_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(53));
+        URL_ACCESSORIES_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(52));
+        URL_ACCESSORIES_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(45));
+        URL_ACCESSORIES_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(37));
+        URL_ACCESSORIES_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(36));
+        URL_ACCESSORIES_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(29));
+        URL_ACCESSORIES_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(27));
+        URL_ACCESSORIES_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(26));
+        URL_ACCESSORIES_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(25));
+        return URL_ACCESSORIES_LIST;
+    }
+
+    private static final List<String> URL_OTHER_LIST(){
+        List<String>URL_OTHER_LIST = new ArrayList<>();
+        URL_OTHER_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(54));
+        URL_OTHER_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(68));
+        URL_OTHER_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(64));
+        URL_OTHER_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(61));
+        URL_OTHER_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(58));
+        URL_OTHER_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(56));
+        URL_OTHER_LIST.add(URLValues.getDISCOVER_HEAD_AND_MID_URL(42));
+        return URL_OTHER_LIST;
+    }
+
+    public static final List<List<String>>URL_HEAD_AND_MID(){
+        List<List<String>>URL_HEAD_AND_MID = new ArrayList<>();
+        URL_HEAD_AND_MID.add(URL_JEWERY_LIST());
+        URL_HEAD_AND_MID.add(URL_BAG_LIST());
+        URL_HEAD_AND_MID.add(URL_SHOE_LIST());
+        URL_HEAD_AND_MID.add(URL_MAN_LIST());
+        URL_HEAD_AND_MID.add(URL_ACCESSORIES_LIST());
+        URL_HEAD_AND_MID.add(URL_OTHER_LIST());
+        return URL_HEAD_AND_MID;
     }
 
 }
