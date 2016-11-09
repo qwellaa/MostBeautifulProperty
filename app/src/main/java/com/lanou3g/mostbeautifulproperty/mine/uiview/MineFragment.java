@@ -124,6 +124,18 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
             Glide.with(this).load(mQq.getDb().getUserIcon()).into(mCirMyImg);
         }
 
+
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    Thread.sleep(3000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                mTvUserName.setText("崩崩沙卡拉卡");
+//            }
+//        }).start();
     }
 
     private AlertDialog createDialog() {
