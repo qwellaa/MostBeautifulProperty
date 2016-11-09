@@ -5,6 +5,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.lanou3g.mostbeautifulproperty.tool.ExceptionHandler;
+
 /**
  *
  * Activity 的基类
@@ -15,6 +17,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ExceptionHandler handler = new ExceptionHandler(this);
+        Thread.setDefaultUncaughtExceptionHandler(handler);
+
         setContentView(setLayout());
         initView();
         initData();
