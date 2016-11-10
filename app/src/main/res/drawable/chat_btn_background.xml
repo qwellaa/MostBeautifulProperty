@@ -5,7 +5,7 @@
         <shape android:shape="rectangle"
              >
             <solid android:color="@color/colorPress_scan_btn_Bg"/>
-            <corners android:radius="5dp"/>
+            <corners android:radius="5px"/>
 
         </shape>
 
@@ -16,7 +16,7 @@
 
         <shape android:shape="rectangle">
             <solid android:color="@color/holo_orange_light"/>
-            <corners android:radius="5dp"/>
+            <corners android:radius="5px"/>
         </shape>
     </item>
 
