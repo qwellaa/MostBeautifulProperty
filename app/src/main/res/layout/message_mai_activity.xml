@@ -1,21 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:background="@mipmap/poi"
+              android:orientation="vertical">
 
-    <EditText
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="输入对方的Id"/>
-    <Button
+        android:layout_margin="30dp"
+        android:orientation="vertical">
+
+
+        <EditText
+            android:id="@+id/ec_edit_chat_id"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/shap_edittext"
+            android:hint="   输入对方昵称"
+
+
+            />
+
+        <Button
+            android:id="@+id/ec_btn_start_chat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/chat_btn_background"
+            android:text="发起聊天"/>
+    </LinearLayout>
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="发起聊天"/>
-    <Button
-        android:id="@+id/btn_exit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="退出登录"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+
+
+        <Button
+            android:id="@+id/btn_exit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="10dp"
+            android:background="@drawable/chat_btn_background"
+            android:text="退出登录"/>
+
+
+    </RelativeLayout>
+
 
 </LinearLayout>

@@ -4,20 +4,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMMessage;
 import com.lanou3g.mostbeautifulproperty.R;
 
 /**
  * Created by dllo on 16/10/28.
  */
 
-public class MessageMainActivity extends AppCompatActivity{
+public class MessageMainActivity extends AppCompatActivity {
 
     // 发起聊天 username 输入框
     private EditText mChatIdEdit;
@@ -36,40 +39,39 @@ public class MessageMainActivity extends AppCompatActivity{
             finish();
             return;
         }
-       setContentView(R.layout.message_mai_activity);
-    initView();
+        setContentView(R.layout.message_mai_activity);
+        initView();
     }
-
 
 
     private void initView() {
 //
-//        mChatIdEdit = (EditText) findViewById(R.id.ec_edit_chat_id);
-//
-//        mStartChatBtn = (Button) findViewById(R.id.ec_btn_start_chat);
-//        mStartChatBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // 获取我们发起聊天的者的username
-//                String chatId = mChatIdEdit.getText().toString().trim();
-//                if (!TextUtils.isEmpty(chatId)) {
-//                    // 获取当前登录用户的 username
-//                    String currUsername = EMClient.getInstance().getCurrentUser();
-//                    if (chatId.equals(currUsername)) {
-//                        Toast.makeText(ECMainActivity.this, "不能和自己聊天", Toast.LENGTH_SHORT).show();
-//                        return;
-//                    }
-//                    // 跳转到聊天界面，开始聊天
-//                    Intent intent = new Intent(ECMainActivity.this, ECChatActivity.class);
-//                    // EaseUI封装的聊天界面需要这两个参数，聊天者的username，以及聊天类型，单聊还是群聊
-//                    intent.putExtra("userId", chatId);
-//                    intent.putExtra("chatType", EMMessage.ChatType.Chat);
-//                    startActivity(intent);
-//                } else {
-//                    Toast.makeText(ECMainActivity.this, "Username 不能为空", Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        });
+        mChatIdEdit = (EditText) findViewById(R.id.ec_edit_chat_id);
+
+        mStartChatBtn = (Button) findViewById(R.id.ec_btn_start_chat);
+        mStartChatBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 获取我们发起聊天的者的username
+                String chatId = mChatIdEdit.getText().toString().trim();
+                if (!TextUtils.isEmpty(chatId)) {
+                    // 获取当前登录用户的 username
+                    String currUsername = EMClient.getInstance().getCurrentUser();
+                    if (chatId.equals(currUsername)) {
+                        Toast.makeText(MessageMainActivity.this, "不能和自己聊天", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    // 跳转到聊天界面，开始聊天
+                    Intent intent = new Intent(MessageMainActivity.this, ECChatActivity.class);
+                    // EaseUI封装的聊天界面需要这两个参数，聊天者的username，以及聊天类型，单聊还是群聊
+                    intent.putExtra("userId", chatId);
+                    intent.putExtra("chatType", EMMessage.ChatType.Chat);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(MessageMainActivity.this, "Username 不能为空", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
         mSignOutBtn = (Button) findViewById(R.id.btn_exit);
         mSignOutBtn.setOnClickListener(new View.OnClickListener() {
@@ -79,8 +81,6 @@ public class MessageMainActivity extends AppCompatActivity{
             }
         });
     }
-
-
 
 
     /**
@@ -108,7 +108,7 @@ public class MessageMainActivity extends AppCompatActivity{
         });
     }
 
-    }
+}
 
 
 
