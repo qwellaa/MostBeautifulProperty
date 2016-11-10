@@ -43,5 +43,4 @@ dependencies {
     compile files('libs/MobCommons-2016.1020.1028.jar')
     compile 'fm.jiecao:jiecaovideoplayer:4.8.1'
     compile 'com.wx.goodview:goodview:1.0.0'
-    compile project(':PullToRefresh')
 }
