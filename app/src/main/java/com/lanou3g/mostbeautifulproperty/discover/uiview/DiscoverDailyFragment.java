@@ -90,6 +90,7 @@ public class DiscoverDailyFragment extends BaseFragment implements IDiscoverView
                 presenter.startRequest(URLValues.getDaily_HEAD_URL(mLd), DailyBean.class);
             }
         });
+
     }
 
     private void initInternetDate() {

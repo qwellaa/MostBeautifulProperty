@@ -27,7 +27,6 @@ public final class URLValues {
 
     // 有物 daily
     private static final String Daily_HEAD_URL = "http://design.zuimeia.com/api/v1/products/daily/?timestamp=";
-    private static final String Daily_TAIL_URL = "000";
     public static String getDaily_HEAD_URL(Long time) {
         return Daily_HEAD_URL + time;
     }
@@ -35,7 +34,6 @@ public final class URLValues {
     //第二页 全部
     private static final String DISCOVER_HEAD_URL = "http://design.zuimeia.com/api/v1/products/category/";
     private static final String DISCOVER_MID_URL = "/?page=";
-    public static final String DISCOVER_TAIL_URL = "&page_size=";
 
     public static String getDISCOVER_HEAD_AND_MID_URL(int category){
         return DISCOVER_HEAD_URL+ category + DISCOVER_MID_URL;
@@ -45,7 +43,6 @@ public final class URLValues {
     public static final String APP_DOWNLOAD_URL = "http://design.zuimeia.com/app.html";
 
     //百思不得姐视频
-    public static final String VIDEO_URL = "http://s.budejie.com/topic/list/jingxuan/41/budejie-android-6.5.7/0-20.json";
     public static final String VIDEO_TOP_URL = "http://s.budejie.com/topic/list/jingxuan/41/budejie-android-6.5.7/";
     public static final String VIDEO_BUTTOM_URL = "-20.json";
     public static String getVIDEO_URL ( int page){
@@ -140,6 +137,11 @@ public final class URLValues {
         URL_HEAD_AND_MID.add(URL_ACCESSORIES_LIST());
         URL_HEAD_AND_MID.add(URL_OTHER_LIST());
         return URL_HEAD_AND_MID;
+    }
+
+    //daily和重用fragment的二级界面接口网址
+    public static final String getResuseFragment(){
+        return "http://design.zuimeia.com/api/v1/product/";
     }
 
 }
