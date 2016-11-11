@@ -118,14 +118,14 @@
             android:layout_below="@+id/tv_resuse_property"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:src="@mipmap/adasd"
             android:scaleType="fitXY"/>
 
         <ImageView
             android:id="@+id/iv_resuse_photo_two"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:layout_margin="10dp"
             android:src="@mipmap/adasd"
             android:scaleType="fitXY"
