@@ -10,7 +10,7 @@
         <ImageView
             android:id="@+id/resuse_vp_photo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:scaleType="fitXY"
             android:src="@mipmap/adasd"/>
         <RadioGroup
@@ -72,22 +72,19 @@
             android:layout_alignTop="@id/tv_resuse_page_one"
             android:layout_marginLeft="15dp"
             android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@mipmap/me_setting"/>
+            android:layout_height="30dp"/>
         <ImageView
             android:id="@+id/iv_resuse_page_two"
             android:layout_alignTop="@id/tv_resuse_page_two"
             android:layout_marginLeft="15dp"
             android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@mipmap/me_setting"/>
+            android:layout_height="30dp"/>
         <ImageView
             android:id="@+id/iv_resuse_page_three"
             android:layout_alignTop="@id/tv_resuse_page_three"
             android:layout_marginLeft="15dp"
             android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@mipmap/me_setting"/>
+            android:layout_height="30dp"/>
         <TextView
             android:id="@+id/tv_resuse_null"
             android:layout_marginTop="10dp"
@@ -118,7 +115,7 @@
             />
         <ImageView
             android:id="@+id/iv_resuse_photo_one"
-            android:layout_below="@+id/tv_resuse_title"
+            android:layout_below="@+id/tv_resuse_property"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

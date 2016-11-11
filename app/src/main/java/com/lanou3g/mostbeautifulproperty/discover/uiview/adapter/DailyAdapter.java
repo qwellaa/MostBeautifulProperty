@@ -89,6 +89,8 @@ public class DailyAdapter extends BaseAdapter implements StickyListHeadersAdapte
         viewHolder.mIvBody.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int infoId = info.getId();
+                mResuseIntent.putExtra("infoId",infoId);
                 mContext.startActivity(mResuseIntent);
             }
         });
