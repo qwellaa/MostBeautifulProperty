@@ -9,15 +9,11 @@
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/resuse_vp_photo"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:scaleType="fitXY"
-            android:src="@mipmap/adasd"/>
+            style="@style/ivResuseTitle"/>
         <RadioGroup
             android:id="@+id/ll_resuse_rb"
             android:layout_below="@id/resuse_vp_photo"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            style="@style/resuseRadioGroup"
             android:background="@color/discover_item_bg"
             android:orientation="horizontal">
 
@@ -40,95 +36,55 @@
         <TextView
             android:id="@+id/tv_resuse_page_one"
             android:layout_below="@id/ll_resuse_rb"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="70dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="askdjasld"
+            style="@style/tvResusePage"
             />
         <TextView
             android:id="@+id/tv_resuse_page_two"
             android:layout_below="@id/tv_resuse_page_one"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="70dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="askdja"
+            style="@style/tvResusePage"
             />
         <TextView
             android:id="@+id/tv_resuse_page_three"
             android:layout_below="@id/tv_resuse_page_two"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="70dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="askdjasld"
+            style="@style/tvResusePage"
             />
         <ImageView
             android:id="@+id/iv_resuse_page_one"
             android:layout_alignTop="@id/tv_resuse_page_one"
-            android:layout_marginLeft="15dp"
-            android:layout_width="30dp"
-            android:layout_height="30dp"/>
+            style="@style/ivResuseTitles"/>
         <ImageView
             android:id="@+id/iv_resuse_page_two"
             android:layout_alignTop="@id/tv_resuse_page_two"
-            android:layout_marginLeft="15dp"
-            android:layout_width="30dp"
-            android:layout_height="30dp"/>
+            style="@style/ivResuseTitles"/>
         <ImageView
             android:id="@+id/iv_resuse_page_three"
             android:layout_alignTop="@id/tv_resuse_page_three"
-            android:layout_marginLeft="15dp"
-            android:layout_width="30dp"
-            android:layout_height="30dp"/>
+            style="@style/ivResuseTitles"/>
         <TextView
             android:id="@+id/tv_resuse_null"
             android:layout_marginTop="10dp"
             android:layout_below="@id/tv_resuse_page_three"
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
+            style="@style/tvNull"
             android:background="@color/colorInterfaceBackground"/>
         <TextView
             android:id="@+id/tv_resuse_title"
             android:layout_below="@id/tv_resuse_null"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="15dp"
             android:textColor="@color/colorInterfaceBackground"
-            android:textSize="35dp"
-            android:text="123132131331212"
+            style="@style/tvResuseTitle"
             />
         <TextView
             android:id="@+id/tv_resuse_property"
             android:layout_below="@id/tv_resuse_title"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="15dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="askdjasldafassafsasafa"
+            style="@style/tvResusePropety"
             />
         <ImageView
             android:id="@+id/iv_resuse_photo_one"
             android:layout_below="@+id/tv_resuse_property"
-            android:layout_margin="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:src="@mipmap/adasd"
-            android:scaleType="fitXY"/>
+            style="@style/ivPhoto"/>
 
         <ImageView
             android:id="@+id/iv_resuse_photo_two"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_margin="10dp"
-            android:src="@mipmap/adasd"
-            android:scaleType="fitXY"
+            style="@style/ivPhoto"
             android:layout_below="@+id/iv_resuse_photo_one"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"/>
@@ -141,12 +97,8 @@
             android:orientation="vertical"
             android:layout_alignParentBottom="true">
             <TextView
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/loginText"
-                android:text="设计师"/>
+                style="@style/tvDesigner"
+                android:textColor="@color/loginText"/>
             <LinearLayout
                 android:orientation="vertical"
                 android:background="@color/loginText"
