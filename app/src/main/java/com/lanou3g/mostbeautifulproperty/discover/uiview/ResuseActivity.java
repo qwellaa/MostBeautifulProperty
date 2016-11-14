@@ -29,7 +29,6 @@ public class ResuseActivity extends BaseActivity implements IDiscoverView<Discov
     private TextView mTitle;
     private TextView mProperty;
     private ImageView mIvPhotoOne;
-    private ImageView mIvPhotoTwo;
     private ImageView mIvPhoto;
     private TextView mName;
     private TextView mPerson;
@@ -53,7 +52,6 @@ public class ResuseActivity extends BaseActivity implements IDiscoverView<Discov
         mTitle = bindView(R.id.tv_resuse_title);
         mProperty = bindView(R.id.tv_resuse_property);
         mIvPhotoOne = bindView(R.id.iv_resuse_photo_one);
-        mIvPhotoTwo = bindView(R.id.iv_resuse_photo_two);
         mIvPhoto = bindView(R.id.iv_resuse_photo);
         mName = bindView(R.id.tv_resuse_name);
         mPerson = bindView(R.id.tv_resuse_person);
@@ -93,7 +91,6 @@ public class ResuseActivity extends BaseActivity implements IDiscoverView<Discov
         mTitle.setText(bean.getName());
         mProperty.setText(bean.getDigest());
         Glide.with(this).load(bean.getImages().get(0)).into(mIvPhotoOne);
-        Glide.with(this).load(bean.getImages().get(1)).into(mIvPhotoTwo);
         Glide.with(this).load(bean.getDesigner().getAvatar_url()).into(mIvPhoto);
         mName.setText(bean.getDesigner().getName());
         mPerson.setText(bean.getDesigner().getLabel());

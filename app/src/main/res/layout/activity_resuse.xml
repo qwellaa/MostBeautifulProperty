@@ -82,15 +82,9 @@
             android:layout_below="@+id/tv_resuse_property"
             style="@style/ivPhoto"/>
 
-        <ImageView
-            android:id="@+id/iv_resuse_photo_two"
-            style="@style/ivPhoto"
-            android:layout_below="@+id/iv_resuse_photo_one"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"/>
 
         <LinearLayout
-            android:layout_below="@id/iv_resuse_photo_two"
+            android:layout_below="@id/iv_resuse_photo_one"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorInterfaceBackground"
@@ -102,42 +96,23 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:background="@color/loginText"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                style="@style/personLin">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_resuse_photo"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
+                style="@style/resusePhoto"
                 android:src="@mipmap/buy_vip_dialog_bg"
                 />
             <TextView
                 android:id="@+id/tv_resuse_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                style="@style/resuseName"
                 android:textColor="@color/colorInterfaceBackground"
-                android:textSize="25sp"
-                android:text="23132132132123"/>
+                />
             <TextView
                 android:id="@+id/tv_resuse_person"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textSize="20sp"
-                android:text="aaaaa"/>
+                style="@style/resusePerson"/>
             <TextView
                 android:id="@+id/tv_resuse_content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:layout_margin="10dp"
-                android:text="aaaaaasdasjfsdjgopidshiofdjuhsoidhdfoighdfioaghoahgodafhgodfhgoidafhgodfhagoiadfhgoidfhogihdfoighdfoighdfoighoiashgoias"
-                />
+                style="@style/resuseContent"/>
 
             </LinearLayout>
         </LinearLayout>
