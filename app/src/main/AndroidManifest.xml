@@ -126,6 +126,7 @@
         </activity>
         <activity android:name=".mine.uiview.chat.ECChatActivity"/>
         <activity android:name=".mine.uiview.scan.ScanWebViewActivity"/>
+        <activity android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity"/>
 
     </application>
 
