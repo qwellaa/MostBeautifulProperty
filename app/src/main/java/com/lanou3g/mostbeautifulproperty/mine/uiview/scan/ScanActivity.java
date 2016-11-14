@@ -1,5 +1,6 @@
 package com.lanou3g.mostbeautifulproperty.mine.uiview.scan;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.annotation.Nullable;
@@ -88,6 +89,9 @@ public class ScanActivity  extends AppCompatActivity implements QRCodeView.Deleg
         Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
         vibrate();
         mQRCodeView.startSpot();
+        Intent intent = new Intent(this,ScanWebViewActivity.class);
+        intent.putExtra("hh",result);
+        startActivity(intent);
 
     }
 

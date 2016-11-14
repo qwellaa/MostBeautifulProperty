@@ -125,6 +125,7 @@
 
         </activity>
         <activity android:name=".mine.uiview.chat.ECChatActivity"/>
+        <activity android:name=".mine.uiview.scan.ScanWebViewActivity"/>
 
     </application>
 

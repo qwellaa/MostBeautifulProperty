@@ -32,7 +32,6 @@
             android:text="发起聊天"/>
     </LinearLayout>
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
