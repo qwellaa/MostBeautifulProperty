@@ -44,7 +44,7 @@ import java.util.List;
 public class DiscoverReuseFragment extends BaseFragment implements View.OnClickListener, IDiscoverView {
 
 
-    private static final int TABMEN = 6;
+    private static final int TABMEN = 4;
     private RelativeLayout mMoreTopView;
     private TextView mTitcleTv;
     private View mView;
@@ -155,7 +155,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
             mPresenter.startRequest(URLValues.POPUPWINDOW_URL, PopupwindowBean.class);
         }
 
-        List URLStrs = URLHeadAndMid.get(mPosition - 3);
+        List URLStrs = URLHeadAndMid.get(mPosition - 1);
         mUrl = ((String) URLStrs.get(0)) + page + mEndUrl + size;
         mPresenter.startRequest(mUrl, DiscoverBean.class);
         //设置是否可以下拉刷新
@@ -179,7 +179,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
             public void onLoadMore(boolean isSilence) {
                         page = page + 1;
                         Log.d("DiscoverReuseFragment", "page:" + page);
-                        List URLStrs = URLHeadAndMid.get(mPosition - 3);
+                        List URLStrs = URLHeadAndMid.get(mPosition - 1);
                         mUrl = (String) URLStrs.get(mPopPosition) + page + mEndUrl + size;
                         Log.d("DiscoverReuseFragment", mUrl);
                         mPresenter.startRequest(mUrl, DiscoverBean.class);
@@ -282,7 +282,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
 
                 String title = mTitleList.get(position).getName();
                 mTitcleTv.setText(title);
-                List URLStrings = URLHeadAndMid.get(mPosition - 3);
+                List URLStrings = URLHeadAndMid.get(mPosition - 1);
                 String urls = ((String) URLStrings.get(position)) + page + mEndUrl + size;
                 mPresenter.startRequest(urls, DiscoverBean.class);
                 mTitclePopupWindow.dismiss();
@@ -308,7 +308,7 @@ public class DiscoverReuseFragment extends BaseFragment implements View.OnClickL
             PopupwindowBean popupwindowBean = (PopupwindowBean) result;
 
             try {
-                mTitleList = popupwindowBean.getData().getCategories().get(mPosition - 3).getSub_categories();
+                mTitleList = popupwindowBean.getData().getCategories().get(mPosition - 1).getSub_categories();
 
             } catch (NullPointerException e) {
                 e.printStackTrace();

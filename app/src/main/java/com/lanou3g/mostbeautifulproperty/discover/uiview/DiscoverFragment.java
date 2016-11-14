@@ -62,7 +62,7 @@ public class DiscoverFragment extends BaseFragment{
 //        mTabDiscover.setSelectedTabIndicatorColor(Color.WHITE);
 //        // 给tab文字 加选中颜色
 //        mTabDiscover.setTabTextColors(Color.GRAY, Color.WHITE);
-        mVpDiscover.setCurrentItem(2);
+
     }
 
     private void initMagic() {
@@ -106,8 +106,7 @@ public class DiscoverFragment extends BaseFragment{
 
         List<String> titles = new ArrayList<>();
 
-        titles.add("喜欢的");
-        titles.add("设计师动态");
+
         titles.add("Daily");
         titles.add("首饰");
         titles.add("包袋");
@@ -121,10 +120,9 @@ public class DiscoverFragment extends BaseFragment{
     @NonNull
     private List<Fragment> getFragments() {
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(new DiscoverLikeFragment());
-        fragments.add(new DiscoverDynamicFragment());
+
         fragments.add(new DiscoverDailyFragment());
-        for (int i = 0; i < mTitles.size() - 3; i++) {
+        for (int i = 0; i < mTitles.size() - 1; i++) {
             fragments.add(new DiscoverReuseFragment());
         }
         return fragments;

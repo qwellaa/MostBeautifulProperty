@@ -33,7 +33,7 @@ public class DiscoverAdapter extends FragmentPagerAdapter{
 
     @Override
     public Fragment getItem(int position) {
-        if (position > 2) {
+        if (position > 0) {
             return DiscoverReuseFragment.newInstance(position);
         } else {
             return mFragments.get(position);

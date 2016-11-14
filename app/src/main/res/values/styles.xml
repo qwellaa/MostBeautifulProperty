@@ -77,8 +77,8 @@
     <style name="likeDaily">
         <item name="android:button">@null</item>
         <item name="android:layout_margin">10dp</item>
-        <item name="android:layout_height">50dp</item>
-        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_width">30dp</item>
         <item name="android:layout_gravity">center</item>
     </style>
     <style name="photoDaily">
@@ -273,6 +273,7 @@
         <item name="android:scaleType">fitXY</item>
     </style>
     <style name="resuseRadioGroup">
+        <item name="android:gravity">center</item>
         <item name="android:layout_height">50dp</item>
         <item name="android:layout_width">match_parent</item>
     </style>
@@ -351,6 +352,15 @@
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
+    </style>
+    <style name="radioResuse">
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">30dp</item>
+    </style>
+    <style name="radioResuseTwo">
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_marginLeft">30dp</item>
     </style>
 
 </resources>

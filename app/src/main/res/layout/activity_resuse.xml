@@ -18,16 +18,12 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:layout_marginLeft="130dp"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                style="@style/radioResuse"
                 android:background="@drawable/radio_btn_dislike"
                 android:button="@null"
                 />
             <RadioButton
-                android:layout_marginLeft="30dp"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                style="@style/radioResuseTwo"
                 android:background="@drawable/radio_btn_like"
                 android:button="@null"
                 />
