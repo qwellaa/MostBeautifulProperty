@@ -1,6 +1,7 @@
 package com.lanou3g.mostbeautifulproperty.discover.uiview;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -109,6 +110,15 @@ public class DiscoverResuseAdapter extends BaseAdapter implements StickyListHead
             public void onClick(View v) {
                 info.setState(2);
                 Toast.makeText(mContext,info.getLike_user_num()+"人喜欢", Toast.LENGTH_SHORT).show();
+            }
+        });
+        final Intent intent = new Intent(mContext,ResuseActivity.class);
+        viewHolder.mIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int infoId = info.getId();
+                intent.putExtra("infoId",infoId);
+                mContext.startActivity(intent);
             }
         });
 

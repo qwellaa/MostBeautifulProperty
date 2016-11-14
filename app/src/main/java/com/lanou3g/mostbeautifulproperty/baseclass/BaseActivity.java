@@ -20,6 +20,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(setLayout());
         ExceptionHandler handler = new ExceptionHandler(this);
         Thread.setDefaultUncaughtExceptionHandler(handler);
+
+
+//        ExceptionHandler handler = new ExceptionHandler(this);
+//        Thread.setDefaultUncaughtExceptionHandler(handler);
+
+        setContentView(setLayout());
         initView();
         initData();
     }

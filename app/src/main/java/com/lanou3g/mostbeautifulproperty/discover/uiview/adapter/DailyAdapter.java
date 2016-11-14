@@ -1,6 +1,7 @@
 package com.lanou3g.mostbeautifulproperty.discover.uiview.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.lanou3g.mostbeautifulproperty.R;
 import com.lanou3g.mostbeautifulproperty.bean.DailyBean;
+import com.lanou3g.mostbeautifulproperty.discover.uiview.ResuseActivity;
 import com.lanou3g.mostbeautifulproperty.view.stickyListHeaders.StickyListHeadersAdapter;
 
 import java.text.SimpleDateFormat;
@@ -33,6 +35,7 @@ public class DailyAdapter extends BaseAdapter implements StickyListHeadersAdapte
     private Context mContext;
     private List<DailyBean.DataBean.ProductsBean> dataList;
     private SimpleDateFormat mFormat = (SimpleDateFormat) SimpleDateFormat.getDateInstance();
+    private Intent mResuseIntent;
 
     public DailyAdapter(Context context) {
         mContext = context;
@@ -81,6 +84,17 @@ public class DailyAdapter extends BaseAdapter implements StickyListHeadersAdapte
         viewHolder.mTvTitle.setText(info.getName());
         Glide.with(mContext).load(info.getDesigner().getAvatar_url()).into(viewHolder.mIvUserHead);
         Glide.with(mContext).load(info.getCover_images().get(0)).into(viewHolder.mIvBody);
+
+        mResuseIntent = new Intent(mContext, ResuseActivity.class);
+        viewHolder.mIvBody.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int infoId = info.getId();
+                mResuseIntent.putExtra("infoId",infoId);
+                mContext.startActivity(mResuseIntent);
+            }
+        });
+
         switch (info.getNum()){
             case 0:
                 viewHolder.mRadioGroup.clearCheck();
