@@ -44,6 +44,7 @@ public class MineMagazineActivity extends BaseActivity implements View.OnClickLi
     protected void initData() {
         initSetList();
 
+        // 点击跳转到 每一个收藏画报的详情
         mLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -56,6 +57,7 @@ public class MineMagazineActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void initSetList() {
+        // 查询数据库
         DBTools.getInstance().getQueryAll(MyMagazineBean.class, new DBTools.QueryListener<MyMagazineBean>() {
             @Override
             public void onQuery(List<MyMagazineBean> beanArrayList) {

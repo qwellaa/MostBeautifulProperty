@@ -105,6 +105,7 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
         focusOnCheckChange();
     }
 
+    // 关注 收藏
     private void focusOnCheckChange() {
         mModDesignerFocus.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -138,6 +139,7 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
         });
     }
 
+    // 开启网络请求
     private void startRequest() {
         Intent intent = getIntent();
         int id = intent.getIntExtra(KEY_ID, 0);
@@ -172,6 +174,7 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
 
     }
 
+    // 请求成功
     @Override
     public void onResponse(Object result) {
 
@@ -198,6 +201,7 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
                 mDesignerBean.setIconHeadUrl(designersBean.getAvatar_url());
                 mDesignerBean.setLabel(designersBean.getLabel());
 
+                // 查询数据
                 DBTools.getInstance().getQueryByWhere(FocusDesignerBean.class, "designerId", new Integer[]{designersBean.getId()}, new DBTools.QueryListener<FocusDesignerBean>() {
                     @Override
                     public void onQuery(List<FocusDesignerBean> beanArrayList) {
@@ -259,6 +263,7 @@ public class MagaDetailsActivity extends BaseActivity implements IDiscoverView, 
         }
     }
 
+    // 分享
     private void showShare() {
         ShareSDK.initSDK(this);
         OnekeyShare oks = new OnekeyShare();

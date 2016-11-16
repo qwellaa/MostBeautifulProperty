@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 
 /**
+ *  鬼魂移动的动画
  * Created by lumingmin on 16/6/29.
  */
 

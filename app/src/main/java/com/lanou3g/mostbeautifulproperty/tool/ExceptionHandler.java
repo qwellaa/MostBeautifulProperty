@@ -36,6 +36,7 @@ public class ExceptionHandler implements Thread.UncaughtExceptionHandler{
     @Override
     public void uncaughtException(Thread t, Throwable e) {
 
+        // 开启线程显示dialog
         new Thread() {
             @Override
             public void run() {
@@ -45,6 +46,7 @@ public class ExceptionHandler implements Thread.UncaughtExceptionHandler{
             }
         }.start();
 
+        // 存储异常
         StackTraceElement[] stackTrace = e.getStackTrace();
         File dir = Environment.getExternalStorageDirectory();
         File file = new File(dir, ERROR_LOG);

@@ -24,6 +24,7 @@ public class HttpManager implements IHttpRequest{
         mRequest = new OkHttpImpl();
     }
 
+    // get请求
     @Override
     public <T> void getRequest(String urlStr, Class<T> clazz, OnCompletedListener<T> listener) {
         mRequest.getRequest(urlStr, clazz, listener);
@@ -34,6 +35,7 @@ public class HttpManager implements IHttpRequest{
         mRequest.getRequest(urlStr, headers, clazz, listener);
     }
 
+    // post请求
     @Override
     public <T> void postRequest(String urlStr, Map<String, String> requestBody, Class<T> clazz, OnCompletedListener<T> listener) {
         mRequest.postRequest(urlStr, requestBody, clazz, listener);

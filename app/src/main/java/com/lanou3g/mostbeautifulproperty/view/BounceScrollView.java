@@ -88,6 +88,7 @@ public class BounceScrollView extends ScrollView {
                 float nowY = ev.getY();// 时时y坐标
                 int deltaY = (int) (preY - nowY);// 滑动距离
 
+                // 判断上滑下滑
                 if (deltaY > 0) {
                     mListener.onDecline();
                 } else if (deltaY < 0){
@@ -165,6 +166,7 @@ public class BounceScrollView extends ScrollView {
         return false;
     }
 
+    // 自定义接口
     public interface OnScrollViewListener {
         void onSlide();
         void onDecline();

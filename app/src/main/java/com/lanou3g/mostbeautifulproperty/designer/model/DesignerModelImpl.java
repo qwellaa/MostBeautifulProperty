@@ -10,6 +10,7 @@ import com.lanou3g.mostbeautifulproperty.okhttp.OnCompletedListener;
 public class DesignerModelImpl implements IDesignerModel{
 
 
+    // 网络请求
     @Override
     public <T> void startRequest(String urlStr, Class<T> clazz, final OnCompletedListener<T> listener) {
         HttpManager.getInstance().getRequest(urlStr, clazz, new OnCompletedListener<T>() {
@@ -26,11 +27,13 @@ public class DesignerModelImpl implements IDesignerModel{
 
     }
 
+    // 查询数据库
     @Override
     public <T> void queryGankAll(OnCompletedListener<T> listener) {
 
     }
 
+    // 插入数据库
     @Override
     public <T> void insertIntoDB(T t) {
 

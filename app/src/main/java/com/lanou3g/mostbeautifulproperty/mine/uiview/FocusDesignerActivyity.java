@@ -39,6 +39,7 @@ public class FocusDesignerActivyity extends BaseActivity implements View.OnClick
 
     @Override
     protected void initData() {
+        // 查询数据库 关注的设计师
         DBTools.getInstance().getQueryAll(FocusDesignerBean.class, new DBTools.QueryListener<FocusDesignerBean>() {
             @Override
             public void onQuery(List<FocusDesignerBean> beanArrayList) {

@@ -42,6 +42,7 @@ public class StartVideoActivity extends BaseActivity{
             }
         });
 
+        // 播放本地视频
         MediaController controller = new MediaController(this);
         mVideoView.setMediaController(controller);
         mVideoView.setVideoURI(Uri.parse("android.resource://com.lanou3g.mostbeautifulproperty/" + R.raw.video));

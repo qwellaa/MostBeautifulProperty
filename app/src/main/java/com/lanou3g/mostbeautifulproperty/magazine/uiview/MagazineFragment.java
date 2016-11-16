@@ -45,6 +45,7 @@ public class MagazineFragment extends BaseFragment implements IMagazineView<Maga
 
 
 
+    // 开启网络请求动画
     private AlertDialog createDialog() {
         AlertDialog dialog = new AlertDialog.Builder(context).create();
         dialog.setCanceledOnTouchOutside(true);
@@ -62,6 +63,7 @@ public class MagazineFragment extends BaseFragment implements IMagazineView<Maga
 
         mPresenter.startRequest(URLValues.getMagazineUrl(PAGA, PAGASIZE));
 
+        // stackView设置点击事件
         mStackView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -86,6 +88,7 @@ public class MagazineFragment extends BaseFragment implements IMagazineView<Maga
 
     }
 
+    // 网络请求成功
     @Override
     public void onResponse(List<MagazineLiteBean> list) {
 
@@ -101,6 +104,7 @@ public class MagazineFragment extends BaseFragment implements IMagazineView<Maga
         });
     }
 
+    // 网络请求失败
     @Override
     public void onError() {
         Toast.makeText(context, "数据异常,请求失败", Toast.LENGTH_SHORT).show();

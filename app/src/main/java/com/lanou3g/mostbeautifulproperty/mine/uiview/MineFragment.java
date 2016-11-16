@@ -169,6 +169,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
             }
         };
 
+        // 新浪登录
         ivSina.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,6 +182,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
             }
         });
 
+        // QQ 登录
         ivQQ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -192,6 +194,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
             }
         });
 
+        // 微信登录
         ivWeiXin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -199,6 +202,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
             }
         });
 
+        // 退出登录
         ivExitLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -262,13 +266,16 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
     public void onClick(View v) {
         switch (v.getId()){
 
+            // 我的消息
             case R.id.fragment_mine_message_ll:
                 Intent mesIntent = new Intent(context, MessageMainActivity.class);
                 startActivity(mesIntent);
                 break;
+            // 头像
             case R.id.fragment_mine_circleimg:
                 mDialog.show();
                 break;
+            // 设置页面
             case R.id.iv_mine_setting:
                 Intent settingIntent = new Intent(context, SettingActivity.class);
 
@@ -279,13 +286,16 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
                 }
                 startActivity(settingIntent);
                 break;
+            // 二维码
             case R.id.iv_mine_sm:
                 Intent scanIntent = new Intent(context,ScanActivity.class);
                 startActivity(scanIntent);
                 break;
+            // 分享应用
             case R.id.btn_mine_share:
                 showShare();
                 break;
+            // 我的画报
             case R.id.fragment_mine_daily_ll:
                 if (mQq.isAuthValid()) {
                     Toast.makeText(context, "qq关注", Toast.LENGTH_SHORT).show();
@@ -299,6 +309,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
                     mDialog.show();
                 }
                 break;
+            // 关注的设计师
             case R.id.fragment_mine_attention_ll:
                 if (mQq.isAuthValid()) {
                     Toast.makeText(context, "qq关注", Toast.LENGTH_SHORT).show();
@@ -312,6 +323,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
                     mDialog.show();
                 }
                 break;
+            // 我的心愿单
             case R.id.fragment_mine_wish_ll:
                 if (mQq.isAuthValid()) {
                     Toast.makeText(context, "qq关注", Toast.LENGTH_SHORT).show();
@@ -363,6 +375,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,E
 
     }
 
+    // 接收三方登录的信息  并且设置头像和名字
     private class MyDisOrderBroadCastReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {

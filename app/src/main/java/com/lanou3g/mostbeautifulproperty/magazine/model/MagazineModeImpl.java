@@ -15,6 +15,7 @@ import java.util.List;
 
 public class MagazineModeImpl implements IMagazineModel<MagazineLiteBean>{
 
+    // 开启网络请求
     @Override
     public void startRequest(String urlStr, final OnFinishedMagazineListener<MagazineLiteBean> listener) {
         HttpManager.getInstance().getRequest(urlStr, MagazineBean.class, new OnCompletedListener<MagazineBean>() {
@@ -46,11 +47,13 @@ public class MagazineModeImpl implements IMagazineModel<MagazineLiteBean>{
         });
     }
 
+    // 插入数据库
     @Override
     public void insertInfoDB(List<MagazineLiteBean> list) {
         DBTools.getInstance().insertDB(list);
     }
 
+    // 查询数据库
     @Override
     public void queryGankAll(final OnFinishedMagazineListener<MagazineLiteBean> listener) {
         DBTools.getInstance().getQueryAll(MagazineLiteBean.class, new DBTools.QueryListener<MagazineLiteBean>() {
@@ -65,6 +68,7 @@ public class MagazineModeImpl implements IMagazineModel<MagazineLiteBean>{
         });
     }
 
+    // 删除数据库
     @Override
     public void deleteInfoDB(Class<MagazineLiteBean> magazineLiteBeanClass) {
         DBTools.getInstance().deleteAll(magazineLiteBeanClass);

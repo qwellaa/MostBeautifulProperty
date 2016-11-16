@@ -21,6 +21,7 @@ public class DesignerPresenter<T> {
 
     }
 
+    // 开启网络请求
     public void startRequest(String urlStr, Class<T> clazz) {
          mView.showDialog();
         mModel.startRequest(urlStr, clazz, new OnCompletedListener<T>() {
@@ -39,6 +40,7 @@ public class DesignerPresenter<T> {
     }
 
 
+    // 查询数据库
     private void queryDB(){
         mModel.queryGankAll(new OnCompletedListener<Object>() {
             @Override

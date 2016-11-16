@@ -54,6 +54,7 @@ public class DiscoverDailyFragment extends BaseFragment implements IDiscoverView
 
     }
 
+    // 创建网络请求前的dialog
     private AlertDialog createDialog() {
         AlertDialog dialog = new AlertDialog.Builder(context).create();
         dialog.setCanceledOnTouchOutside(true);
@@ -74,9 +75,11 @@ public class DiscoverDailyFragment extends BaseFragment implements IDiscoverView
         mAdapter = new DailyAdapter(context);
         mStickyLv.setAdapter(mAdapter);
 
+        // 开启网络请求
         final DiscoverPresenter presenter = new DiscoverPresenter(this);
         presenter.startRequest(URLValues.getDaily_HEAD_URL(mLd), DailyBean.class);
 
+        // 刷新方法
         mRefreshView.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener(){
             @Override
             public void onRefresh() {
@@ -93,6 +96,7 @@ public class DiscoverDailyFragment extends BaseFragment implements IDiscoverView
 
     }
 
+    // 获取网络请求当前时间戳
     private void initInternetDate() {
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -127,6 +131,7 @@ public class DiscoverDailyFragment extends BaseFragment implements IDiscoverView
         mDialog.dismiss();
     }
 
+    // 网络请求成功
     @Override
     public void onResponse(Object result) {
         if (result instanceof DailyBean) {

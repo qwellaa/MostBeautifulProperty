@@ -18,6 +18,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(setLayout());
+
+        // 捕获异常
         ExceptionHandler handler = new ExceptionHandler(this);
         Thread.setDefaultUncaughtExceptionHandler(handler);
 

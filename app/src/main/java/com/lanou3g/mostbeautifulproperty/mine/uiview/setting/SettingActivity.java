@@ -87,6 +87,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         mQq = ShareSDK.getPlatform(QQ.NAME);
         mWeibo = ShareSDK.getPlatform(SinaWeibo.NAME);
 
+        // 判断是否登录
         if (mQq.isAuthValid()) {
             mLlPersonal.setVisibility(View.VISIBLE);
             mLlExitLogin.setVisibility(View.VISIBLE);
@@ -189,6 +190,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         oks.show(this);
     }
 
+    // 清除缓存dialog
     private void cacheDialog() {
         final AlertDialog dialog = new AlertDialog.Builder(this).create();
         View viewDialog = LayoutInflater.from(this).inflate(R.layout.dialog_remove, null);
@@ -217,6 +219,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         dialog.show();
     }
 
+    // 退出登录dialog
     private void exitLoginDialog() {
         final AlertDialog dialog = new AlertDialog.Builder(this).create();
         View viewDialog = LayoutInflater.from(this).inflate(R.layout.dialog_remove, null);
